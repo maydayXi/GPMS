@@ -1,4 +1,4 @@
-"""PM25 URL Configuration
+"""GPMS URL Configuration
 
 The `urlpatterns` list routes URLs to views. For more information please see:
     https://docs.djangoproject.com/en/1.11/topics/http/urls/
@@ -19,10 +19,8 @@ from GPMSWEB import views
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
-    url(r'^test/$', views.Main),
     url(r'^gpms/index/$', views.index),
     url(r'^gpms/data/$', views.data),
     url(r'^gpms/wronglist/$', views.wronglist),
     url(r'^gpms/wronglist/(\w+)/$', views.wronglist),
-    # url(r'^test/(\w+)/$', views.getSite),
 ]
