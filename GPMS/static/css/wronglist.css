@@ -1,0 +1,111 @@
+.ccol{
+    border: 1px solid  #7FFF00;
+}
+
+.row{
+  border: 1px solid blue;
+}
+
+.container{
+   border: 1px solid red;
+}
+
+.card {
+  font-family: Microsoft JhengHei;
+  font-size: 20px;
+}
+
+
+body {
+  font-size: 14px;
+  font-weight: 300;
+  line-height: 25px;
+  color: #3b4045;
+  font: 14px/22px 'Microsoft JhengHei', sans-serif, Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased; }
+
+
+.navbar {
+  background-color: rgba(0,0,0,60%);;
+  -webkit-transition: all 0.3s ease-in-out 0s;
+  -moz-transition: all 0.3s ease-in-out 0s;
+  -ms-transition: all 0.3s ease-in-out 0s;
+  -o-transition: all 0.3s ease-in-out 0s;
+  transition: all 0.3s ease-in-out 0s;
+  padding: 10px 50px;
+  margin: 0;
+  border: 0; }
+  .navbar .navbar-brand {
+    padding-top: 5px;
+    display: inline-block; }
+  .navbar .navbar-toggler {
+    height: 40px;
+    width: 60px;
+    /*border: 1px solid blue;*/
+    color: #000;
+     }
+
+.navbar.animated {
+  background-color: rgba(0,0,0,60%);
+  box-shadow: 0 2px 7px 0px rgba(142, 142, 142, 0.15);
+}
+
+  .navbar.animated .menu a {
+    color: #fff;
+  }
+.navbar.animated .navbar-toggler i {
+  color: #fff;
+}
+
+.menu li a {
+  color: #fff;
+  font-size: 16px;
+   }
+  .menu li a:hover, .menu li a:focus {
+    color: #87CEEB;
+  }
+
+.top1 {
+  margin-top: 8vh;
+}
+
+footer {
+  text-align: center;
+  background: #272727;
+  padding: 27px 0px; }
+  footer p {
+    font-weight: 300;
+    font-size: 12px;
+    color: #dfdfdf;
+    letter-spacing: 3px; }
+    footer p a {
+      color: #00BFFF; }
+      footer p a:hover {
+        color: #00FFFF;
+        text-decoration: none; }
+
+.card1{
+height: 350px;
+width: 400px;
+}
+
+.ovscroll{
+  overflow-y: auto;
+  max-height: 350px;
+}
+
+.cmborad{
+  justify-content: center;
+  min-height: 400px;
+  overflow:hidden;
+}
+
+.socialPage{
+  max-width: 100%;
+  padding-right: 50px;
+}
+
+cen{
+  justify-content: center;
+  align-items: center;
+}

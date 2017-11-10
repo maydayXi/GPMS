@@ -1,0 +1,5 @@
+@media (min-width: 1px) and (max-width: 990px) {
+  .navbar {
+    background: rgba(0, 0, 0, 0.5); }
+    .navbar .navbar-brand {
+      float: none; } }

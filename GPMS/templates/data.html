@@ -1,0 +1,265 @@
+<!DOCTYPE html> {% load staticfiles %}
+
+<head class="no-js">
+  <meta charset="UTF-8">
+  <title>測站資料</title>
+  <!-- <link rel="stylesheet" href="css/bootstrap.min.css"> -->
+  <!-- Bootstrap CDN -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css">
+  <link rel="stylesheet" href="{% static "css/themefisher-fonts.css" %}">
+  <link rel="stylesheet" href="{% static "css/font-awesome.min.css" %}">
+  <link rel="stylesheet" href="{% static "css/animate.css" %}">
+  <link rel="stylesheet" href="{% static "css/data.css" %}">
+  <!-- Responsive Stylesheet -->
+  <link rel="stylesheet" href="{% static "css/responsive.css" %}">
+</head>
+
+<body id="body">
+  <!--PreLoader Start-->
+  <!-- <div id="preloader">
+    <div class="book">
+      <div class="book__page"></div>
+      <div class="book__page"></div>
+      <div class="book__page"></div>
+    </div>
+  </div> -->
+  <!--PreLoader-->
+
+  <!--NavBar Start-->
+  <div class="container-fluid">
+    <div class="row">
+      <nav class="navbar navbar-expand-md navbar-inverse fixed-top">
+        <a class="navbar-brand" href="http://127.0.0.1:8000/gpms/index/"><img src="{% static "images/logo.png" %}" alt=""></a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+          <img src="{% static "images/toggler.png" %}" class="img-fluid">
+        </button>
+        <div class="collapse navbar-collapse " id="collapsibleNavbar">
+          <ul class="navbar-nav ml-auto menu">
+            <li class="nav-item">
+              <a class="nav-link" href="http://127.0.0.1:8000/gpms/index/">HOME</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="http://127.0.0.1:8000/gpms/wronglist/">WrongList</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="http://127.0.0.1:8000/gpms/data/">DataCheck</a>
+            </li>
+          </ul>
+        </div>
+      </nav>
+    </div>
+  </div>
+  <!--NavBar-->
+
+  <div class="container-fluid">
+    <div class="row dataRow">
+      <!--左邊Start-->
+      <div class="col-md-5 col-sm-12">
+        <!--左上Start-->
+        <div class="card border-primary mb-3" style="max-width: 50rem;">
+          <!--Header-->
+          <div class="card-header text-white bg-primary">站點資訊</div>
+          <!--body-->
+          <div class="card-body">
+            <!--Title-->
+            <h4 id="stNote" class="card-title">東山高中</h4>
+
+            <!--Content-->
+            <table class="table table-bordered">
+              <thead>
+                <tr>
+                  <th>PM2.5</th>
+                  <th>PM10</th>
+                  <th>溫度</th>
+                  <th>濕度</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td id="PM2.5">25</td>
+                  <td id="PM10">35</td>
+                  <td id="Temperature">45</td>
+                  <td id="Humidity">55</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <!--左上-->
+
+        <div class="w-100"></div>
+        <!--換row-->
+
+        <!--左下Start-->
+        <div class="card border-primary mb-3" style="max-width: 50rem;">
+          <!--Header-->
+          <div class="card-header text-white bg-primary">
+            所有地點List
+          </div>
+          <!--Content-->
+          <div class="card-body">
+            <form action="." method="get" id="stform">
+              <select size="20" class="form-control" style="font-family: Microsoft JhengHei;
+              font-size: 18px;" id="site_lst" name="site" onchange="select()">
+              {% for id,site in site_lst %}
+                <option value={{id}}>{{site}}
+              {% endfor %}
+              </select>
+              <input id="selectedIndex" type="text" name="selectedIndex" value="" style="visibility:hidden">
+              <input id="PM2.5Value" type="text" name="PM2.5Value" value="" style="visibility:hidden">
+              <input id="PM10Value" type="text" name="pm10Value" value="" style="visibility:hidden">
+              <input id="TemperatureValue" type="text" name="TemperatureValue" value="" style="visibility:hidden">
+              <input id="HumidityValue" type="text" name="HumidityValue" value="" style="visibility:hidden">
+              <input id="sent" type="submit" value="sent" style="visibility:hidden">
+            </form>
+          </div>
+        </div>
+        <!--左下-->
+      </div>
+      <!--左邊-->
+
+      <!--右上Start-->
+      <div class="col-md-7 col-sm-12">
+        <div class="card border-primary mb-3">
+          <div class="card-header text-primary">
+            <div class="btn-group btn-group-sm">
+              <button type="button" class="btn btn-primary" onclick="_1()">1小時</button>
+              <button type="button" class="btn btn-primary" onclick="_6()">6小時</button>
+              <button type="button" class="btn btn-primary" onclick="_12()">12小時</button>
+            </div>
+          </div>
+          <div class="card-body">
+            <div class="card border-primary mb-3 chartup">
+              <div class="card-header text-primary">
+                該點的數據
+              </div>
+              <div class="card-body row align-items-center justify-content-center">
+                <canvas class="cvstyle col" id="pastChart">
+                </canvas>
+              </div>
+            </div>
+
+            <div class="card border-primary mb-3 chartup">
+              <div class="card-header text-primary">
+                區域的數據
+              </div>
+              <div class="card-body row align-items-center justify-content-center">
+                <canvas class="cvstyle col" id="areaChart">
+                </canvas>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!--右上-->
+    </div>
+  </div>
+
+  <footer>
+      <div class="container">
+          <div class="row">
+              <div class="col-md-12">
+                  <div class="block">
+                      <p>Copyright &copy; <a href="http://im.nutc.edu.tw/bin/home.php">NUTC-IM</a> | Prof. Allen Lian </p>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </footer>
+
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js"></script>
+  <script src="{% static "scripts/Chart.js" %}"></script>
+  <script src="{% static "scripts/vendor/modernizr-2.6.2.min.js" %}"></script>
+  <script src="{% static "scripts/jquery.form.js" %}"></script>
+  <script src="{% static "scripts/jquery.nav.js" %}"></script>
+  <script src="{% static "scripts/wow.min.js" %}"></script>
+  <script src="{% static "scripts/main.js" %}"></script>
+  <script src="{% static "scripts/select.js" %}"></script>
+  <script src="{% static "scripts/myChart.js" %}"></script>
+  <script src="{% static "scripts/btn.js" %}"></script>
+  <script>
+    var air_data_lst = {{air_data_lst}};                      // 全堿 server 端回傳空氣資料
+    var pm25_lst = {{data|safe}};                             // 全堿 server 端回傳站點過去資料
+    var siteLst = document.getElementById('site_lst');        // 全堿 Listbox 物件變數
+    siteLst.selectedIndex = {{row}};                          // Listbox 預選第一個
+    var site = siteLst.options[siteLst.selectedIndex].text;   // 全堿 取得選項文字內容
+    var past;                                                 // 繪圖類別 上
+    var area;                                                 // 繪圖類別 下
+    var past_point = {                                        // 全堿 過去資料圖表結構物件
+      type: 'line',
+      data: {
+        labels: AxisX12(),
+        datasets: [{
+          label: "PM2.5",
+          data: pm25_lst[site]['12'],
+          fill: false,
+          borderColor: 'orange',
+          backgroundColor: '#f21515'
+        }]
+      },
+      options: {
+        responsive: true,
+        title: {
+          display: true,
+          text: site
+        },
+        tooltips: {
+          mode: 'index',
+          intersect: false,
+        },
+        hover: {
+          mode: 'nearest',
+          intersect: true
+        },
+        scales: {
+          yAxes: [{
+            ticks: {
+              beginAtZero: true
+            }
+          }]
+        },
+      }
+    };
+    var area_point = {                                        // 全堿 區域資料圖表結構物件
+      type: 'bar',
+      data: {
+        labels: pm25_lst[site]['area'],
+        datasets: [{
+          label: "PM2.5",
+          data: AxisY(),
+          fill: false,
+          backgroundColor: '#4695e8',
+          borderColor: 'blue',
+        }]
+      },
+      options: {
+        responsive: true,
+        title: {
+          display: true,
+          text: '方圓 7 公里內'
+        },
+        tooltips: {
+          mode: 'index',
+          intersect: false,
+        },
+        hover: {
+          mode: 'nearest',
+          intersect: true
+        },
+        scales: {
+          yAxes: [{
+            ticks: {
+              beginAtZero: true
+            }
+          }]
+        },
+      }
+    };
+
+    init();                                                   // 初始繪圖模組，預選 Listbox 第一個
+  </script>
+</body>
+
+</html>
