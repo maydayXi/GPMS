@@ -1,4 +1,4 @@
-.ccol{
+/*.ccol{
     border: 1px solid  #7FFF00;
 }
 
@@ -9,6 +9,10 @@
 .container{
    border: 1px solid red;
 }
+
+.ccol {
+  border: 1
+}*/
 
 .card {
   font-family: Microsoft JhengHei;
@@ -47,14 +51,14 @@ body {
 
 .navbar.animated {
   background-color: rgba(0,0,0,60%);
-  box-shadow: 0 2px 7px 0px rgba(142, 142, 142, 0.15);
+  box-shadow: 0 2px 7px 0px rgba(142, 142, 142, 0.15); 
 }
 
   .navbar.animated .menu a {
-    color: #fff;
+    color: #fff; 
   }
 .navbar.animated .navbar-toggler i {
-  color: #fff;
+  color: #fff; 
 }
 
 .menu li a {
@@ -66,7 +70,7 @@ body {
   }
 
 .top1 {
-  margin-top: 8vh;
+  margin-top: 70px;
 }
 
 footer {
@@ -84,9 +88,9 @@ footer {
         color: #00FFFF;
         text-decoration: none; }
 
-.card1{
+.card1{ 
 height: 350px;
-width: 400px;
+width: 400px; 
 }
 
 .ovscroll{
@@ -103,9 +107,4 @@ width: 400px;
 .socialPage{
   max-width: 100%;
   padding-right: 50px;
-}
-
-cen{
-  justify-content: center;
-  align-items: center;
 }

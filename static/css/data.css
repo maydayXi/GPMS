@@ -15,7 +15,7 @@ body {
   font-weight: 300;
   line-height: 25px;
   color: #3b4045;
-  font: 14px/22px 'Microsoft JhengHei', sans-serif, Helvetica, Arial, sans-serif;
+  font: 16px/22px 'Microsoft JhengHei', sans-serif, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased; }
 
 
@@ -41,32 +41,26 @@ body {
 
 .navbar.animated {
   background-color: rgba(0,0,0,60%);
-  box-shadow: 0 2px 7px 0px rgba(142, 142, 142, 0.15);
+  box-shadow: 0 2px 7px 0px rgba(142, 142, 142, 0.15); 
 }
 
-.navbar.animated .menu a {
-  color: #fff;
-}
+  .navbar.animated .menu a {
+    color: #fff; 
+  }
 .navbar.animated .navbar-toggler i {
-  color: #fff;
+  color: #fff; 
 }
 
 .menu li a {
   color: #fff;
   font-size: 16px;
    }
-
-.menu li a:hover, .menu li a:focus {
-  color: #87CEEB;
-}
+  .menu li a:hover, .menu li a:focus {
+    color: #87CEEB;
+  }
 
 .dataRow{
-  margin-top: 9vh;
-}
-
-.card-header {
-  font-family: Microsoft JhengHei;
-  font-size: 20px;
+  margin-top: 80px;
 }
 
 .card .card-body{
@@ -82,26 +76,23 @@ body {
   max-height: 15px;
 }
 
-.cvstyle{
-  max-height: 666px;
-  max-width: 666px;
+.cvWidth{
+  width: 700px;
 }
 
-.chartup{
+.bg-point-info{
+  background-color: #d9edf7;
+  color: #0d384e;
+
+}
+
+.chart-info{
   text-align: left;
+  background-color: #fcf8e3;
 }
 
-footer {
-  text-align: center;
-  background: #272727;
-  padding: 27px 0px; }
-  footer p {
-    font-weight: 300;
-    font-size: 12px;
-    color: #dfdfdf;
-    letter-spacing: 3px; }
-    footer p a {
-      color: #00BFFF; }
-      footer p a:hover {
-        color: #00FFFF;
-        text-decoration: none; }
+.btn-bg{
+  background-color: #5bc0de;
+  border-color: #35a3c4;
+  color: #fff;
+}

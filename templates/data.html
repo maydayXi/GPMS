@@ -1,5 +1,5 @@
-<!DOCTYPE html> {% load staticfiles %}
-
+<!DOCTYPE html>
+{% load staticfiles %}
 <head class="no-js">
   <meta charset="UTF-8">
   <title>測站資料</title>
@@ -16,20 +16,21 @@
 
 <body id="body">
   <!--PreLoader Start-->
-  <!-- <div id="preloader">
+  <div id="preloader">
     <div class="book">
       <div class="book__page"></div>
       <div class="book__page"></div>
       <div class="book__page"></div>
     </div>
-  </div> -->
+  </div>
   <!--PreLoader-->
+
 
   <!--NavBar Start-->
   <div class="container-fluid">
     <div class="row">
       <nav class="navbar navbar-expand-md navbar-inverse fixed-top">
-        <a class="navbar-brand" href="http://127.0.0.1:8000/gpms/index/"><img src="{% static "images/logo.png" %}" alt=""></a>
+        <a class="navbar-brand" href="#"><img src="{% static "images/logo.png" %}" alt=""></a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
           <img src="{% static "images/toggler.png" %}" class="img-fluid">
         </button>
@@ -56,14 +57,13 @@
       <!--左邊Start-->
       <div class="col-md-5 col-sm-12">
         <!--左上Start-->
-        <div class="card border-primary mb-3" style="max-width: 50rem;">
+        <div class="card mb-3 " style="max-width: 50rem; border-color: #5bc0de;">
           <!--Header-->
-          <div class="card-header text-white bg-primary">站點資訊</div>
+          <div class="card-header bg-point-info">站點資訊</div>
           <!--body-->
           <div class="card-body">
             <!--Title-->
             <h4 id="stNote" class="card-title">東山高中</h4>
-
             <!--Content-->
             <table class="table table-bordered">
               <thead>
@@ -91,19 +91,19 @@
         <!--換row-->
 
         <!--左下Start-->
-        <div class="card border-primary mb-3" style="max-width: 50rem;">
+        <div class="card mb-3" style="max-width: 50rem; border-color: #5bc0de;">
           <!--Header-->
-          <div class="card-header text-white bg-primary">
+          <div class="card-header bg-point-info">
             所有地點List
           </div>
           <!--Content-->
           <div class="card-body">
-            <form action="." method="get" id="stform">
-              <select size="20" class="form-control" style="font-family: Microsoft JhengHei;
+            <form action="." method="get" id="stForm">
+              <select size="25" class="form-control" style="font-family: Microsoft JhengHei;
               font-size: 18px;" id="site_lst" name="site" onchange="select()">
-              {% for id,site in site_lst %}
-                <option value={{id}}>{{site}}
-              {% endfor %}
+                {% for id,site in site_lst %}
+                  <option value={{id}}>{{site}}
+                {% endfor %}
               </select>
               <input id="selectedIndex" type="text" name="selectedIndex" value="" style="visibility:hidden">
               <input id="PM2.5Value" type="text" name="PM2.5Value" value="" style="visibility:hidden">
@@ -120,31 +120,34 @@
 
       <!--右上Start-->
       <div class="col-md-7 col-sm-12">
-        <div class="card border-primary mb-3">
+        <div class="card mb-3" style="border-color: #5bc0de;">
           <div class="card-header text-primary">
             <div class="btn-group btn-group-sm">
-              <button type="button" class="btn btn-primary" onclick="_1()">1小時</button>
-              <button type="button" class="btn btn-primary" onclick="_6()">6小時</button>
-              <button type="button" class="btn btn-primary" onclick="_12()">12小時</button>
+              <button type="button" class="btn btn-bg" onclick="_1()">1小時</button>
+              <button type="button" class="btn btn-bg" onclick="_6()">6小時</button>
+              <button type="button" class="btn btn-bg" onclick="_12()">12小時</button>
             </div>
           </div>
           <div class="card-body">
-            <div class="card border-primary mb-3 chartup">
-              <div class="card-header text-primary">
+            <div class="card mb-3" style="border-color: #faebcc; color: #8a6d3b;">
+              <div class="card-header chart-info">
                 該點的數據
               </div>
-              <div class="card-body row align-items-center justify-content-center">
-                <canvas class="cvstyle col" id="pastChart">
+              <div class="card-body">
+                <canvas class="cvWidth" id="pastChart">
+
                 </canvas>
               </div>
             </div>
-
-            <div class="card border-primary mb-3 chartup">
-              <div class="card-header text-primary">
+          </div>
+          <div class="card-body">
+            <div class="card mb-3" style="border-color: #faebcc; color: #8a6d3b;">
+              <div class="card-header chart-info">
                 區域的數據
               </div>
-              <div class="card-body row align-items-center justify-content-center">
-                <canvas class="cvstyle col" id="areaChart">
+              <div class="card-body">
+                <canvas class="cvWidth" id="areaChart">
+
                 </canvas>
               </div>
             </div>
@@ -152,6 +155,17 @@
         </div>
       </div>
       <!--右上-->
+    </div>
+  </div>
+
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-5 col-sm-12">
+
+      </div>
+
+      <!--右下Start-->
+      <!--右下-->
     </div>
   </div>
 
