@@ -78,7 +78,6 @@
 							<input id="stId" type="text" name="stId" value="" style="display:none;">
 	            <input id="stLat" type="text" name="stLat" value="" style="display:none;">
 	            <input id="stLon" type="text" name="stLon" value="" style="display:none;">
-							<input id="href" type="text" name="href" value="" style="display:none;">
 	            <input id="ok" type="submit" value="sent" style="display:none;">
 						</table>
 					</form>
@@ -104,7 +103,7 @@
 		<div class="row cmborad">
 			<div id="fb" class="col-md-7 col-sm-12 ccol">
 				<!-- <button type="button" name="button" onclick="postToPage()">click</button> -->
-				<div class="fb-comments" data-width="100%" data-href="" data-numposts="5">
+				<div class="fb-comments" data-width="100%" data-href="https://im41gpms.herokuapp.com/wronglist/" data-numposts="5">
 				</div>
 			</div>
 			<div class="col-md-5 col-sm-12 socialPage ccol">
@@ -135,8 +134,11 @@
 	<script>
 
 		function init() {
-
-			alert(location.href);
+			var fb = document.getElementsByClassName('fb-comments')[0];
+			var x = fb.getAttribute('data-href');
+			alert(location.href + '\n' + x);
+			fb.setAttribute('data-href', location.href);
+			alert(location.href + '\n' + fb.getAttribute('data-href'));
 		}
 
 		function tableClick(Id) {
