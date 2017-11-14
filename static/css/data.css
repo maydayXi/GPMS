@@ -16,11 +16,34 @@ body {
   line-height: 25px;
   color: #3b4045;
   font: 16px/22px 'Microsoft JhengHei', sans-serif, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased; }
+  -webkit-font-smoothing: antialiased;
+}
 
+footer {
+  text-align: center;
+  background: #272727;
+  padding: 27px 0px;
+}
 
-  .navbar {
-  background-color: rgba(0,0,0,60%);;
+footer p {
+  font-weight: 300;
+  font-size: 12px;
+  color: #dfdfdf;
+  letter-spacing: 3px;
+}
+
+footer p a {
+  color: #00BFFF;
+}
+
+footer p a:hover {
+  color: #00FFFF;
+  text-decoration: none;
+}
+
+.navbar {
+  background-color: rgba(0, 0, 0, 60%);
+  ;
   -webkit-transition: all 0.3s ease-in-out 0s;
   -moz-transition: all 0.3s ease-in-out 0s;
   -ms-transition: all 0.3s ease-in-out 0s;
@@ -28,70 +51,75 @@ body {
   transition: all 0.3s ease-in-out 0s;
   padding: 10px 50px;
   margin: 0;
-  border: 0; }
-  .navbar .navbar-brand {
-    padding-top: 5px;
-    display: inline-block; }
-  .navbar .navbar-toggler {
-    height: 40px;
-    width: 60px;
-    /*border: 1px solid blue;*/
-    color: #000;
-     }
-
-.navbar.animated {
-  background-color: rgba(0,0,0,60%);
-  box-shadow: 0 2px 7px 0px rgba(142, 142, 142, 0.15); 
+  border: 0;
 }
 
-  .navbar.animated .menu a {
-    color: #fff; 
-  }
+.navbar .navbar-brand {
+  padding-top: 5px;
+  display: inline-block;
+}
+
+.navbar .navbar-toggler {
+  height: 40px;
+  width: 60px;
+  /*border: 1px solid blue;*/
+  color: #000;
+}
+
+.navbar.animated {
+  background-color: rgba(0, 0, 0, 60%);
+  box-shadow: 0 2px 7px 0px rgba(142, 142, 142, 0.15);
+}
+
+.navbar.animated .menu a {
+  color: #fff;
+}
+
 .navbar.animated .navbar-toggler i {
-  color: #fff; 
+  color: #fff;
 }
 
 .menu li a {
   color: #fff;
   font-size: 16px;
-   }
-  .menu li a:hover, .menu li a:focus {
-    color: #87CEEB;
-  }
+}
 
-.dataRow{
+.menu li a:hover, .menu li a:focus {
+  color: #87CEEB;
+}
+
+.dataRow {
   margin-top: 80px;
 }
 
-.card .card-body{
+.card .card-body {
   text-align: center;
   font-size: 15px;
 }
 
-.card-body td{
+.card-body td {
   font-size: 20px;
 }
 
-.btnHeight{
+.btnHeight {
   max-height: 15px;
 }
 
-.cvWidth{
+.cvWidth {
   width: 700px;
 }
 
-.bg-point-info{
+.bg-point-info {
   background-color: #d9edf7;
   color: #0d384e;
-
 }
 
-.chart-info{
+.chart-info {
   text-align: left;
   background-color: #fcf8e3;
 }
 
-.btn-bg{
+.btn-bg {
   background-color: #5bc0de;
   border-color: #35a3c4;
   color: #fff;

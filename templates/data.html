@@ -30,7 +30,7 @@
   <div class="container-fluid">
     <div class="row">
       <nav class="navbar navbar-expand-md navbar-inverse fixed-top">
-        <a class="navbar-brand" href="#"><img src="{% static "images/logo.png" %}" alt=""></a>
+        <a class="navbar-brand" href="http://127.0.0.1:8000/gpms/index/"><img src="{% static "images/logo.png" %}" alt=""></a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
           <img src="{% static "images/toggler.png" %}" class="img-fluid">
         </button>
@@ -99,7 +99,7 @@
           <!--Content-->
           <div class="card-body">
             <form action="." method="get" id="stForm">
-              <select size="25" class="form-control" style="font-family: Microsoft JhengHei;
+              <select size="37" class="form-control" style="font-family: Microsoft JhengHei;
               font-size: 18px;" id="site_lst" name="site" onchange="select()">
                 {% for id,site in site_lst %}
                   <option value={{id}}>{{site}}

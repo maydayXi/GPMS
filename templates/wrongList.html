@@ -3,6 +3,7 @@
 <head class="no-js">
 	<meta charset="UTF-8">
 	<title>wrongList</title>
+	<meta property="fb:app_id" content="909518255880791" />
 	<!-- <link rel="stylesheet" href="css/bootstrap.min.css"> -->
 	<!-- Bootstrap CDN -->
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css">
@@ -19,13 +20,13 @@
 	</style>
 </head>
 
-<body>
+<body onload="init()">
 
 	<!--NavBar Start-->
 	<div class="container-fluid">
 		<div class="row">
 			<nav class="navbar navbar-expand-md navbar-inverse fixed-top">
-				<a class="navbar-brand" href="#"><img src="{% static "images/logo.png" %}" alt=""></a>
+				<a class="navbar-brand" href="http://127.0.0.1:8000/gpms/index/"><img src="{% static "images/logo.png" %}" alt=""></a>
 				<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
           <img src="{% static "images/toggler.png" %}" class="img-fluid">
         </button>
@@ -77,6 +78,7 @@
 							<input id="stId" type="text" name="stId" value="" style="display:none;">
 	            <input id="stLat" type="text" name="stLat" value="" style="display:none;">
 	            <input id="stLon" type="text" name="stLon" value="" style="display:none;">
+							<input id="href" type="text" name="href" value="" style="display:none;">
 	            <input id="ok" type="submit" value="sent" style="display:none;">
 						</table>
 					</form>
@@ -100,8 +102,9 @@
 	<!--留言版start-->
 	<div class="container">
 		<div class="row cmborad">
-			<div class="col-md-7 col-sm-12 ccol">
-				<div class="fb-comments" data-width="100%" data-href="https://developers.facebook.com/docs/plugins/comments#configurator" data-numposts="5">
+			<div id="fb" class="col-md-7 col-sm-12 ccol">
+				<!-- <button type="button" name="button" onclick="postToPage()">click</button> -->
+				<div class="fb-comments" data-width="100%" data-href="" data-numposts="5">
 				</div>
 			</div>
 			<div class="col-md-5 col-sm-12 socialPage ccol">
@@ -131,6 +134,11 @@
 
 	<script>
 
+		function init() {
+
+			alert(location.href);
+		}
+
 		function tableClick(Id) {
 			var Table = document.getElementById('errorTable');                        // 取得表格物件
 			var Row = document.getElementById(Id);                                    // 取得被選取列
@@ -143,43 +151,43 @@
 		}
 
 		window.fbAsyncInit = function() {
-			FB.init({
-				appId: '909518255880791',
-				autoLogAppEvents: true,
-				xfbml: true,
-				version: 'v2.10'
-			});
-			FB.AppEvents.logPageView();
-		};
-		(function(d, s, id) {
-			var js, fjs = d.getElementsByTagName(s)[0];
-			if (d.getElementById(id)) return;
-			js = d.createElement(s);
-			js.id = id;
-			js.src = 'https://connect.facebook.net/zh_TW/sdk.js';
-			fjs.parentNode.insertBefore(js, fjs);
-		}(document, 'script', 'facebook-jssdk'));
+	    FB.init({
+	      appId: '909518255880791',
+	      autoLogAppEvents: true,
+	      xfbml: true,
+	      version: 'v2.11'
+	    });
+	    FB.AppEvents.logPageView();
+	  };
+	  (function(d, s, id) {
+	    var js, fjs = d.getElementsByTagName(s)[0];
+	    if (d.getElementById(id)) return;
+	    js = d.createElement(s);
+	    js.id = id;
+	    js.src = 'https://connect.facebook.net/zh_TW/sdk.js';
+	    fjs.parentNode.insertBefore(js, fjs);
+	  }(document, 'script', 'facebook-jssdk'));
 
 
-		function postToPage() {
-			var page_id = '277631202754911';
-			FB.api('/' + page_id, {
-				fields: 'access_token'
-			}, function(resp) {
-				if (resp.access_token) {
-					FB.api('/' + page_id + '/feed',
-						'post', {
-							message: "I'm a Page!",
-							link: location.href,
-							access_token: resp.access_token
-						},
-						function(response) {
-							console.log(response);
-							//response 為一個dict {id: "POST ID"}
-						});
-				}
-			});
-		};
+	  function postToPage() {
+	    var page_id = '277631202754911';
+	    FB.api('/' + page_id, {
+	      fields: 'access_token'
+	    }, function(resp) {
+	      if (resp.access_token) {
+	        FB.api('/' + page_id + '/feed',
+	          'post', {
+	            message: "I'm a Page!",
+	            link: location.href,
+	            access_token: resp.access_token
+	          },
+	          function(response) {
+	            console.log(response);
+	            //response 為一個dict {id: "POST ID"}
+	          });
+	      }
+	    });
+	  };
 	</script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.3.7/js/tether.min.js" integrity="sha384-XTs3FgkjiBgo8qjEjBk0tGmf3wPrWtA6coPfQDfFEY8AnYJwjalXCiosYRBIBZX8" crossorigin="anonymous"></script>
 	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
