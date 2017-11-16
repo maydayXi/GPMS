@@ -2,7 +2,7 @@
 
 <head class="no-js">
 	<meta charset="UTF-8">
-	<title>wrongList</title>
+	<title>異常列表</title>
 	<meta property="fb:app_id" content="909518255880791" />
 	<!-- <link rel="stylesheet" href="css/bootstrap.min.css"> -->
 	<!-- Bootstrap CDN -->
@@ -49,84 +49,85 @@
 	</div>
 	<!--NavBar-->
 
-	<div class="container top1">
+	<div class="container-fluid top1">
 		<div class="row">
-			<!--Table Start-->
-			<div class="col-md-7 col-sm-12 ">
-				<div class="ovscroll">
-					<form action="." method="get">
-						<table id="errorTable" class="table table-bordered table-hover table-striped ">
-							<thead>
-								<tr>
-									<th>編號</th>
-									<th>測站</th>
-									<th>時間</th>
-									<th>原因</th>
-								</tr>
-							</thead>
-							<tbody>
-								{% for item in error %}
-									<tr id="{{item.2}}" onclick="tableClick(this.id)">
-										<td>{{forloop.counter}}</td>
-										<td>{{item.0}}</td>
-										<td>{{item.3}}</td>
-										<td>{{item.4}}</td>
-										<td style="display:none;">{{item.5}}</td>
-										<td style="display:none;">{{item.6}}</td>
-									</tr>
-								{% endfor %}
-							</tbody>
-							<input id="stId" type="text" name="stId" value="" style="display:none;">
-	            <input id="stLat" type="text" name="stLat" value="" style="display:none;">
-	            <input id="stLon" type="text" name="stLon" value="" style="display:none;">
-	            <input id="ok" type="submit" value="sent" style="display:none;">
-						</table>
-					</form>
-				</div>
+			<!--Map Start-->
+			<div class="col-md-7 col-12" style="height:100vh">
+				<!--Map Object-->
+				<div id="map"></div>
+
 			</div>
-			<!--Table -->
-			<!--map Start-->
-			<div class="col-md-5 col-sm-12">
-				<div class="card border-dark mk-3 card1">
-					<div class="card-header">Map</div>
-					<iframe id="map" width="100%" height="100%" frameborder="0" style="border:0" src=http://maps.google.com.tw/maps?f=q&hl=zh-TW&geocode=&q={{stLat}},{{stLon}}&z=16&output=embed allowfullscreen>
-	     		</iframe>
-				</div>
+			<!--MAP-->
+
+			<!--Right Start-->
+			<div class="col-md-5 col-12" style="height:100vh">
+				<div class="card " style="height:100%; border-color: #5bc0de;">
+          <!--Header-->
+          <div class="card-header bg-point-info">當時發生錯誤的資訊</div>
+          <!--Card body-->
+          <div class="card-body">
+            <!--Title-->
+            <h5 id="stNote" class="card-title">東山高中</h5>
+            <!--Content-->
+            <table id="wrongTable" class="table table-bordered ">
+              <thead>
+                <tr>
+                  <th>PM2.5</th>
+                  <th>PM10</th>
+                  <th>溫度</th>
+                  <th>濕度</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td id="PM2.5">25</td>
+                  <td id="PM10">35</td>
+                  <td id="Temperature">45</td>
+                  <td id="Humidity">55</td>
+                </tr>
+              </tbody>
+            </table>
+
+						<div class="row" style="height: 430px;">
+							<div class="card" style=" border-color: #5bc0de;">
+								<div class="card-header" style="text-align:left;">
+									原因分析 - 您的留言會為我們提供更準確的分析
+								</div>
+								<div class="card-body" >
+									<td>可能發生火災</td>
+									<hr>
+									<div class="ovscroll">
+												<div class="fb-comments" data-width="100%" data-href="https://developers.facebook.com/docs/plugins/comments#configurator" data-numposts="5"></div>
+									</div>
+								</div>
+							</div>
+						</div>
+
+          </div>
+					<!--Card Body-->
+        </div>
+
+
+
+
+
 			</div>
-			<!--map-->
+			<!--Right-->
+
 		</div>
 	</div>
 
 	<hr>
 
-	<!--留言版start-->
-	<div class="container">
-		<div class="row cmborad">
-			<div id="fb" class="col-md-7 col-sm-12 ccol">
-				<!-- <button type="button" name="button" onclick="postToPage()">click</button> -->
-				<div class="fb-comments" data-width="100%" data-href="https://im41gpms.herokuapp.com/wronglist/" data-numposts="5">
-				</div>
-			</div>
-			<div class="col-md-5 col-sm-12 socialPage ccol">
-				<div class="fb-page ccol" data-href="https://www.facebook.com/allenabcde" data-tabs="timeline" data-small-header="false" data-adapt-container-width="false" data-hide-cover="false" data-show-facepile="true">
-					<blockquote cite="https://www.facebook.com/allenabcde" class="fb-xfbml-parse-ignore">
-						<a href="https://www.facebook.com/allenabcde">Allen先生之專題測試</a>
-					</blockquote>
-				</div>
-			</div>
-		</div>
-	</div>
-	<!--留言板-->
+
 
 	<!--footer Start-->
 	<footer>
 		<div class="container">
 			<div class="row">
 				<div class="col-md-12">
-					<div class="block">
 						<p>Copyright &copy; <a href="http://im.nutc.edu.tw/bin/home.php">NUTC-IM</a> | Prof. Allen Lian </p>
 					</div>
-				</div>
 			</div>
 		</div>
 	</footer>
@@ -137,22 +138,10 @@
 		function init() {
 			var fb = document.getElementsByClassName('fb-comments')[0];
 			var x = fb.getAttribute('data-href');
-			alert(location.href + '\n' + x);
+			// alert(location.href + '\n' + x);
 			fb.setAttribute('data-href', location.href);
-			alert(location.href + '\n' + fb.getAttribute('data-href'));
+			// alert(location.href + '\n' + fb.getAttribute('data-href'));
 		}
-
-		function tableClick(Id) {
-			var Table = document.getElementById('errorTable');                        // 取得表格物件
-			var Row = document.getElementById(Id);                                    // 取得被選取列
-			document.getElementById('stId').value = Row.id;                           // 取得選擇的測站 Id
-			var stLat = Table.rows[Row.rowIndex].cells[4].firstChild.data;            // 取得緯度
-			var stLon = Table.rows[Row.rowIndex].cells[5].firstChild.data;            // 取得經度
-			document.getElementById('stLat').value = stLat;
-			document.getElementById('stLon').value = stLon;
-			document.getElementById('ok').click();
-		}
-
 		window.fbAsyncInit = function() {
 	    FB.init({
 	      appId: '909518255880791',
@@ -202,6 +191,40 @@
 	<script src="{% static "scripts/jquery.nav.js" %}"></script>
 	<script src="{% static "scripts/wow.min.js" %}"></script>
 	<script src="{% static "scripts/main.js" %}"></script>
+
+	<script src="{% static "scripts/googlemap.js" %}"></script>
+	<!-- Google	Map API -->
+	<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA1MDAz4pygB9byYzbBpaeFRptZ1cyKcig&callback=initMap"></script>
+
+	<script>
+	//init Map
+	function initMap(){
+	var options = {
+		zoom : 8,
+		center: {lat:23.903687,lng:121.079370}
+	}
+
+	//New Map
+	var map = new google.maps.Map(document.getElementById('map'),options);
+
+	// Add point marker
+	function addMarker(coords){
+		var marker = new google.maps.Marker({
+			position : coords,
+			map: map
+		});
+	}
+
+	//Use JQuery Read map.json
+	//Call addMarker Function to add point
+	var point = $.getJSON( "{% static "json/map.json" %}" ,function(data){
+		console.log("json file loading success!");
+		for(var i=0;i<15;i++){
+			addMarker(data[i]);
+		}
+	});
+	}
+	</script>
 
 </body>
 

@@ -8,22 +8,17 @@
 
 .container{
    border: 1px solid red;
-}
-
-.ccol {
-  border: 1
 }*/
 
-.card {
-  font-family: Microsoft JhengHei;
-  font-size: 20px;
+.ccol {
+  border: 1px solid red;
 }
 
 body {
-  font-size: 14px;
+  /*font-size: 14px;
   font-weight: 300;
   line-height: 25px;
-  color: #3b4045;
+  color: #3b4045;*/
   font: 14px/22px 'Microsoft JhengHei', sans-serif, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
 }
@@ -80,6 +75,7 @@ body {
 }
 
 footer {
+  height: 80px;
   text-align: center;
   background: #272727;
   padding: 27px 0px;
@@ -101,23 +97,42 @@ footer p a:hover {
   text-decoration: none;
 }
 
-.card1 {
-  height: 350px;
-  width: 400px;
+#map {
+  height: 100%;
+  width: 100%;
 }
 
-.ovscroll {
+#stNote {
+  font-size: 28px;
+}
+
+#wrongTable{
+  text-align: center;
+}
+
+.card{
+  width: 100%;
+}
+
+.table th{
+  font-weight: lighter ;
+  font-size: 17px;
+}
+
+.table td{
+  font-size: 20px;
+}
+
+.card-body {
+  height: 100%;
+  text-align: center;
+}
+
+.card-body td{
+  text-align: center;
+}
+
+.ovscroll{
   overflow-y: auto;
-  max-height: 350px;
-}
-
-.cmborad {
-  justify-content: center;
-  min-height: 400px;
-  overflow: hidden;
-}
-
-.socialPage {
-  max-width: 100%;
-  padding-right: 50px;
+  max-height: 302px;
 }
