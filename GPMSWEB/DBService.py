@@ -65,6 +65,16 @@ class DBService:
 
         return result
 
+    # 2017-11-16 add by Mayday
+    #
+    def readSiteAreaNote(self,Note):
+        connection = sqlite3.connect(self.path + '/' + 'PM25.sqlite')
+        sqlStr = 'select stLatitude, stLongitude from SiteInfo where stNote = "{}"'.format(Note)
+        cursor = connection.execute(sqlStr)
+        result = cursor.fetchone()
+
+        return result
+
     # <summary>Read stie information</summary>
     # <return>Site information</return>
     def readSiteData(self):
@@ -169,6 +179,34 @@ class DBService:
         cursor = connection.execute(queryStr)
 
         return cursor.fetchone()
+
+    # 2017-11-16 add by Maydya
+
+    def createErrorData(self, timeStr, data_lst):
+        connection = sqlite3.connect(self.path + '/' + 'PM25.sqlite')
+        sqlStr = """CREATE TABLE ErrorInfo_{}
+                    (stId VARCHAR NOT NULL,
+                    stNote TEXT,
+                    PM25 INTEGER,
+                    PM10 INTEGER,
+                    Temperature DOUBLE,
+                    Humidity DOUBLE,
+                    stLatitude DOUBLE,
+                    stLongitude DOUBLE,
+                    PRIMARY KEY(stId),
+                    FOREIGN KEY(stId) REFERENCES SiteInfo(stId))
+                """.format(timeStr)
+
+        connection.execute(sqlStr)
+        connection.commit()
+
+        for item in data_lst:
+            sqlStr = "INSERT INTO ErrorInfo_{} VALUES('{}','{}',{},{},{},{},{},{})".format(
+                      timeStr,item[0],item[1],item[2],item[3],item[4],item[5],item[6],item[7])
+            connection.execute(sqlStr)
+
+        connection.commit()
+        connection.close()
 
     # 2017-10-31 Add by Mayday
     # <summary>Read error site data</summary>
