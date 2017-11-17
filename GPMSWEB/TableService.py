@@ -15,15 +15,27 @@ class TableService:
         self.db = DBService()                   # new database instance
         self.ana = dataAnaly()                  # new dataAnaly instance
 
-    #2017-10-12 add by Mayday
-    # <summary>Get all talbe name</summary>
-    # <return>Table name list</return>
-    def getAllTableName(self):
-        tables = self.db.readAllTableName()
+    # 2017-10-12 add by Mayday
+    # <summary> 取得所有空氣資料表格名稱 </summary>
+    # <return> 所有空氣資料表名稱串列 </return>
+    def getAllAirInfoTableName(self):
+        tables = self.db.readAllAirInfoTableName()
 
         result = []
         for item in tables:
             result.append(item[1])
+
+        return result
+
+    # 2017-11-17 add by Maydya
+    # <summary> 取得所有異常資料表名稱 </summary>
+    # <return> 所有異常資料表名稱串列 </return>
+    def getAllErrorTableName(self):
+        tables = self.db.readAllErrorTableName()
+
+        result = []
+        for table in tables:
+            result.append(table[1])
 
         return result
 

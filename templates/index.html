@@ -1,5 +1,4 @@
-<!DOCTYPE html>
-{% load staticfiles %}
+<!DOCTYPE html> {% load staticfiles %}
 <html class="no-js">
 
 <head>
@@ -28,7 +27,7 @@
 </head>
 
 <body id="body">
-<!--
+	<!--
 	<div id="preloader">
 		<div class="book">
 			<div class="book__page"></div>
@@ -67,7 +66,7 @@
 		<div class="container-fluid bg-1">
 			<div class="row box">
 				<div class="col-md-6 col-12">
-					<div class="wow fadeInDown heroblock " data-wow-delay="0.3s" data-wow-duration=".2s" >
+					<div class="wow fadeInDown heroblock " data-wow-delay="0.3s" data-wow-duration=".2s">
 						<h1 style="display: inline">
 							「我們的
 						</h1>
@@ -76,13 +75,13 @@
 						<p class="wow fadeInDown" data-wow-delay="0.5s" data-wow-duration=".5s">空氣品質是影響現代人最直接也不可避免的議題</p>
 						<p class="wow fadeInDown" data-wow-delay="0.5s" data-wow-duration=".5s">它遠比你想像的更加危險!!!</p>
 					</div>
-						<!-- <div class="wow fadeInDown text-center" data-wow-delay="0.7s" data-wow-duration=".7s">
+					<!-- <div class="wow fadeInDown text-center" data-wow-delay="0.7s" data-wow-duration=".7s">
 							<a class="btn btn-home" href="http://127.0.0.1:8000/gpms/wronglist/" role="button">Get Started</a>
 						</div> -->
 				</div>
 
 				<div class="col-md-6 col-12 wow fadeInDown" data-wow-delay="0.8s" data-wow-duration="1s">
-				  <div class="wow fadeInDown heroright" data-wow-delay="0.3s" data-wow-duration=".5s">
+					<div class="wow fadeInDown heroright" data-wow-delay="0.3s" data-wow-duration=".5s">
 						<p>懸浮粒子容易吸附有害物質進入人體</p>
 						<p>像是隱形的殺手</p>
 						<p>因此我們提供即時的空氣品質數據讓你參考</p>
@@ -99,8 +98,6 @@
 		<!-- .container close -->
 	</section>
 	<!-- header close -->
-
-
 
 	<!--
         About start
@@ -130,8 +127,6 @@
 			<hr>
 			<div class="row">
 				<div class="w-100"></div>
-
-
 
 				<div class="col-md-8 col-12 wow fadeInLeft ccol" data-wow-delay="0.3s">
 					<div class="bg-gray"></div>
@@ -187,9 +182,6 @@
 	</section>
 	<!-- #service close -->
 
-
-
-
 	<section class="call-to-action section">
 		<div class="container">
 			<div class="row">
@@ -200,38 +192,32 @@
 							<a class="btn btn-home" href="http://127.0.0.1:8000/gpms/wronglist/" role="button">Getting Started</a>
 						</div>
 						<div class="col-lg-8 offset-lg-2 wow fadeInDown tablemargin" data-wow-delay="0.8s" data-wow-duration="1s">
-							<p><------------最新異常資訊------------></p>
-									<table class="table table-dark table-hover">
-										<thead>
-											<tr>
-												<th>測站</th>
-												<th>時間</th>
-												<th>原因</th>
-											</tr>
-										</thead>
-										<tbody>
-											<tr>
-												<td>{{error.0.0}}</td>
-												<td>{{error.0.3}}</td>
-												<td>{{error.0.4}}</td>
-											</tr>
-											<tr>
-												<td>{{error.1.0}}</td>
-												<td>{{error.1.3}}</td>
-												<td>{{error.1.4}}</td>
-											</tr>
-											<tr>
-												<td>{{error.2.0}}</td>
-												<td>{{error.2.3}}</td>
-												<td>{{error.2.4}}</td>
-											</tr>
-											<tr>
-												<td>{{error.3.0}}</td>
-												<td>{{error.3.3}}</td>
-												<td>{{error.3.4}}</td>
-											</tr>
-										</tbody>
-									</table>
+							<p style="color:white;font-size:20pt;test-align:center;">
+								{{date_time}}
+							</p><br>
+							<p style="color:#ff1212;font-size:20pt;test-align:center;">
+								最新異常資訊
+							</p><br>
+							{% if erorr|length == 0 or error == None %}
+								<p style="color:#55df00;font-size:20pt;test-align:center;">
+									沒有異常
+								</p>
+							{% else %}
+								<table class="table table-dark table-hover">
+									<thead>
+										<th>異常測站</th>
+										<th>異常時間</th>
+										<th>可能異常原因</th>
+									</thead>
+								{% for item in error %}
+									<tbody>
+										<td>{{item.1}}</td>
+										<td>{{time}}</td>
+										<td>過高或過低</td>
+									</tbody>
+								{% endfor %}
+								</table>
+							{% endif %}
 						</div>
 						<!-- /.col-lg-6 -->
 					</div>

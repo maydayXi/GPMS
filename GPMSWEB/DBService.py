@@ -17,10 +17,21 @@ class DBService:
     # 2017-10-12 add by Mayday
     # <summary> 取得所有空氣資料表 </summary>
     # <return> 空氣資料表串列 </return>
-    def readAllTableName(self):
+    def readAllAirInfoTableName(self):
         connection = sqlite3.connect(self.path + '/' + 'PM25.sqlite')
         queryStr = '''SELECT type,name FROM sqlite_master WHERE type = "table"
                       AND name LIKE "A%"'''
+        result = connection.execute(queryStr).fetchall()
+
+        return result
+
+    # 2017-11-17 add by Mayday
+    # <summary> 取得所有異常測站資料表 </summary>
+    # <return> 異常資料表名稱串列 </return>
+    def readAllErrorTableName(self):
+        connection = sqlite3.connect(self.path + '/' + 'PM25.sqlite')
+        queryStr = '''SELECT type,name FROM sqlite_master WHERE type = "table"
+                      AND name LIKE "E%"'''
         result = connection.execute(queryStr).fetchall()
 
         return result
@@ -181,7 +192,9 @@ class DBService:
         return cursor.fetchone()
 
     # 2017-11-16 add by Maydya
-
+    # <summary> 建立異常測站資料表 傳入異常資料 </summary>
+    # <param name = "timeStr"> 偵測時間 </param>
+    # <param name = "data_lst"> 異常資料 </param>
     def createErrorData(self, timeStr, data_lst):
         connection = sqlite3.connect(self.path + '/' + 'PM25.sqlite')
         sqlStr = """CREATE TABLE ErrorInfo_{}
@@ -210,15 +223,11 @@ class DBService:
 
     # 2017-10-31 Add by Mayday
     # <summary>Read error site data</summary>
-    # <param name = 'timeStr'>Error table name</param>
+    # <param name = 'table_name'>Error table name</param>
     # <return>Error site data list</summay>
-    def readErrorData(self, timeStr):
+    def readErrorData(self, table_name):
         connection = sqlite3.connect(self.path + '/' + 'PM25.sqlite')
-        sqlStr = """select SiteInfo.stNote, Error_{}.*,
-                    SiteInfo.stLatitude, SiteInfo.stLongitude
-                    from Error_{}, SiteInfo
-                    where Error_{}.stId = SiteInfo.stId
-                 """.format(timeStr,timeStr,timeStr)
+        sqlStr = "select * from {} where {}.PM25 > 54".format(table_name,table_name)
         cursor = connection.execute(sqlStr)
 
         return cursor.fetchall()

@@ -20,7 +20,7 @@ def Main(requests):
     x.getInitData()
     x.getAirValue()
     x.dbHandle()
-    table_name_lst = table.getAllTableName()
+    table_name_lst = table.getAllAirInfoTableName()
     error_site = x.analy()
 
     result = []
@@ -34,14 +34,19 @@ def Main(requests):
 
     return render(requests, "test.html", {"result":result})
 
+# 首頁
 def index(requests):
-    error = db.readErrorData('2017_10_31')
+    error_table_name_lst = table.getAllErrorTableName()
+    error = db.readErrorData(error_table_name_lst[-1])
+    now = datetime.now()
+    date_time = now.strftime('%Y-%m-%d %H:%M')
+    time = now.strftime('%H:%M')
 
     return render(requests, "index.html", locals())
 
 # 取得所有測站資料 傳送至 data.html 頁面
 def data(requests):
-    table_name_lst = table.getAllTableName()
+    table_name_lst = table.getAllAirInfoTableName()
     temp = db.readSiteData()        # 測站暫存空氣資料
     site_lst = []                   # 測站串列
     air_data_lst = []               # 空氣資料串列
@@ -106,7 +111,8 @@ def data(requests):
 
 # 取得有問題的測站，傳送至 wrongList.html 頁面
 def wronglist(requests):
-    error = db.readErrorData('2017_10_31')
+    error_table_name_lst = table.getAllErrorTableName()
+    error = db.readErrorData(error_table_name_lst[-1])
 
     stLat = 24.1492789
     stLon = 120.68338

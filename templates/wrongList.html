@@ -12,12 +12,6 @@
 	<link rel="stylesheet" href="{% static "css/animate.css" %}">
 	<link rel="stylesheet" href="{% static "css/wronglist.css" %}">
 	<!-- Responsive Stylesheet -->
-	<link rel="stylesheet" href="{% static "css/responsive.css" %}">
-	<style>
-		td:hover {
-			cursor: pointer;
-		}
-	</style>
 </head>
 
 <body onload="init()">
@@ -63,7 +57,7 @@
 			<div class="col-md-5 col-12" style="height:100vh">
 				<div class="card " style="height:100%; border-color: #5bc0de;">
           <!--Header-->
-          <div class="card-header bg-point-info">當時發生錯誤的資訊</div>
+          <div class="card-header bg-point-info" style="color:red;font-size:20pt;">異常的測站</div>
           <!--Card body-->
           <div class="card-body">
             <!--Title-->
@@ -102,24 +96,15 @@
 								</div>
 							</div>
 						</div>
-
           </div>
 					<!--Card Body-->
         </div>
-
-
-
-
-
 			</div>
 			<!--Right-->
-
 		</div>
 	</div>
 
 	<hr>
-
-
 
 	<!--footer Start-->
 	<footer>
@@ -191,11 +176,9 @@
 	<script src="{% static "scripts/jquery.nav.js" %}"></script>
 	<script src="{% static "scripts/wow.min.js" %}"></script>
 	<script src="{% static "scripts/main.js" %}"></script>
-
 	<script src="{% static "scripts/googlemap.js" %}"></script>
 	<!-- Google	Map API -->
 	<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA1MDAz4pygB9byYzbBpaeFRptZ1cyKcig&callback=initMap"></script>
-
 	<script>
 	//init Map
 	function initMap(){
