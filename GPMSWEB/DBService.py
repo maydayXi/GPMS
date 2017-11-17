@@ -67,7 +67,7 @@ class DBService:
     # <summary>Read site name by site id</summary>
     # <param name = 'id'>Site id</param>
     # <return>Site name</return>
-    def readSiteDataById(self,Id):
+    def readSiteNoteById(self,Id):
         connection = sqlite3.connect(self.path + '/' + 'PM25.sqlite')
         sqlStr = 'select stNote from SiteInfo where stId = "{}"'.format(
                 Id)
@@ -154,7 +154,7 @@ class DBService:
 
     # <summary>Read all area data</summary>
     # <param name = "timeStr"> table name </param>
-    # <return> sorted all area data </return>
+    # <return> All area data </return>
     def readAreaData(self,timeStr):
         connection = sqlite3.connect(self.path + '/' + 'PM25.sqlite')
         queryStr="""SELECT AirInfo_{}.stId, SiteInfo.stLatitude,

@@ -46,6 +46,11 @@ def index(requests):
 
 # 取得所有測站資料 傳送至 data.html 頁面
 def data(requests):
+    if(len(requests.GET) == 0):
+        row = 0
+    else:
+        row = int(requests.GET['selectedIndex'])
+
     table_name_lst = table.getAllAirInfoTableName()
     temp = db.readSiteData()        # 測站暫存空氣資料
     site_lst = []                   # 測站串列
@@ -53,7 +58,7 @@ def data(requests):
     data = {}                       # 過去空氣資料字典
 
     analy.getAreaId(table_name_lst[-1][8:])             # 取得鄰近測站資料  ID
-    area = analy.getAreaSite()                          # 取得鄰近站點資料名稱
+    area = analy.getAreaSite(row)                       # 取得鄰近站點資料名稱
 
     for item in temp:
         air_data = db.readAirDataByNote(table_name_lst[-1],item[3])
@@ -61,11 +66,6 @@ def data(requests):
             site_lst.append([item[0],item[3]])                          # (id,stNote)
             air_data_lst.append([air_data[1], air_data[2],              # (pm2.5, pm10,
                                 air_data[3], air_data[4]])              # 溫度, 濕度)
-
-    if(len(requests.GET) == 0):
-        row = 0
-    else:
-        row = int(requests.GET['selectedIndex'])
 
     data[site_lst[row][1]] = {"12":[], "6":[], "1":[], "area":[]}
 
@@ -76,7 +76,7 @@ def data(requests):
     data[site_lst[row][1]]["6"] = pm25_lst
     time_lst,pm25_lst = table.getXYAxis(table_name_lst,site_lst[row][0],interval=5)
     data[site_lst[row][1]]["1"] = pm25_lst
-    data[site_lst[row][1]]["area"] = area[row]
+    data[site_lst[row][1]]["area"] = area
 
             # if not item[3] in data:
             #     key = item[3]
@@ -122,7 +122,7 @@ def wronglist(requests):
         stLon = requests.GET['stLon']
         stId = requests.GET['stId']
         print(stId)
-        site = db.readSiteDataById(stId);
+        site = db.readSiteNoteById(stId);
         Message = '異常測站：' + site[0] + '\n' + '時間：' + str(datetime.now())
         print(Message)
 

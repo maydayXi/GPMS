@@ -35,17 +35,15 @@ class dataAnaly:
     # 2017-10-25 add by Mayday
     # <summary> 取得區域測站名稱 </summary>
     # <return> 區域測站名稱串列 </return>
-    def getAreaSite(self):
+    def getAreaSite(self, row):
         result = []
 
-        for item in self.area_gps:
-            temp = []
-            for Id in item:
-                x = self.db.readSiteDataById(Id)
-                temp.append(x[0])
+        for item in self.area_gps[row]:
+            print(item)
+            st_note = self.db.readSiteNoteById(item)
+            result.append(st_note[0])
 
-            result.append(temp)
-
+        print(result)
         return result
 
     # <summary>計算附近的點</summary>
