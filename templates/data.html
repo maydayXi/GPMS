@@ -55,7 +55,7 @@
   <div class="container-fluid">
     <div class="row dataRow">
       <!--左邊Start-->
-      <div class="col-md-5 col-sm-12">
+      <div class="col-lg-5 col-12">
         <!--左上Start-->
         <div class="card mb-3 " style="max-width: 50rem; border-color: #5bc0de;">
           <!--Header-->
@@ -91,7 +91,7 @@
         <!--換row-->
 
         <!--左下Start-->
-        <div class="card mb-3" style="max-width: 50rem; border-color: #5bc0de;">
+        <div class="card mb-3" style="max-width: 50rem; height:730px; border-color: #5bc0de;">
           <!--Header-->
           <div class="card-header bg-point-info">
             所有地點List
@@ -99,7 +99,7 @@
           <!--Content-->
           <div class="card-body">
             <form action="." method="get" id="stForm">
-              <select size="37" class="form-control" style="font-family: Microsoft JhengHei;
+              <select size="25" class="form-control" style="font-family: Microsoft JhengHei;
               font-size: 18px;" id="site_lst" name="site" onchange="select()">
                 {% for id,site in site_lst %}
                   <option value={{id}}>{{site}}
@@ -119,8 +119,8 @@
       <!--左邊-->
 
       <!--右上Start-->
-      <div class="col-md-7 col-sm-12">
-        <div class="card mb-3" style="border-color: #5bc0de;">
+      <div class="col-lg-7 col-12">
+        <div class="card mb-3" style="height:988px; border-color: #5bc0de;">
           <div class="card-header text-primary">
             <div class="btn-group btn-group-sm">
               <button type="button" class="btn btn-bg" onclick="_1()">1小時</button>
