@@ -5,63 +5,97 @@ Created on Sun Sep 24 18:22:47 2017
 @author: user
 """
 
-import sqlite3,os
+# import sqlite3,os         # locahost database use slqite
+import psycopg2 as db       # online database use postgreSQL
 
 class DBService:
 
-    # 2017-10-12 add by Mayday
+    # 2017-11-22 edit by Mayday
+    # <summay> Change DB using online postgreSQL database </summary>
     # 類別初始執行
     def __init__(self):
-        self.path = os.path.dirname(__file__)       #取得資料庫所在路徑
+        # self.path = os.path.dirname(__file__)       #取得資料庫所在路徑
+        self.connection = db.connect(database="dffltr2ms0lhfh",
+					                 user="knbnjgeyfptklf",
+					                 password="292002f4307cf02d0d6ae2747ed70d7ee7bc003af4af68282711c9343a4fc6d7",
+					                 host="ec2-54-243-107-66.compute-1.amazonaws.com",
+					                 port="5432")
 
-    # 2017-10-12 add by Mayday
+    # 2017-11-23 edit by Mayday
     # <summary> 取得所有空氣資料表 </summary>
     # <return> 空氣資料表串列 </return>
-    def readAllAirInfoTableName(self):
-        connection = sqlite3.connect(self.path + '/' + 'PM25.sqlite')
-        queryStr = '''SELECT type,name FROM sqlite_master WHERE type = "table"
-                      AND name LIKE "A%"'''
-        result = connection.execute(queryStr).fetchall()
+    def lst_readAllAirInfoTableName(self):
+        queryStr = '''SELECT relname FROM pg_class c
+                      WHERE relkind = 'r' AND
+                      relname LIKE 'a%'
+                      ORDER BY relname'''
+        cursor = self.connection.cursor()
+        cursor.execute(queryStr)
+        air_table_lst = cursor.fetchall()
+        self.connection.close()
 
-        return result
+        return air_table_lst
 
     # 2017-11-17 add by Mayday
     # <summary> 取得所有異常測站資料表 </summary>
     # <return> 異常資料表名稱串列 </return>
-    def readAllErrorTableName(self):
-        connection = sqlite3.connect(self.path + '/' + 'PM25.sqlite')
-        queryStr = '''SELECT type,name FROM sqlite_master WHERE type = "table"
-                      AND name LIKE "E%"'''
-        result = connection.execute(queryStr).fetchall()
+    def lst_readAllErrorTableName(self):
+        queryStr = '''SELECT relname FROM pg_class c
+                      WHERE relkind = 'r' AND
+                      relname LIKE 'e%'
+                      ORDER BY relname'''
+        cursor = self.connection.cursor()
+        cursor.execute(queryStr)
+        error_table_lst = cursor.fetchall()
+        self.connection.close()
 
-        return result
+        return error_table_lst
 
-    # <summary>Create site table</summary>
+    # 2017-11-23 edit by Mayday
+    # <summary> Create site table </summary>
     # <param name = "id_lst">   Site id list        </param>
     # <param name = "lat_lst">  Site latitude list  </param>
     # <param name = "lon_lst">  Site longitude list </param>
     # <param name = "note_lst"> Site name list      </param>
-    def createSiteData(self,id_lst,lat_lst,lon_lst,note_lst,):
+    def createSiteData(self,id_lst,lat_lst,lon_lst,note_lst):
         self.id_lst = id_lst
         self.lat_lst = lat_lst
         self.lon_lst = lon_lst
         self.note_lst = note_lst
-        connection = sqlite3.connect('PM25.sqlite')
+        # connection = sqlite3.connect('PM25.sqlite')         # local db using
+        cursor = self.connection.cursor()                     # 取得資料庫操作物件
 
-        #create site table
-        sqlStr = """create table if not exists SiteInfo(
-                    stId varchar primary key not null,
-                    stLatitude float,
-                    stLongitude float,
-                    stNote varchar)"""
-        connection.execute(sqlStr)
+        # Create site table syntax
+        sqlStr = """CREATE TABLE IF NOT EXISTS SiteInfo(
+                    stId TEXT PRIMARY KEY NOT NULL,
+                    stLatitude FLOAT,
+                    stLongitude FLOAT,
+                    stNote TEXT)"""
+        cursor.execute(sqlStr)                                # 執行 SQL 語法
+        self.connection.commit()                              # 資料庫更新
 
         for i in range(0,len(id_lst)):
-            sqlStr="insert into SiteInfo values('{}',{},{},'{}')".format(
-                    self.id_lst[i],self.lat_lst[i],self.lon_lst[i],self.note_lst[i],)
-            connection.execute(sqlStr)
-        connection.commit()
-        connection.close()
+            sqlStr="""INSERT INTO SiteInfo
+                      (stId, stLatitude, stLongitude, stNote)
+                      VALUES('{}',{},{},'{}')""".format(
+                      self.id_lst[i],self.lat_lst[i],
+                      self.lon_lst[i],self.note_lst[i],)
+            cursor.execute(sqlStr)
+
+        self.connection.commit()
+        self.connection.close()                              # 關閉資料庫連線
+
+    # 2017-11-23 edit by Mayday
+    # <summary>Read stie information</summary>
+    # <return>Site information list</return>
+    def lst_readSiteData(self):
+        queryStr = 'SELECT * FROM SiteInfo'
+        cursor = self.connection.cursor()
+        cursor.execute(queryStr)
+        site_info_lst = cursor.fetchall()
+        self.connection.close()
+
+        return site_info_lst
 
     # 2017-10-25 add by Mayday
     # <summary>Read site name by site id</summary>
@@ -76,65 +110,63 @@ class DBService:
 
         return result
 
-    # 2017-11-16 add by Mayday
-    #
-    def readSiteAreaNote(self,Note):
-        connection = sqlite3.connect(self.path + '/' + 'PM25.sqlite')
-        sqlStr = 'select stLatitude, stLongitude from SiteInfo where stNote = "{}"'.format(Note)
-        cursor = connection.execute(sqlStr)
-        result = cursor.fetchone()
+    # 2017-11-23 edit by Mayday
+    # <summary> Read site position by site Name </summary>
+    # <return> One site position </return>
+    def m_readSitePositionByNote(self,Note):
+        queryStr = '''SELECT stLatitude, stLongitude FROM SiteInfo
+                      WHERE stNote = "{}"'''.format(Note)
+        cursor = self.connection.cursor()
+        cursor.execute(queryStr)
+        site_position = cursor.fetchone()
+        self.connection.close()
 
-        return result
+        return site_position
 
-    # <summary>Read stie information</summary>
-    # <return>Site information</return>
-    def readSiteData(self):
-        queryStr = 'select SiteInfo.* from SiteInfo'
-        connection = sqlite3.connect(self.path + '/' + 'PM25.sqlite')
-        cursor = connection.execute(queryStr)
-        result = cursor.fetchall()
-
-        return result
-
-    # <summary>create air table</summary>
-    # <param name = "timeStr">  table name             </param>
+    # 2017-11-23 edit by Mayday
+    # <summary> Create air information table </summary>
+    # <param name = "timeStr">  Table name             </param>
     # <param name = "id_lst">   Site Id list           </param>
     # <param name = "pm25_lst"> PM2.5 value list       </param>
     # <param name = "pm10_lst"> PM10 value list        </param>
     # <param name = "t_lst">    Temperature value list </param>
     # <param name = "h_lst">    Humidity value list    </param>
     def createAirData(self,timeStr,id_lst,pm25_lst,pm10_lst,t_lst,h_lst):
-        connection = sqlite3.connect(self.path + '/' + 'PM25.sqlite')
+        # Create air information table sql syntax
         sqlStr = """CREATE TABLE AirInfo_{}
-                    (stId VARCHAR NOT NULL,
+                    (stId TEXT NOT NULL,
                     PM25 INTEGER,
                     PM10 INTEGER,
-                    Temperature DOUBLE,
-                    Humidity DOUBLE,
+                    Temperature FLOAT,
+                    Humidity FLOAT,
                     PRIMARY KEY(stId),
                     FOREIGN KEY(stId) REFERENCES SiteInfo(stId))""".format(timeStr)
-        connection.execute(sqlStr)
-        connection.commit()
+        cursor = self.connection.cursor()
+        cursor.execute(sqlStr)
+        self.connection.commit()
 
         for i in range(0,len(id_lst)):
-            sqlStr = "INSERT INTO AirInfo_{} VALUES('{}',{},{},{},{})".format(
-                    timeStr,id_lst[i],pm25_lst[i],pm10_lst[i],t_lst[i],h_lst[i])
-            connection.execute(sqlStr)
-        connection.commit()
-        connection.close()
+            sqlStr = """INSERT INTO AirInfo_{}
+                        (stId, PM25, PM10, Temperature, Humidity)
+                        VALUES('{}',{},{},{},{})""".format(timeStr,
+                        id_lst[i],pm25_lst[i],pm10_lst[i],t_lst[i],h_lst[i])
+            cursor.execute(sqlStr)
+        self.connection.commit()
+        self.connection.close()
 
-    # 2017-10-12 add by Mayday
+    # 2017-11-23 add by Mayday
     # <summary>Read air data by station name </summary>
     # <param name = "table_name"> Table name </param>
     # <param name = "stNote"> Station name   </param>
     # <return> Air data belonging to station name </return>
-    def readAirDataByNote(self,table_name,stNote):
-        connnection = sqlite3.connect(self.path + '/' + 'PM25.sqlite')
-        queryStr = """SELECT {}.* FROM {},SiteInfo
+    def m_readAirDataByNote(self,table_name,stNote):
+        queryStr = """SELECT {}.* FROM {}, SiteInfo
                       WHERE SiteInfo.stId = {}.stId and SiteInfo.stNote = "{}"
                    """.format(table_name,table_name,table_name,stNote)
-        cursor = connnection.execute(queryStr)
+        cursor = self.connnection.cursor()
+        cursor.execute(queryStr)
         result = cursor.fetchone()
+        self.connection.close()
 
         return result
 
@@ -152,74 +184,85 @@ class DBService:
 
         return result
 
-    # <summary>Read all area data</summary>
-    # <param name = "timeStr"> table name </param>
-    # <return> All area data </return>
-    def readAreaData(self,timeStr):
-        connection = sqlite3.connect(self.path + '/' + 'PM25.sqlite')
+    # 2017-11-23 edit by Mayday
+    # <summary> Read all site position data </summary>
+    # <param name="timeStr"> table name </param>
+    # <return> All site position data </return>
+    def lst_readPositionData(self,timeStr):
         queryStr="""SELECT AirInfo_{}.stId, SiteInfo.stLatitude,
                     SiteInfo.stLongitude, SiteInfo.stNote
                     FROM AirInfo_{}, SiteInfo
                     WHERE SiteInfo.stId = AirInfo_{}.stId
                  """.format(timeStr,timeStr,timeStr)
 
-        cursor = connection.execute(queryStr)
-        result = cursor.fetchall()
+        cursor = self.connection.cursor()
+        cursor.execute(queryStr)
+        site_position_lst = cursor.fetchall()
+        self.connection.close()
 
-        return result
+        return site_position_lst
 
+    # 2017-11-23 edit by Mayday
     # <summary>Read PM25 and PM10 by Id</summary>
     # <param name = "timeStsr">table name </param>
     # <param name = "Id">      Site Id    </param>
     # <return>one PM25 and PM10 </return>
-    def readPM25PM10(self,timeStr,Id):
-        connection = sqlite3.connect(self.path + '/' + 'PM25.sqlite')
-        queryStr = 'SELECT AirInfo_{}.PM25, AirInfo_{}.PM10 FROM AirInfo_{} \
-                      WHERE stId = "{}"'.format(timeStr,timeStr,timeStr,Id)
-        cursor = connection.execute(queryStr)
-        r_data = cursor.fetchall()
+    def m_readPM25PM10ById(self,timeStr,Id):
+        queryStr = '''SELECT AirInfo_{}.PM25, AirInfo_{}.PM10 FROM AirInfo_{}
+                      WHERE stId = "{}"'''.format(timeStr,timeStr,timeStr,Id)
+        cursor = self.connection.cursor()
+        cursor.execute(queryStr)
+        pm25_pm10 = cursor.fetchone()
 
-        return r_data
+        self.connection.close()
 
-    # <summary>select Alpha n by Id</summary>
-    # <param name = "n"> 樣本數     </param>
-    # <return>Alpha n</return>
-    def selectGAlpha(self,n):
-        queryStr = 'select GrubbsTValue.alpha from GrubbsTValue where N = {}'.format(n)
-        connection = sqlite3.connect(self.path + '/' + 'PM25.sqlite')
-        cursor = connection.execute(queryStr)
+        return pm25_pm10
 
-        return cursor.fetchone()
+    # 2017-11-23 edit by Mayday
+    # <summary> Select Alpha by N </summary>
+    # <param name = "n"> 樣本數    </param>
+    # <return> Alpha </return>
+    def m_selectGAlpha(self,n):
+        queryStr = '''SELECT GrubbsTValue.alpha FROM GrubbsTValue
+                      WHERE N = {}'''.format(n)
+        cursor = self.connection.cursor()
+        cursor.execute(queryStr)
+        alpha = cursor.fetchone()
+        self.connection.close()
 
-    # 2017-11-16 add by Maydya
+        return alpha
+
+    # 2017-11-23 edit by Maydya
     # <summary> 建立異常測站資料表 傳入異常資料 </summary>
     # <param name = "timeStr"> 偵測時間 </param>
     # <param name = "data_lst"> 異常資料 </param>
-    def createErrorData(self, timeStr, data_lst):
-        connection = sqlite3.connect(self.path + '/' + 'PM25.sqlite')
+    def createErrorData(self, timeStr, error_lst):
         sqlStr = """CREATE TABLE ErrorInfo_{}
-                    (stId VARCHAR NOT NULL,
-                    stNote TEXT,
-                    PM25 INTEGER,
-                    PM10 INTEGER,
-                    Temperature DOUBLE,
-                    Humidity DOUBLE,
-                    stLatitude DOUBLE,
-                    stLongitude DOUBLE,
-                    PRIMARY KEY(stId),
-                    FOREIGN KEY(stId) REFERENCES SiteInfo(stId))
-                """.format(timeStr)
+                    (stId TEXT NOT NULL,
+                     stNote TEXT,
+                     PM25 INTEGER,
+                     PM10 INTEGER,
+                     Temperature FLOAT,
+                     Humidity FLOAT,
+                     stLatitude FLOAT,
+                     stLongitude FLOAT,
+                     PRIMARY KEY(stId),
+                     FOREIGN KEY(stId) REFERENCES SiteInfo(stId))
+                 """.format(timeStr)
+        cursor = self.connection.cursor()
+        cursor.execute(sqlStr)
+        self.connection.commit()
 
-        connection.execute(sqlStr)
-        connection.commit()
+        for item in error_lst:
+            sqlStr = '''INSERT INTO ErrorInfo_{}
+                        (stId, stNote, PM25, PM10,
+                         Temperature, Humidity, stLatitude, stLongitude)
+                     '''.format(timeStr, item[0], item[1], item[2], item[3],
+                                item[4], item[5], item[6], item[7])
+            cursor.execute(sqlStr)
 
-        for item in data_lst:
-            sqlStr = "INSERT INTO ErrorInfo_{} VALUES('{}','{}',{},{},{},{},{},{})".format(
-                      timeStr,item[0],item[1],item[2],item[3],item[4],item[5],item[6],item[7])
-            connection.execute(sqlStr)
-
-        connection.commit()
-        connection.close()
+        self.connection.commit()
+        self.connection.close()
 
     # 2017-10-31 Add by Mayday
     # <summary>Read error site data</summary>

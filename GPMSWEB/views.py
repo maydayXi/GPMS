@@ -6,6 +6,7 @@ from GPMSWEB.main import main                   # 自建主程式類別
 from GPMSWEB.DBService import DBService         # 自建資料庫類別
 from GPMSWEB.TableService import TableService   # 自建資料表類別
 from GPMSWEB.dataAnaly import dataAnaly         # 資料分析類別
+import psycopg2
 
 # Create your views here.
 
@@ -14,25 +15,34 @@ db = DBService()                            # 資料庫物件
 analy = dataAnaly()                         # 資料分析物件
 table = TableService()                      # 表格資料物件
 
+def test(request):
+    x = main()
+    t = x.getInitData()
+    x.getAirValue()
+    x.dataSave()
+
+    return render(request , "test.html", locals())
+
 # 找出有問題的站點
 def Main(requests):
     x = main()
     x.getInitData()
     x.getAirValue()
-    x.dbHandle()
-    table_name_lst = table.getAllAirInfoTableName()
+    x.dataSave()
+    table_name_lst = table.lst_getAllAirInfoTableName()
     error_site = x.analy()
 
-    result = []
+    error = []
     for item in error_site:
-        error_air_data = db.readAirDataByNote(table_name_lst[-1], item)
-        error_area = db.readSiteAreaNote(item)
-        result.append([error_air_data[0],item,error_air_data[1],error_air_data[2],
-                       error_air_data[3],error_air_data[4],error_area[0],error_area[1]])
+        error_air_data = db.m_readAirDataByNote(table_name_lst[-1], item)
+        error_position = db.m_readSitePositionByNote(item)
+        error.append([error_air_data[0],item,error_air_data[1],                 # stId, PM2.5
+                       error_air_data[2],error_air_data[3],                     # PM10, Temperature
+                       error_air_data[4],error_position[0],error_position[1]])  # Humidity, stLatitude, stLongitude
 
-    db.createErrorData(table_name_lst[-1][8:],result)
+    db.createErrorData(table_name_lst[-1][8:],error)
 
-    return render(requests, "test.html", {"result":result})
+    return render(requests, "test.html", {"result":error})
 
 # 首頁
 def index(requests):
@@ -51,7 +61,7 @@ def data(requests):
     else:
         row = int(requests.GET['selectedIndex'])
 
-    table_name_lst = table.getAllAirInfoTableName()
+    table_name_lst = table.lst_getAllAirInfoTableName()
     temp = db.readSiteData()        # 測站暫存空氣資料
     site_lst = []                   # 測站串列
     air_data_lst = []               # 空氣資料串列
@@ -111,7 +121,7 @@ def data(requests):
 
 # 取得有問題的測站，傳送至 wrongList.html 頁面
 def wronglist(requests):
-    error_table_name_lst = table.getAllErrorTableName()
+    error_table_name_lst = table.lst_getAllErrorTableName()
     error = db.readErrorData(error_table_name_lst[-1])
 
     stLat = 24.1492789

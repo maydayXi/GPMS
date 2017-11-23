@@ -6,7 +6,11 @@
   </head>
   <body>
     <center>
-      {{result}}
+      {% for row in result %}
+        {{row}}
+      {% empty %}
+        nothing
+      {% endfor %}
     </center>
   </body>
 </html>

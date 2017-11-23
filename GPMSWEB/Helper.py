@@ -11,27 +11,28 @@ from bs4 import BeautifulSoup as bs
 # <summary>Get useful data class</summary>
 class Helper:
 
-    # <summary>Find all error url and remove it by id</summary>
+    # 2017-11-23 edit by Mayday
+    # <summary> Find all error url and remove it by id </summary>
     # <param name = "id_lst">     Site id list </param>
     # <param name = "sensor_lst"> Sensor list  </param>
-    # <return>Useful id list  </return>
-    # <return>Useful url list </return>
-    def urlHelper(self,id_lst,sensor_lst):
+    # <return> Useful id list  </return>
+    # <return> Useful url list </return>
+    def urlHelper(self, all_id_lst, sensor_lst):
         self.error_id_lst = []
         self.error_sensor_list = []
         self.url_lst = []
         self.id_lst = []
 
         count = 0
-        for Id in id_lst:
+        for Id in all_id_lst:
             for sensor in sensor_lst:
-                #get url
+                # Get url
                 url = 'http://www.airq.org.tw/Home/GetCurrentValueApi?station={}&sensor={}'.format(Id,sensor)
-                #get html text
+                # Get html text
                 html = requests.get(url).text
                 parse = bs(html,'html.parser')
 
-                #remove invalid id
+                # Remove invalid id
                 if str(parse.find('title')).find('錯誤') == 7:
                     self.error_id_lst.append(Id)
                     self.error_sensor_list.append(sensor)

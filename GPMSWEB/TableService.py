@@ -12,32 +12,32 @@ class TableService:
 
     # 2017-10-12 add by Mayday
     def __init__(self):
-        self.db = DBService()                   # new database instance
-        self.ana = dataAnaly()                  # new dataAnaly instance
+        self.db = DBService()                   # New database instance
+        self.ana = dataAnaly()                  # New dataAnaly instance
 
-    # 2017-10-12 add by Mayday
+    # 2017-11-23 edit by Mayday
     # <summary> 取得所有空氣資料表格名稱 </summary>
     # <return> 所有空氣資料表名稱串列 </return>
-    def getAllAirInfoTableName(self):
-        tables = self.db.readAllAirInfoTableName()
+    def lst_getAllAirInfoTableName(self):
+        tables = self.db.lst_readAllAirInfoTableName()
 
-        result = []
+        air_table_lst = []
         for item in tables:
-            result.append(item[1])
+            resair_table_lstult.append(item[1])
 
-        return result
+        return air_table_lst
 
-    # 2017-11-17 add by Maydya
+    # 2017-11-23 edit by Maydya
     # <summary> 取得所有異常資料表名稱 </summary>
     # <return> 所有異常資料表名稱串列 </return>
-    def getAllErrorTableName(self):
-        tables = self.db.readAllErrorTableName()
+    def lst_getAllErrorTableName(self):
+        tables = self.db.lst_readAllErrorTableName()
 
-        result = []
+        error_table_lst = []
         for table in tables:
-            result.append(table[1])
+            error_table_lst.append(table[1])
 
-        return result
+        return error_table_lst
 
     # 2017-10-12 add by Mayday
     # <summary> 取得 x 與 y 軸的數據 </summary>

@@ -91,7 +91,7 @@
 									<td>可能發生火災</td>
 									<hr>
 									<div class="ovscroll">
-												<div class="fb-comments" data-width="100%" data-href="https://developers.facebook.com/docs/plugins/comments#configurator" data-numposts="5"></div>
+										<div class="fb-comments" data-width="100%" data-href="https://developers.facebook.com/docs/plugins/comments#configurator" data-numposts="5"></div>
 									</div>
 								</div>
 							</div>
@@ -111,8 +111,8 @@
 		<div class="container">
 			<div class="row">
 				<div class="col-md-12">
-						<p>Copyright &copy; <a href="http://im.nutc.edu.tw/bin/home.php">NUTC-IM</a> | Prof. Allen Lian </p>
-					</div>
+					<p>Copyright &copy; <a href="http://im.nutc.edu.tw/bin/home.php">NUTC-IM</a> | Prof. Allen Lian </p>
+				</div>
 			</div>
 		</div>
 	</footer>
@@ -176,47 +176,46 @@
 	<script src="{% static "scripts/jquery.nav.js" %}"></script>
 	<script src="{% static "scripts/wow.min.js" %}"></script>
 	<script src="{% static "scripts/main.js" %}"></script>
-
 	<!-- Google	Map API -->
 	<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA1MDAz4pygB9byYzbBpaeFRptZ1cyKcig&callback=initMap"></script>
 	<script>
 	//init Map
 	function initMap(){
-	var options = {
-		zoom : 8,
-		center: {lat:23.903687,lng:121.079370}
-	}
-
-	//New Map
-	var map = new google.maps.Map(document.getElementById('map'),options);
-
-	// Add point marker
-	//coords => map.json
-	//['name','lat','lng']
-	//可以按照需要把必需要資訊加入到json檔以便讀取
-	function addMarker(coords){
-		var marker = new google.maps.Marker({
-			position : {lat:coords['lat'],lng:coords['lng']},
-			map: map
-		});
-
-		//for each point All add ClickListener
-		//按下便可以設定post function
-		marker.addListener('click',function(){
-			//function start here
-			console.log(coords['name']);
-		})
-	}
-
-	//Use JQuery Read map.json
-	//Call addMarker Function to add point
-	var point = $.getJSON( "{% static "json/map.json" %}" ,function(data){
-		console.log("json file loading success!");
-		// i < data.length 則全部跑完
-		for(var i=0;i<15;i++){
-			addMarker(data[i]);
+		var options = {
+			zoom : 8,
+			center: {lat:23.903687,lng:121.079370}
 		}
-	});
+
+		//New Map
+		var map = new google.maps.Map(document.getElementById('map'),options);
+
+		// Add point marker
+		//coords => map.json
+		//['name','lat','lng']
+		//可以按照需要把必需要資訊加入到json檔以便讀取
+		function addMarker(coords){
+			var marker = new google.maps.Marker({
+				position : {lat:coords['lat'],lng:coords['lng']},
+				map: map
+			});
+
+			//for each point All add ClickListener
+			//按下便可以設定post function
+			marker.addListener('click',function(){
+				//function start here
+				console.log(coords['name']);
+			})
+		}
+
+		//Use JQuery Read map.json
+		//Call addMarker Function to add point
+		var point = $.getJSON( "{% static "json/map.json" %}" ,function(data){
+			console.log("json file loading success!");
+			// i < data.length 則全部跑完
+			for(var i=0;i<15;i++){
+				addMarker(data[i]);
+			}
+		});
 	}
 	</script>
 
