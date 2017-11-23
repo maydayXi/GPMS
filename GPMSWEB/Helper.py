@@ -27,7 +27,9 @@ class Helper:
         for Id in all_id_lst:
             for sensor in sensor_lst:
                 # Get url
+
                 url = 'http://www.airq.org.tw/Home/GetCurrentValueApi?station={}&sensor={}'.format(Id,sensor)
+                print(url)
                 # Get html text
                 html = requests.get(url).text
                 parse = bs(html,'html.parser')

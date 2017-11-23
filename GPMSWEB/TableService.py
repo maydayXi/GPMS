@@ -19,12 +19,15 @@ class TableService:
     # <summary> 取得所有空氣資料表格名稱 </summary>
     # <return> 所有空氣資料表名稱串列 </return>
     def lst_getAllAirInfoTableName(self):
+        print("lst_readAllAirInfoTableName")
         tables = self.db.lst_readAllAirInfoTableName()
 
         air_table_lst = []
+        print("lst_readAllAirInfoTableName-for-table")
         for item in tables:
             air_table_lst.append(item[0])
 
+        print("lst_readAllAirInfoTableName-return")
         return air_table_lst
 
     # 2017-11-23 edit by Maydya

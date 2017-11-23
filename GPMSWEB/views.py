@@ -17,11 +17,17 @@ table = TableService()                      # 表格資料物件
 
 # 找出有問題的站點
 def Main(requests):
+    print("main")
     x = main()
+    print("getInitData")
     x.getInitData()
+    print("getAirValue")
     x.getAirValue()
+    print("datasave")
     x.dataSave()
+
     table_name_lst = table.lst_getAllAirInfoTableName()
+
     error_site = x.analy()
 
     error = []
@@ -40,14 +46,15 @@ def Main(requests):
 def index(requests):
     # error_table_name_lst = table.getAllErrorTableName()
     # error = db.readErrorData(error_table_name_lst[-1])
-    now = datetime.now()
-    date_time = now.strftime('%Y-%m-%d %H:%M')
-    time = now.strftime('%H:%M')
-
-    return render(requests, "index.html", locals())
+    # now = datetime.now()
+    # date_time = now.strftime('%Y-%m-%d %H:%M')
+    # time = now.strftime('%H:%M')
+    #
+     return render(requests, "index.html", locals())
 
 # 取得所有測站資料 傳送至 data.html 頁面
 def data(requests):
+
     # if(len(requests.GET) == 0):
     #     row = 0
     # else:
@@ -109,7 +116,7 @@ def data(requests):
 
     # data = HttpResponse(json.dumps(data),content_type="application/json")
 
-    return render(requests, "data.html", locals())
+     return render(requests, "data.html", locals())
 
 # 取得有問題的測站，傳送至 wrongList.html 頁面
 def wronglist(requests):

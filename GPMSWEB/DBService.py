@@ -25,13 +25,18 @@ class DBService:
     # <summary> 取得所有空氣資料表 </summary>
     # <return> 空氣資料表串列 </return>
     def lst_readAllAirInfoTableName(self):
+        print("lst_readAllAirInfoTableName-1")
         queryStr = '''SELECT relname FROM pg_class c
                       WHERE relkind = 'r' AND
                       relname LIKE 'a%'
                       ORDER BY relname'''
+        print("lst_readAllAirInfoTableName-2")
         cursor = self.connection.cursor()
+        print("lst_readAllAirInfoTableName-3")
         cursor.execute(queryStr)
+        print("lst_readAllAirInfoTableName-4")
         air_table_lst = cursor.fetchall()
+        print("lst_readAllAirInfoTableName-5")
 
         return air_table_lst
 
@@ -157,12 +162,15 @@ class DBService:
     # <return> Air data belonging to station name </return>
     def m_readAirDataByNote(self,table_name,stNote):
         queryStr = """SELECT {}.* FROM {}, SiteInfo
-                      WHERE SiteInfo.stId = {}.stId and SiteInfo.stNote = "{}"
+                      WHERE SiteInfo.stId = {}.stId and SiteInfo.stNote = '{}'
                    """.format(table_name,table_name,table_name,stNote)
+        print("m_readAirDataByNote-connection")
         cursor = self.connection.cursor()
+        print("m_readAirDataByNote-execute")
         cursor.execute(queryStr)
+        print("m_readAirDataByNote-fetchone")
         result = cursor.fetchone()
-        self.connection.close()
+        # self.connection.close()
 
         return result
 
@@ -250,6 +258,7 @@ class DBService:
             sqlStr = '''INSERT INTO ErrorInfo_{}
                         (stId, stNote, PM25, PM10,
                          Temperature, Humidity, stLatitude, stLongitude)
+                        VALUES('{}','{}',{},{},{},{},{},{})
                      '''.format(timeStr, item[0], item[1], item[2], item[3],
                                 item[4], item[5], item[6], item[7])
             cursor.execute(sqlStr)
@@ -261,8 +270,10 @@ class DBService:
     # <param name = 'table_name'>Error table name</param>
     # <return>Error site data list</summay>
     def readErrorData(self, table_name):
-        connection = sqlite3.connect(self.path + '/' + 'PM25.sqlite')
         sqlStr = "select * from {} where {}.PM25 > 54".format(table_name,table_name)
-        cursor = connection.execute(sqlStr)
+        cursor = self.connection.cursor()
+        cursor.execute(sqlStr)
 
-        return cursor.fetchall()
+        result = cursor.fetchall()
+
+        return result

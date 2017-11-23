@@ -15,7 +15,10 @@ class dataAnaly:
     # <param name = "timeStr">Table name</param>
     def getAreaId(self,timeStr):
         gps = []                                                        # Site area temp list
+        print("read_DB_Postition")
         site_position_lst = self.db.lst_readPositionData(timeStr)       # Read site position data
+
+        print("add_Position_to_GPS[]")
         for item in site_position_lst:
             gps.append([item[0],item[1],item[2]])   # Add site id,lat and lon
             self.note.append(item[3])               # Add site name
@@ -25,9 +28,10 @@ class dataAnaly:
             temp = []                               # Temp list
             temp.append(i[0])                       # Add point itself
 
+            print("add_area_function")
             for j in gps:
                 if (self.haversine(i[2],i[1],j[2],j[1]) > 0 and
-                self.haversine(i[2],i[1],j[2],j[1]) <= 7) :
+                self.haversine(i[2],i[1],j[2],j[1]) <= 5) :
                     temp.append(j[0])
 
             self.area_gps.append(temp)
@@ -63,17 +67,26 @@ class dataAnaly:
     # 2017-11-23 edit by Mayday
     # <summary>Get area PM2.5 and PM10 information</summary>
     # <param name = "timeStr">Table name</param>
-    def getAreaAirInfo(self,timeStr):
+    def getAreaAirInfo(self,timeStr,dict_pm25,dict_pm10):
 
         self.area_pm25 = []             # Area PM2.5 list
         self.area_pm10 = []             # Area PM10 list
         for item in self.area_gps:
+            print("getAreaAirInfo-1")
             temp25 = []                 # Temp PM2.5 list
             temp10 = []                 # Temp PM10 list
             for Id in item:
-                pm25_pm10 = self.db.m_readPM25PM10ById(timeStr,Id)
-                temp25.append(pm25_pm10[0])
-                temp10.append(pm25_pm10[1])
+                print("getAreaAirInfo-2")
+
+                # 這行佔最多時間
+                # pm25_pm10 = self.db.m_readPM25PM10ById(timeStr,Id)
+
+                # print(dict_pm25['{}'.format(Id)])
+                temp25.append(dict_pm25['{}'.format(Id)])
+                temp10.append(dict_pm10['{}'.format(Id)])
+
+                # temp25.append(pm25_pm10[0])
+                # temp10.append(pm25_pm10[1])
 
             self.area_pm25.append(temp25)
             self.area_pm10.append(temp10)
@@ -107,17 +120,20 @@ class dataAnaly:
     # Cal grubbsTest value
     def grubbsTest(self):
 
+        print("grubbsTest-1")
         self.area_final = []
         index = 0                                       # item index
+        print("grubbsTest-2")
         for item in self.area_pm25:
             An = self.db.m_selectGAlpha(len(item))
             if An != None:          # if N >= 3
                 x = An[0]
-                Gn = abs((item[0] - self.avg_pm25_lst[index])/self.s_pm25_lst[index])
+                Gn = abs((item[0] - self.avg_pm25_lst[index]) / self.s_pm25_lst[index])
                 final = x - Gn
                 if final < 0:
                     self.area_final.append(self.note[index])
 
             index += 1
 
+        print("grubbsTest-3")
         return self.area_final
