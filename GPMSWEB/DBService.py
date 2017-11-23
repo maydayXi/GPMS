@@ -159,7 +159,7 @@ class DBService:
         queryStr = """SELECT {}.* FROM {}, SiteInfo
                       WHERE SiteInfo.stId = {}.stId and SiteInfo.stNote = "{}"
                    """.format(table_name,table_name,table_name,stNote)
-        cursor = self.connnection.cursor()
+        cursor = self.connection.cursor()
         cursor.execute(queryStr)
         result = cursor.fetchone()
         self.connection.close()

@@ -1,224 +1,260 @@
-﻿<!DOCTYPE html> {% load staticfiles %}
+<!DOCTYPE html> {% load staticfiles %}
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!-->
+<html class="no-js">
+<!--<![endif]-->
 
-<head class="no-js">
+<head>
 	<meta charset="UTF-8">
-	<title>異常列表</title>
+	<title>異常監測站</title>
 	<meta property="fb:app_id" content="909518255880791" />
-	<!-- <link rel="stylesheet" href="css/bootstrap.min.css"> -->
-	<!-- Bootstrap CDN -->
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css">
-	<link rel="stylesheet" href="{% static "css/themefisher-fonts.css" %}">
-	<link rel="stylesheet" href="{% static "css/font-awesome.min.css" %}">
-	<link rel="stylesheet" href="{% static "css/animate.css" %}">
-	<link rel="stylesheet" href="{% static "css/wronglist.css" %}">
-	<!-- Responsive Stylesheet -->
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<!-- FB Share Content -->
+	<meta property="og:url" content="location.href" />
+	<meta property="og:type" content="website" />
+	<meta property="og:title" content="GPMS-PM2.5異常分析系統" />
+	<meta property="og:description" content="異常站點的詳細資訊" />
+	<meta property="og:image" content="https://upload.wikimedia.org/wikipedia/commons/thumb/d/dd/Achtung.svg/220px-Achtung.svg.png" />
+	<!--  -->
+
+	<!-- CSS
+		================================================== -->
+	<!-- Fontawesome Icon font -->
+	<link rel="stylesheet" href="{% static "plugins/themefisher-font/style.css" %}">
+	<!-- bootstrap.min css -->
+	<link rel="stylesheet" href="{% static "plugins/bootstrap/dist/css/bootstrap.min.css" %}">
+	<!-- Animate.css -->
+	<link rel="stylesheet" href="{% static "plugins/animate-css/animate.css" %}">
+	<!-- Magnific popup css -->
+	<!-- <link rel="stylesheet" href="{% static "plugins/magnific-popup/dist/magnific-popup.css" %}"> -->
+	<!-- Main Stylesheet -->
+	<link rel="stylesheet" href="{% static "css/wrongList.css" %}">
+	<!-- Google ICONs -->
+	<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+	<!-- Font Awsome ICON -->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
+<body id="body">
 
-<body onload="init()">
-	<div id="fb-root"></div>
+<script>
+	function init() {
+		var fb = document.getElementsByClassName('fb-comments')[0];
+		var x = fb.getAttribute('data-href');
+		// alert(location.href + '\n' + x);
+		fb.setAttribute('data-href', location.href);
+		// alert(location.href + '\n' + fb.getAttribute('data-href'));
+	}
+	window.fbAsyncInit = function() {
+    FB.init({
+      appId: '909518255880791',
+      autoLogAppEvents: true,
+      xfbml: true,
+      version: 'v2.11'
+    });
+    FB.AppEvents.logPageView();
+  };
+  (function(d, s, id) {
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) return;
+    js = d.createElement(s);
+    js.id = id;
+    js.src = 'https://connect.facebook.net/zh_TW/sdk.js';
+    fjs.parentNode.insertBefore(js, fjs);
+  }(document, 'script', 'facebook-jssdk'));
 
-	<!--NavBar Start-->
+  function postToPage() {
+    var page_id = '277631202754911';
+    FB.api('/' + page_id, {
+      fields: 'access_token'
+    }, function(resp) {
+      if (resp.access_token) {
+        FB.api('/' + page_id + '/feed',
+          'post', {
+            message: "I 'm a Page!",
+            link: location.href,
+            access_token: resp.access_token
+          },
+          function(response) {
+            console.log(response);
+            //response 為一個dict {id: "POST ID"}
+          });
+      }
+    });
+  };
+</script>
+
+
+
+<div id="preloader"></div>
+
+<!--
+Fixed Navigation
+  ==================================== -->
+<div class="container-fluid">
+
+	<nav class="navbar navbar-inverse navbar-fixed-top navigation">
 	<div class="container-fluid">
-		<div class="row">
-			<nav class="navbar navbar-expand-md navbar-inverse fixed-top">
-				<a class="navbar-brand" href="http://127.0.0.1:8000/gpms/index/"><img src="{% static "images/logo.png" %}" alt=""></a>
-				<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
-          <img src="{% static "images/toggler.png" %}" class="img-fluid">
-        </button>
-				<div class="collapse navbar-collapse " id="collapsibleNavbar">
-					<ul class="navbar-nav ml-auto menu">
-						<li class="nav-item">
-							<a class="nav-link" href="http://127.0.0.1:8000/gpms/index/">HOME</a>
-						</li>
-						<li class="nav-item">
-							<a class="nav-link" href="http://127.0.0.1:8000/gpms/wronglist/">WrongList</a>
-						</li>
-						<li class="nav-item">
-							<a class="nav-link" href="http://127.0.0.1:8000/gpms/data/">DataCheck</a>
-						</li>
-					</ul>
+	    <div class="navbar-header">
+	    	<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+	        	<span class="icon-bar"></span>
+	       	 	<span class="icon-bar"></span>
+	        	<span class="icon-bar"></span>
+	    	</button>
+	    <a class="navbar-brand" href="http://127.0.0.1:8000/gpms/index/">GPMS</a>
+	    </div>
+
+	    <div class="collapse navbar-collapse navbar-right navigation-menu" id="myNavbar">
+			<ul class="nav navbar-nav">
+				<li><a href="http://127.0.0.1:8000/gpms/index/">Home</a></li>
+				<li class="active"><a href="http://127.0.0.1:8000/gpms/wronglist/">異常監測站</a></li>
+				<li><a href="http://127.0.0.1:8000/gpms/data/">全部監測站</a></li>
+			</ul>
+	    </div>
+	</div>
+</nav>
+
+</div>
+  <!--
+  End Fixed Navigation
+  ==================================== -->
+<!--
+left Start
+==================================== -->
+
+<div class="container-fluid" style="padding-top: 65px; ;">
+	<div class="row">
+
+		<div class="col-md-7 col-12">
+			<div class="panel panel-info">
+				<div class="panel-heading">
+					異常監測站地點
 				</div>
-			</nav>
+				<div class="panel-body">
+					<div id="map"></div>
+				</div>
+		    </div>
+		</div>
+
+		<div class="col-md-5 col-12">
+	    	<div class="panel panel-danger">
+		   		<div class="panel-heading">站點當時信息</div>
+
+		    	<div class="panel-body NodeInfo" >
+		    		<table class="table table-bordered">
+		    			<tbody>
+		    				<tr class="info">
+						        <td>東山高中</td>
+						        <td>發生時間</td>
+						        <td>2017/06/9 18:27:35</td>
+						    </tr>
+		    			</tbody>
+		    		</table>
+		    		<div class="well">原因分析:暫時未知</div>
+		    	</div>
+		    </div>
+
+	        <div class="panel panel-warning">
+
+		    	<div class="panel-heading">
+		    		如果你知道這個監測站附近的情況請告訴我們
+		    		<div class="fb-share-button" data-href="http://localhost/meghna/wrongList.html" data-layout="button" data-size="small" data-mobile-iframe="true">
+		    			<a class="fb-xfbml-parse-ignore" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fdevelopers.facebook.com%2Fdocs%2Fplugins%2F&amp;src=sdkpreparse">分享</a>
+		    		</div>
+		    	</div>
+
+		    	<div class="panel-body">
+					<div class="ovscroll">
+						<div class="fb-comments" data-width="100%" data-href="https://developers.facebook.com/docs/plugins/comments#configurator" data-numposts="5"></div>
+					</div>
+		    	</div>
+		    </div>
 		</div>
 	</div>
-	<!--NavBar-->
+</div>
 
-	<div class="container-fluid top1">
-		<div class="row">
-			<!--Map Start-->
-			<div class="col-md-7 col-12" style="height:100vh">
-				<!--Map Object-->
-				<div id="map"></div>
+<!--
+left END
+==================================== -->
 
-			</div>
-			<!--MAP-->
-
-			<!--Right Start-->
-			<div class="col-md-5 col-12" style="height:100vh">
-				<div class="card " style="height:100%; border-color: #5bc0de;">
-          <!--Header-->
-          <div class="card-header bg-point-info" style="color:red;font-size:20pt;">異常的測站</div>
-          <!--Card body-->
-          <div class="card-body">
-            <!--Title-->
-            <h5 id="stNote" class="card-title">東山高中</h5>
-            <!--Content-->
-            <table id="wrongTable" class="table table-bordered ">
-              <thead>
-                <tr>
-                  <th>PM2.5</th>
-                  <th>PM10</th>
-                  <th>溫度</th>
-                  <th>濕度</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td id="PM2.5">25</td>
-                  <td id="PM10">35</td>
-                  <td id="Temperature">45</td>
-                  <td id="Humidity">55</td>
-                </tr>
-              </tbody>
-            </table>
-
-						<div class="row" style="height: 430px;">
-							<div class="card" style=" border-color: #5bc0de;">
-								<div class="card-header" style="text-align:left;">
-									原因分析 - 您的留言會為我們提供更準確的分析
-								</div>
-								<div class="card-body" >
-									<td>可能發生火災</td>
-									<hr>
-									<div class="ovscroll">
-										<div class="fb-comments" data-width="100%" data-href="https://developers.facebook.com/docs/plugins/comments#configurator" data-numposts="5"></div>
-									</div>
-								</div>
-							</div>
-						</div>
-          </div>
-					<!--Card Body-->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="block">
+                    <p>Copyright &copy; <a href="http://im.nutc.edu.tw/bin/home.php">NUTC-IM</a> | Prof. Allen Lian </p>
+                </div>
+            </div>
         </div>
-			</div>
-			<!--Right-->
-		</div>
-	</div>
+    </div>
+</footer>
 
-	<hr>
+	<!-- Main jQuery -->
+	<script type="text/javascript" src="{% static "plugins/jquery/dist/jquery.min.js" %}"></script>
+	<!-- Bootstrap 3.1 -->
+	<script type="text/javascript" src="{% static "plugins/bootstrap/dist/js/bootstrap.min.js" %}"></script>
+	<!-- Smooth Scroll -->
+	<script type="text/javascript" src="{% static "plugins/smooth-scroll/dist/js/smooth-scroll.min.js" %}"></script>
+	<!-- Sticky Nav -->
+	<script type="text/javascript" src="{% static "plugins/Sticky/jquery.sticky.js" %}"></script>
+	<!-- wow.min Script -->
+	<script type="text/javascript" src="{% static "plugins/wow/dist/wow.min.js" %}"></script>
+	<!-- Custom js -->
+	<script type="text/javascript" src="{% static "scripts/script.js" %}"></script>
 
-	<!--footer Start-->
-	<footer>
-		<div class="container">
-			<div class="row">
-				<div class="col-md-12">
-					<p>Copyright &copy; <a href="http://im.nutc.edu.tw/bin/home.php">NUTC-IM</a> | Prof. Allen Lian </p>
-				</div>
-			</div>
-		</div>
-	</footer>
-	<!--footer-->
-
-	<script>
-
-		function init() {
-			var fb = document.getElementsByClassName('fb-comments')[0];
-			var x = fb.getAttribute('data-href');
-			// alert(location.href + '\n' + x);
-			fb.setAttribute('data-href', location.href);
-			// alert(location.href + '\n' + fb.getAttribute('data-href'));
-		}
-		window.fbAsyncInit = function() {
-	    FB.init({
-	      appId: '909518255880791',
-	      autoLogAppEvents: true,
-	      xfbml: true,
-	      version: 'v2.11'
-	    });
-	    FB.AppEvents.logPageView();
-	  };
-	  (function(d, s, id) {
-	    var js, fjs = d.getElementsByTagName(s)[0];
-	    if (d.getElementById(id)) return;
-	    js = d.createElement(s);
-	    js.id = id;
-	    js.src = 'https://connect.facebook.net/zh_TW/sdk.js';
-	    fjs.parentNode.insertBefore(js, fjs);
-	  }(document, 'script', 'facebook-jssdk'));
-
-
-	  function postToPage() {
-	    var page_id = '277631202754911';
-	    FB.api('/' + page_id, {
-	      fields: 'access_token'
-	    }, function(resp) {
-	      if (resp.access_token) {
-	        FB.api('/' + page_id + '/feed',
-	          'post', {
-	            message: "I'm a Page!",
-	            link: location.href,
-	            access_token: resp.access_token
-	          },
-	          function(response) {
-	            console.log(response);
-	            //response 為一個dict {id: "POST ID"}
-	          });
-	      }
-	    });
-	  };
-	</script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.3.7/js/tether.min.js" integrity="sha384-XTs3FgkjiBgo8qjEjBk0tGmf3wPrWtA6coPfQDfFEY8AnYJwjalXCiosYRBIBZX8" crossorigin="anonymous"></script>
-	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js"></script>
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js"></script>
-	<script src="{% static "scripts/vendor/jquery-2.1.1.min.js" %}"></script>
-	<script src="{% static "scripts/vendor/modernizr-2.6.2.min.js" %}"></script>
-	<script src="{% static "scripts/jquery.form.js" %}"></script>
-	<script src="{% static "scripts/jquery.nav.js" %}"></script>
-	<script src="{% static "scripts/wow.min.js" %}"></script>
-	<script src="{% static "scripts/main.js" %}"></script>
 	<!-- Google	Map API -->
 	<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA1MDAz4pygB9byYzbBpaeFRptZ1cyKcig&callback=initMap"></script>
 	<script>
 	//init Map
-	function initMap(){
-		var options = {
-			zoom : 8,
-			center: {lat:23.903687,lng:121.079370}
+		function initMap(){
+
+		function centerGPS(){
+
+				var options = {
+					zoom : 8,
+					center: {lat:23.813691,lng:121.077081}
+					}
+
+
+
+			return options;
 		}
 
+
 		//New Map
-		var map = new google.maps.Map(document.getElementById('map'),options);
+		var map = new google.maps.Map(document.getElementById('map'),centerGPS());
 
 		// Add point marker
 		//coords => map.json
-		//['name','lat','lng']
+		//['name ','lat ','lng ']
 		//可以按照需要把必需要資訊加入到json檔以便讀取
 		function addMarker(coords){
 			var marker = new google.maps.Marker({
-				position : {lat:coords['lat'],lng:coords['lng']},
+				position : {lat:coords['lat '],lng:coords['lng ']},
 				map: map
 			});
 
 			//for each point All add ClickListener
 			//按下便可以設定post function
-			marker.addListener('click',function(){
+			marker.addListener('click ',function(){
 				//function start here
-				console.log(coords['name']);
+				console.log(coords['name ']);
 			})
 		}
 
 		//Use JQuery Read map.json
 		//Call addMarker Function to add point
-		var point = $.getJSON( "{% static "json/map.json" %}" ,function(data){
+		var point = $.getJSON("json/map.json",function(data){
 			console.log("json file loading success!");
 			// i < data.length 則全部跑完
 			for(var i=0;i<15;i++){
 				addMarker(data[i]);
 			}
 		});
-	}
+		}
 	</script>
 
 </body>
-
 </html>

@@ -1,256 +1,676 @@
 <!DOCTYPE html> {% load staticfiles %}
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!-->
 <html class="no-js">
+<!--<![endif]-->
 
 <head>
-	<meta charset="utf-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>GPMS</title>
-	<meta name="description" content="">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
-	<!-- Fonts -->
-	<!-- Source Sans Pro -->
-	<link href="https://fonts.googleapis.com/css?family=Droid+Serif:400i|Source+Sans+Pro:300,400,600,700" rel="stylesheet">
-	<!-- CSS -->
-	<!-- <link rel="stylesheet" href="css/bootstrap.min.css"> -->
-	<!-- Bootstrap CDN -->
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css">
-	<!--
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.5/css/bootstrap.min.css" integrity="sha384-AysaV+vQoT3kOAXZkl02PThvDr8HYKPZhNT5h/CXfBThSRXQ6jW5DO2ekP5ViFdi" crossorigin="anonymous">
-        -->
-	<link rel="stylesheet" href="{% static "css/themefisher-fonts.css" %}">
-	<link rel="stylesheet" href="{% static "css/font-awesome.min.css" %}">
-	<link rel="stylesheet" href="{% static "css/animate.css" %}">
-	<link rel="stylesheet" href="{% static "css/style.css" %}">
-	<!-- Responsive Stylesheet -->
-	<link rel="stylesheet" href="{% static "css/responsive.css" %}">
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <title>GPMS</title>
+
+  <!-- Mobile Specific Meta
+		================================================== -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- Favicon -->
+  <!-- <link rel="shortcut icon" type="image/x-icon" href="img/favicon.png" /> -->
+
+  <!-- CSS
+		================================================== -->
+  <!-- Fontawesome Icon font -->
+  <link rel="stylesheet" href="{% static "plugins/themefisher-font/style.css" %}">
+  <!-- bootstrap.min css -->
+  <link rel="stylesheet" href="{% static "plugins/bootstrap/dist/css/bootstrap.min.css" %}">
+  <!-- Animate.css -->
+  <link rel="stylesheet" href="{% static "plugins/animate-css/animate.css" %}">
+  <!-- Magnific popup css -->
+  <!-- <link rel="stylesheet" href="{% static "plugins/magnific-popup/dist/magnific-popup.css" %}"> -->
+  <!-- Main Stylesheet -->
+  <link rel="stylesheet" href="{% static "css/style.css" %}">
+  <!-- Google ICONs -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+  <!-- Font Awsome ICON -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
 </head>
 
-<body id="body">
-	<!--
-	<div id="preloader">
-		<div class="book">
-			<div class="book__page"></div>
-			<div class="book__page"></div>
-			<div class="book__page"></div>
-		</div>
-	</div> -->
+<body id="body" data-spy="scroll" data-target=".navbar" data-offset="50">
+  <!-- facbeoo API -->
+  <div id="fb-root"></div>
+  <script>
+    (function(d, s, id) {
+      var js, fjs = d.getElementsByTagName(s)[0];
+      if (d.getElementById(id)) return;
+      js = d.createElement(s);
+      js.id = id;
+      js.src = 'https://connect.facebook.net/zh_TW/sdk.js#xfbml=1&version=v2.11&appId=909518255880791';
+      fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));
+  </script>
 
-	<!--
-	    Header start
-	    ==================== -->
-	<nav class="navbar navbar-expand-md navbar-inverse fixed-top">
 
-		<a class="navbar-brand" href="http://127.0.0.1:8000/gpms/index/"><img src="{% static "images/logo.png" %}" alt=""></a>
+  <!--
+	    Start Preloader
+	    ==================================== -->
+  <div id="preloader">
+    <div class="preloader">
+      <div class="sk-cube-grid">
+        <div class="sk-cube sk-cube1"></div>
+        <div class="sk-cube sk-cube2"></div>
+        <div class="sk-cube sk-cube3"></div>
+        <div class="sk-cube sk-cube4"></div>
+        <div class="sk-cube sk-cube5"></div>
+        <div class="sk-cube sk-cube6"></div>
+        <div class="sk-cube sk-cube7"></div>
+        <div class="sk-cube sk-cube8"></div>
+        <div class="sk-cube sk-cube9"></div>
+      </div>
+    </div>
+  </div>
+  <!--
+        End Preloader
+        ==================================== -->
 
-		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
-      <img src="{% static "images/toggler.png" %}" class="img-fluid">
-    </button>
+  <!--
+Welcome Slider
+==================================== -->
 
-		<div class="collapse navbar-collapse " id="collapsibleNavbar">
-			<ul class="navbar-nav ml-auto menu">
-				<li class="nav-item">
-					<a class="nav-link" href="http://127.0.0.1:8000/gpms/index/">HOME</a>
-				</li>
-				<li class="nav-item">
-					<a class="nav-link" href="http://127.0.0.1:8000/gpms/wronglist/">WrongList</a>
-				</li>
-				<li class="nav-item">
-					<a class="nav-link" href="http://127.0.0.1:8000/gpms/data/">DataCheck</a>
-				</li>
-			</ul>
-		</div>
-	</nav>
+  <section class="hero-area">
+    <div class="block">
+      <h1>GPMS</h1>
+      <h2>Grasp Purple Monitor System</h2>
+      <h3>空氣污染異常自動檢測系統</h3>
+      <p>找出各地的空氣異常是我們的責任</p>
+      <a href="#about" class="btn btn-transparent">Explore Us</a>
+    </div>
+  </section>
 
-	<section class="hero-area ">
-		<div class="container-fluid bg-1">
-			<div class="row box">
-				<div class="col-md-6 col-12">
-					<div class="wow fadeInDown heroblock " data-wow-delay="0.3s" data-wow-duration=".2s">
-						<h1 style="display: inline">
-							「我們的
-						</h1>
-						<h1 style="color: red; display:inline; font-size:60px;">肺</h1>
-						<h1 style="display: inline;">不是空氣清淨機」</h1>
-						<p class="wow fadeInDown" data-wow-delay="0.5s" data-wow-duration=".5s">空氣品質是影響現代人最直接也不可避免的議題</p>
-						<p class="wow fadeInDown" data-wow-delay="0.5s" data-wow-duration=".5s">它遠比你想像的更加危險!!!</p>
-					</div>
-					<!-- <div class="wow fadeInDown text-center" data-wow-delay="0.7s" data-wow-duration=".7s">
-							<a class="btn btn-home" href="http://127.0.0.1:8000/gpms/wronglist/" role="button">Get Started</a>
-						</div> -->
-				</div>
+  <!--
+Fixed Navigation
+  ==================================== -->
+  <nav class="navbar navbar-inverse navbar-fixed-top navigation">
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+	        	<span class="icon-bar"></span>
+	       	 	<span class="icon-bar"></span>
+	        	<span class="icon-bar"></span>
+	    	</button>
+        <a class="navbar-brand" href="http://127.0.0.1:8000/gpms/index/">GPMS</a>
+      </div>
 
-				<div class="col-md-6 col-12 wow fadeInDown" data-wow-delay="0.8s" data-wow-duration="1s">
-					<div class="wow fadeInDown heroright" data-wow-delay="0.3s" data-wow-duration=".5s">
-						<p>懸浮粒子容易吸附有害物質進入人體</p>
-						<p>像是隱形的殺手</p>
-						<p>因此我們提供即時的空氣品質數據讓你參考</p>
-						<p>但是最真實的資料</p>
-						<p>是來自於最接近現實的你們</p>
-						<h1 style="display: inline;">「所以我們需要 </h1>
-						<h1 style="color:red; font-size:60px; display: inline;">你</h1>
-						<h1 style="display: inline;">的加入」</h1>
-					</div>
-				</div>
-			</div>
-			<!-- .row close -->
-		</div>
-		<!-- .container close -->
-	</section>
-	<!-- header close -->
+      <div class="collapse navbar-collapse navbar-right navigation-menu" id="myNavbar">
+        <ul class="nav navbar-nav">
+          <li class="active"><a href="http://127.0.0.1:8000/gpms/index/">Home</a></li>
+          <li><a href="http://127.0.0.1:8000/gpms/wronglist/">異常監測站</a></li>
+          <li><a href="http://127.0.0.1:8000/gpms/data/">全部監測站</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+  <!--
+  End Fixed Navigation
+  ==================================== -->
 
-	<!--
-        About start
-        ==================== -->
+  <!--
+		Start About Section
+		==================================== -->
+  <section id="about" class="bg-one about section">
+    <div class="container">
+      <div class="row">
 
-	<section class="section about " id="about">
-		<div class="container-fluid">
-			<hr>
-			<div class="row" id="about_row">
-				<div class="col-md-8 col-12 ccol">
-					<div class="content">
+        <!-- section title -->
+        <div class="title text-center wow fadeIn" data-wow-duration="1500ms">
+          <h2>What we <span class="color">Do</span> </h2>
+          <div class="border"></div>
+        </div>
+        <!-- /section title -->
 
-						<div class="sub-heading">
-							<h1 class="wow fadeInLeft aboutH1">空污異常報你知</h1>
-						</div>
-					</div>
-				</div>
-				<div class="col-md-4 col-12">
-					<p class="wow fadeInLeft pagecenter" data-wow-delay="0.5s">
-						>根據每個點進行不同的判斷
-					</p>
-					<p class="wow fadeInLeft pagecenter" data-wow-delay="0.8s">
-						>透過科學的方法找出有問題的點
-					</p>
-				</div>
-			</div>
-			<hr>
-			<div class="row">
-				<div class="w-100"></div>
+        <!-- About item -->
+        <div class="col-md-3 text-center wow fadeInUp about-item" data-wow-duration="500ms">
+          <div class="block">
+            <div class="icon-box">
+              <i class="material-icons" style="font-size:50px">search</i>
+            </div>
+            <!-- Express About Yourself -->
+            <div class="content text-center">
+              <h3>找出異常的監測站</h3>
+              <p>透過大數據分析找出空氣污染指數異常的監測站點</p>
+            </div>
+          </div>
+        </div>
+        <!-- End About item -->
 
-				<div class="col-md-8 col-12 wow fadeInLeft ccol" data-wow-delay="0.3s">
-					<div class="bg-gray"></div>
-				</div>
+        <!-- About item -->
+        <div class="col-md-3 text-center wow fadeInUp about-item" data-wow-duration="500ms" data-wow-delay="250ms">
+          <div class="block">
+            <div class="icon-box">
+              <i class="material-icons" style="font-size:50px">pin_drop</i>
+            </div>
+            <!-- Express About Yourself -->
+            <div class="content text-center">
+              <h3>標記</h3>
+              <p>利用GPS定位找出你周遭是否有異常的監測站</p>
+            </div>
+          </div>
+        </div>
+        <!-- End About item -->
 
-				<div class="col-md-4 col-12 wow fadeInLeft aboutright ccol" data-wow-delay="0.3s">
-					<div class="aboutRightDiv">
-						<h4>當一地區的空氣品質遠劣於其他地區，</h4>
-						<h4>系統便會自動判定為異常數據。</h4>
-						<h4>我們將會為此異常數據作標記，</h4>
-						<h4>進而有系統的進行整理。</h4>
-					</div>
-				</div>
-			</div>
-		</div>
-	</section>
-	<!-- #about close -->
-	<!--
-        About start
-        ==================== -->
+        <!-- About item -->
+        <div class="col-md-3 text-center wow fadeInUp about-item" data-wow-duration="500ms" data-wow-delay="500ms">
+          <div class="block kill-margin-bottom">
+            <div class="icon-box">
+              <i class="material-icons" style="font-size:50px">group_add</i>
+            </div>
+            <!-- Express About Yourself -->
+            <div class="content text-center">
+              <h3>在社群分享你的資訊</h3>
+              <p>任何人都可以把你們最新得到污染資料分享給我們</p>
+            </div>
+          </div>
+        </div>
+        <!-- End About item -->
 
-	<!--
-        Service start
-        ==================== -->
-	<section id="service" class="service section">
-		<div class="container">
-			<div class="row">
-				<div class="heading">
-					<hr>
-					<h2 class="wow fadeInDown">透過社群讓我們更了解世界</h2>
-					<hr>
-					<div class="row">
-						<div class="col-md-4 col-12 wow fadeInDown">
-							<div class="c2">
-								<p>不管你是誰</p>
-								<p>不管你在哪</p>
-								<p>都可以在這裡提供你的消息</p>
-								<p>沒有門檻</p>
-								<p>只有即時</p>
-								<h2>八卦無罪 爆料有理</h2>
-								<p>你們的資訊</p>
-								<p>讓我們的資料更接近現實</p>
-							</div>
-						</div>
-						<div class="col-md-8 col-12 wow">
-							<img src="{% static "images/c_2.jpg" %}" class="img-fluid">
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-		<!-- .container close -->
-	</section>
-	<!-- #service close -->
+        <!-- About item -->
+        <div class="col-md-3 text-center wow fadeInUp about-item" data-wow-duration="500ms" data-wow-delay="500ms">
+          <div class="block kill-margin-bottom">
+            <div class="icon-box">
+              <i class="material-icons" style="font-size:36px">share</i>
+            </div>
+            <!-- Express About Yourself -->
+            <div class="content text-center">
+              <h3>找出異常原因</h3>
+              <p>根據社群的留言， 分析出「可能」的異常原因
+              </p>
+            </div>
+          </div>
+        </div>
+        <!-- End About item -->
 
-	<section class="call-to-action section">
-		<div class="container">
-			<div class="row">
-				<div class="col-md-12 wow text-center">
-					<div class="block">
-						<h2>追蹤我們 獲得更多相關的空氣資訊</h2>
-						<div class="wow fadeInDown" data-wow-delay="0.7s" data-wow-duration=".7s">
-							<a class="btn btn-home" href="http://127.0.0.1:8000/gpms/wronglist/" role="button">Getting Started</a>
-						</div>
-						<div class="col-lg-8 offset-lg-2 wow fadeInDown tablemargin" data-wow-delay="0.8s" data-wow-duration="1s">
-							<p style="color:white;font-size:20pt;test-align:center;">
-								{{date_time}}
-							</p><br>
-							<p style="color:#ff1212;font-size:20pt;test-align:center;">
-								最新異常資訊
-							</p><br>
-							{% if erorr|length == 0 or error == None %}
-								<p style="color:#55df00;font-size:20pt;test-align:center;">
-									沒有異常
-								</p>
-							{% else %}
-								<table class="table table-dark table-hover">
-									<thead>
-										<th>異常測站</th>
-										<th>異常時間</th>
-										<th>可能異常原因</th>
-									</thead>
-								{% for item in error %}
-									<tbody>
-										<td>{{item.1}}</td>
-										<td>{{time}}</td>
-										<td>過高或過低</td>
-									</tbody>
-								{% endfor %}
-								</table>
-							{% endif %}
-						</div>
-						<!-- /.col-lg-6 -->
-					</div>
-				</div>
-			</div>
-		</div>
-	</section>
-	<!-- #call-to-action close -->
+      </div>
+      <!-- End row -->
+    </div>
+    <!-- End container -->
+  </section>
+  <!-- End section -->
 
-	<footer>
-		<div class="container">
-			<div class="row">
-				<div class="col-md-12">
-					<div class="block">
-						<p>Copyright &copy; <a href="http://im.nutc.edu.tw/bin/home.php">NUTC-IM</a> | Prof. Allen Lian </p>
-					</div>
-				</div>
-			</div>
-		</div>
-	</footer>
 
-	<!-- Js -->
-	<script src="{% static "scripts/vendor/jquery-2.1.1.min.js" %}"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.3.7/js/tether.min.js" integrity="sha384-XTs3FgkjiBgo8qjEjBk0tGmf3wPrWtA6coPfQDfFEY8AnYJwjalXCiosYRBIBZX8" crossorigin="anonymous"></script>
-	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js"></script>
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js"></script>
-	<script src="{% static "scripts/vendor/modernizr-2.6.2.min.js" %}"></script>
-	<script src="{% static "scripts/jquery.form.js" %}"></script>
-	<script src="{% static "scripts/jquery.nav.js" %}"></script>
-	<script src="{% static "scripts/wow.min.js" %}"></script>
-	<!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js" integrity="sha384-3ceskX3iaEnIogmQchP8opvBy3Mi7Ce34nWjpBIwVTHfGYWQS9jwHDVRnpKKHJg7" crossorigin="anonymous"></script> -->
-	<script src="{% static "scripts/main.js" %}"></script>
+  <!-- Start Services Section 1
+==================================== -->
+  <section id="services1" class="services section">
+    <div class="container">
+      <div class="row">
+
+        <!-- section title -->
+        <div class="title text-center wow fadeIn" data-wow-duration="500ms">
+          <h2>Find <span class="color">Out</span></h2>
+          <div class="border"></div>
+        </div>
+        <!-- /section title -->
+
+        <!-- 找出異常的監測站 -->
+        <div class="row">
+
+          <div class="col-md-8 col-12">
+            <img src="{% static "images\about\page2.png" %}" alt="findout">
+          </div>
+
+          <div class="col-md-4 col-12 services-item align-items-center">
+
+            <div class="col-12">
+              <!-- About item -->
+              <div class=" text-center wow fadeInUp about-item" data-wow-duration="500ms">
+                <div class="block">
+                  <!-- Express About Yourself -->
+                  <div class="content text-center">
+
+                    <i class="material-icons" style="font-size:45px">get_app</i>
+                    <p>利用爬蟲獲得取新的空氣污染資料</p>
+                  </div>
+                </div>
+              </div>
+              <!--  -->
+            </div>
+
+            <div class="col-12">
+              <!-- About item -->
+              <div class=" text-center wow fadeInUp about-item" data-wow-duration="500ms">
+                <div class="block">
+                  <!-- Express About Yourself -->
+                  <div class="content text-center">
+                    <i class="material-icons" style="font-size:45px">view_quilt</i>
+                    <p>利用取得的資料為不同監測站點進行地區劃分</p>
+                  </div>
+                </div>
+              </div>
+              <!--  -->
+            </div>
+
+            <div class="col-12">
+              <!-- About item -->
+              <div class=" text-center wow fadeInUp about-item" data-wow-duration="500ms">
+                <div class="block">
+                  <!-- Express About Yourself -->
+                  <div class="content text-center">
+                    <i class="material-icons" style="font-size:50px">youtube_searched_for</i>
+                    <p>利用科學性的統計方法</p>
+                    <p>Grubbs'Test</p>
+                    <p>分析是否有異常值</p>
+                  </div>
+                </div>
+              </div>
+              <!--  -->
+            </div>
+
+          </div>
+
+
+        </div>
+        <!-- End row -->
+      </div>
+      <!-- End container -->
+  </section>
+  <!-- End section -->
+
+  <!-- Start Services Section 2
+==================================== -->
+  <section id="services2" class="services section">
+    <div class="container">
+      <div class="row">
+
+        <!-- section title -->
+        <div class="title text-center wow fadeIn" data-wow-duration="500ms">
+          <h2>Mark <span class="color">Down</span></h2>
+          <div class="border"></div>
+        </div>
+        <!-- /section title -->
+
+        <!-- 找出異常的監測站 -->
+        <div class="row">
+
+          <div class="col-md-5 col-12 services-item " style="padding-top: 10px;">
+
+            <div class="col-12">
+              <!-- About item -->
+              <div class=" text-center wow fadeInUp about-item" data-wow-duration="500ms">
+                <div class="block">
+                  <!-- Express About Yourself -->
+                  <div class="content text-center">
+                    <i class="material-icons" style="font-size:45px">add_location</i>
+                    <p>檢測到有異常的站點即時標記在地圖上</p>
+                  </div>
+                </div>
+              </div>
+              <!--  -->
+            </div>
+
+            <div class="col-12">
+              <!-- About item -->
+              <div class=" text-center wow fadeInUp about-item" data-wow-duration="500ms">
+                <div class="block">
+                  <!-- Express About Yourself -->
+                  <div class="content text-center">
+                    <i class="material-icons" style="font-size:45px">view_quilt</i>
+                    <p>讓你可以快速查看全台有異常的監測站</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!--  -->
+
+            <div class="col-12">
+              <!-- About item -->
+              <div class=" text-center wow fadeInUp about-item" data-wow-duration="500ms">
+                <div class="block">
+                  <!-- Express About Yourself -->
+                  <div class="content text-center">
+                    <i class="material-icons" style="font-size:45px">my_location</i>
+                    <p>透過GPS定位</p>
+                    <p>迅速知道自己附近有沒有空污異常!</p>
+                  </div>
+                </div>
+              </div>
+              <!--  -->
+            </div>
+
+          </div>
+          <div class="col-md-1"></div>
+          <div class="col-md-6 col-12">
+            <img src="{% static "images\about\mapshow.png" %}" alt="findout">
+          </div>
+
+
+        </div>
+        <!-- End row -->
+      </div>
+      <!-- End container -->
+  </section>
+  <!-- End section -->
+
+  <!-- Start Services Section 3
+==================================== -->
+  <section id="services1" class="services section">
+    <div class="container">
+      <div class="row">
+
+        <!-- section title -->
+        <div class="title text-center wow fadeIn" data-wow-duration="500ms">
+          <h2> <span class="color">community </span></h2>
+          <div class="border"></div>
+        </div>
+        <!-- /section title -->
+
+        <!-- 找出異常的監測站 -->
+        <div class="row">
+
+          <div class="col-md-8 col-12">
+            <img src="{% static "images\about\c_2.jpg" %}" alt="findout">
+          </div>
+
+          <div class="col-md-4 col-12 services-item align-items-center">
+
+            <div class="col-12">
+              <!-- About item -->
+              <div class=" text-center wow fadeInUp about-item" data-wow-duration="500ms">
+                <div class="block">
+                  <!-- Express About Yourself -->
+                  <div class="content text-center">
+
+                    <i class="material-icons" style="font-size:45px">public</i>
+                    <p>社群是傳遞信息最快的地方</p>
+                    <p>我們希望能用最短的時間</p>
+                    <p>盡量讓最多的人看到最新的資訊</p>
+                  </div>
+                </div>
+              </div>
+              <!--  -->
+            </div>
+
+            <div class="col-12">
+              <!-- About item -->
+              <div class=" text-center wow fadeInUp about-item" data-wow-duration="500ms">
+                <div class="block">
+                  <!-- Express About Yourself -->
+                  <div class="content text-center">
+                    <i class="fa fa-facebook-square" style="font-size:45px"></i>
+                    <br>
+                    <p>你可以隨時隨地透過我們的粉絲專頁獲得最新的空氣資訊</p>
+                    <p>不再需要局限於網站</p>
+                  </div>
+                </div>
+              </div>
+              <!--  -->
+            </div>
+
+            <div class="col-12">
+              <!-- About item -->
+              <div class=" text-center wow fadeInUp about-item" data-wow-duration="500ms">
+                <div class="block">
+                  <!-- Express About Yourself -->
+                  <div class="content text-center">
+                    <i class="fa fa-comments" style="font-size:45px"></i>
+                    <p>我們希望大家都能在這裡交換空污的資訊</p>
+                  </div>
+                </div>
+              </div>
+              <!--  -->
+            </div>
+
+          </div>
+
+
+        </div>
+        <!-- End row -->
+      </div>
+      <!-- End container -->
+  </section>
+  <!-- End section -->
+
+  <!-- Start Services Section 4
+==================================== -->
+  <section id="services2" class="services section">
+    <div class="container">
+      <div class="row">
+
+        <!-- section title -->
+        <div class="title text-center wow fadeIn" data-wow-duration="500ms">
+          <h2>Comments <span class="color">Analysis</span></h2>
+          <div class="border"></div>
+        </div>
+        <!-- /section title -->
+
+        <!-- 找出異常的監測站 -->
+        <div class="row">
+
+          <div class="col-md-4 col-12 services-item " style="padding-top: 10px;">
+
+            <div class="col-12">
+              <!-- About item -->
+              <div class=" text-center wow fadeInUp about-item" data-wow-duration="500ms">
+                <div class="block">
+                  <!-- Express About Yourself -->
+                  <div class="content text-center">
+                    <i class="material-icons" style="font-size:45px">plus_one</i>
+                    <p>歡迎任何人為我們、為大家提供有用的資訊</p>
+                  </div>
+                </div>
+              </div>
+              <!--  -->
+            </div>
+
+            <div class="col-12">
+              <!-- About item -->
+              <div class=" text-center wow fadeInUp about-item" data-wow-duration="500ms">
+                <div class="block">
+                  <!-- Express About Yourself -->
+                  <div class="content text-center">
+                    <i class="fa fa-pie-chart" style="font-size:45px"></i>
+                    <p>我們會不斷收集大家的留言</p>
+                    <p>希望能從里面發現一點異常的線索</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!--  -->
+
+            <div class="col-12">
+              <!-- About item -->
+              <div class=" text-center wow fadeInUp about-item" data-wow-duration="500ms">
+                <div class="block">
+                  <!-- Express About Yourself -->
+                  <div class="content text-center">
+                    <i class="material-icons" style="font-size:45px">warning</i>
+                    <p>對留言進行關鍵字分析</p>
+                    <p>找出異常「可能」的原因</p>
+                  </div>
+                </div>
+              </div>
+              <!--  -->
+            </div>
+
+          </div>
+
+          <div class="col-md-8 col-12">
+            <img src="{% static "images\about\ana.png" %}" alt="findout">
+          </div>
+
+
+        </div>
+        <!-- End row -->
+      </div>
+      <!-- End container -->
+  </section>
+  <!-- End section -->
+
+
+  <!-- Start Pricing section
+		=========================================== -->
+  <section id="pricing" class="pricing section">
+    <div class="container">
+      <div class="row">
+
+        <!-- section title -->
+        <div class="title text-center wow fadeInDown" data-wow-duration="500ms">
+          <h2>Let's Check<span class="color"> Latest Info</span></h2>
+          <div class="border"></div>
+        </div>
+        <!-- /section title -->
+
+        <!-- single pricing table -->
+        <div class="col-md-6 col-sm-6 col-xs-12 text-center wow fadeInUp" data-wow-duration="200ms">
+
+          <!-- latest wrong list table -->
+          <table class="table">
+            <thead>
+              <tr>
+                <th>編號</th>
+                <th>日期</th>
+                <th>地點</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>John</td>
+                <td>Doe</td>
+                <td>john@example.com</td>
+              </tr>
+              <tr>
+                <td>Mary</td>
+                <td>Moe</td>
+                <td>mary@example.com</td>
+              </tr>
+              <tr>
+                <td>July</td>
+                <td>Dooley</td>
+                <td>july@example.com</td>
+              </tr>
+            </tbody>
+          </table>
+          <!-- table end -->
+        </div>
+        <!-- end single pricing table -->
+
+        <!-- Click BTN -->
+        <div class="col-md-6 col-xs-12 text-center wow fadeIn" data-wow-duration="200ms">
+          <div>
+            <h1>立即查看最新的異常監測點</h1>
+            <br>
+            <a href="http://127.0.0.1:8000/gpms/wronglist/" class="btn btn-transparent ">Getting Start</a>
+          </div>
+        </div>
+
+
+      </div>
+      <!-- End row -->
+    </div>
+    <!-- End container -->
+  </section>
+  <!-- End section -->
+
+
+
+
+  <!-- Srart Contact Us
+=========================================== -->
+  <section id="contact-us" class="contact-us section-bg">
+    <div class="container">
+      <div class="row">
+
+        <!-- section title -->
+        <div class="title text-center wow fadeIn" data-wow-duration="500ms">
+          <h2>Get In <span class="color">Touch</span></h2>
+          <div class="border"></div>
+        </div>
+        <!-- /section title -->
+
+        <!-- Contact Details -->
+        <div class="contact-info col-md-3 wow fadeInUp" data-wow-duration="500ms">
+
+        </div>
+        <!-- / End Contact Details -->
+
+        <!-- Contact Form -->
+
+        <div class=" col-md-6 wow fadeInUp" data-wow-duration="600ms" data-wow-delay="500ms">
+          <div style="align-items: center; justify-content: center;">
+            <p>Follow Our Facbeook Fans Page!</p>
+            <div class="fb-page" data-href="https://www.facebook.com/allenabcde" data-tabs="timeline" data-small-header="false" data-height="100" data-width="600" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true">
+              <blockquote cite="https://www.facebook.com/allenabcde" class="fb-xfbml-parse-ignore"><a href="https://www.facebook.com/allenabcde">爆料空氣 八掛無罪 報料有理</a></blockquote>
+            </div>
+          </div>
+
+          <hr>
+          <p>Or Subscribe by E-mail!</p>
+          <form id="contact-form" method="post" action="sendmail.php" role="form">
+
+            <div class="form-group">
+              <input type="text" placeholder="Your Name" class="form-control" name="name" id="name">
+            </div>
+
+            <div class="form-group">
+              <input type="email" placeholder="Your Email" class="form-control" name="email" id="email">
+            </div>
+
+
+            <div id="mail-success" class="success">
+              Thank you. The Mailman is on His Way :)
+            </div>
+
+            <div id="mail-fail" class="error">
+              Sorry, don't know what happened. Try later :(
+            </div>
+
+            <div id="cf-submit">
+              <input type="submit" id="contact-submit" class="btn btn-transparent" value="Subscribe">
+            </div>
+
+          </form>
+        </div>
+        <!-- ./End Contact Form -->
+
+      </div>
+      <!-- end row -->
+    </div>
+    <!-- end container -->
+
+    <br>
+    <br>
+
+  </section>
+  <!-- end section -->
+  <!-- end Contact Area
+		========================================== -->
+  <footer>
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="block">
+            <p>Copyright &copy; <a href="http://im.nutc.edu.tw/bin/home.php">NUTC-IM</a> | Prof. Allen Lian </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+
+  <!--
+		Essential Scripts
+		=====================================-->
+
+  <!-- Main jQuery -->
+  <script type="text/javascript" src="{% static "plugins/jquery/dist/jquery.min.js" %}"></script>
+  <!-- Bootstrap 3.1 -->
+  <script type="text/javascript" src="{% static "plugins/bootstrap/dist/js/bootstrap.min.js" %}"></script>
+  <!-- Smooth Scroll -->
+  <script type="text/javascript" src="{% static "plugins/smooth-scroll/dist/js/smooth-scroll.min.js" %}"></script>
+  <!-- Sticky Nav -->
+  <script type="text/javascript" src="{% static "plugins/Sticky/jquery.sticky.js" %}"></script>
+  <!-- wow.min Script -->
+  <script type="text/javascript" src="{% static "plugins/wow/dist/wow.min.js" %}"></script>
+  <!-- Custom js -->
+  <script type="text/javascript" src="{% static "scripts/script.js" %}"></script>
 
 </body>
 
