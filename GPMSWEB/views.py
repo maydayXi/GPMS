@@ -15,14 +15,6 @@ db = DBService()                            # 資料庫物件
 analy = dataAnaly()                         # 資料分析物件
 table = TableService()                      # 表格資料物件
 
-def test(request):
-    x = main()
-    t = x.getInitData()
-    x.getAirValue()
-    x.dataSave()
-
-    return render(request , "test.html", locals())
-
 # 找出有問題的站點
 def Main(requests):
     x = main()

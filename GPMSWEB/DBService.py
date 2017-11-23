@@ -15,10 +15,10 @@ class DBService:
     # 類別初始執行
     def __init__(self):
         # self.path = os.path.dirname(__file__)       #取得資料庫所在路徑
-        self.connection = db.connect(database="dffltr2ms0lhfh",
-					                 user="knbnjgeyfptklf",
-					                 password="292002f4307cf02d0d6ae2747ed70d7ee7bc003af4af68282711c9343a4fc6d7",
-					                 host="ec2-54-243-107-66.compute-1.amazonaws.com",
+        self.connection = db.connect(database="d1hr2vo3lmf7l",
+					                 user="u691nrkdrrb3v2",
+					                 password="pe1985615c773d417f2b004d74c5855cb0787fad0b05a491ed35ccc035b5d6499",
+					                 host="ec2-34-236-253-151.compute-1.amazonaws.com",
 					                 port="5432")
 
     # 2017-11-23 edit by Mayday
@@ -32,7 +32,6 @@ class DBService:
         cursor = self.connection.cursor()
         cursor.execute(queryStr)
         air_table_lst = cursor.fetchall()
-        self.connection.close()
 
         return air_table_lst
 
@@ -47,7 +46,6 @@ class DBService:
         cursor = self.connection.cursor()
         cursor.execute(queryStr)
         error_table_lst = cursor.fetchall()
-        self.connection.close()
 
         return error_table_lst
 
@@ -93,7 +91,6 @@ class DBService:
         cursor = self.connection.cursor()
         cursor.execute(queryStr)
         site_info_lst = cursor.fetchall()
-        self.connection.close()
 
         return site_info_lst
 
@@ -115,11 +112,11 @@ class DBService:
     # <return> One site position </return>
     def m_readSitePositionByNote(self,Note):
         queryStr = '''SELECT stLatitude, stLongitude FROM SiteInfo
-                      WHERE stNote = "{}"'''.format(Note)
+                      WHERE stNote = '{}'
+                   '''.format(Note)
         cursor = self.connection.cursor()
         cursor.execute(queryStr)
         site_position = cursor.fetchone()
-        self.connection.close()
 
         return site_position
 
@@ -152,7 +149,6 @@ class DBService:
                         id_lst[i],pm25_lst[i],pm10_lst[i],t_lst[i],h_lst[i])
             cursor.execute(sqlStr)
         self.connection.commit()
-        self.connection.close()
 
     # 2017-11-23 add by Mayday
     # <summary>Read air data by station name </summary>
@@ -198,7 +194,6 @@ class DBService:
         cursor = self.connection.cursor()
         cursor.execute(queryStr)
         site_position_lst = cursor.fetchall()
-        self.connection.close()
 
         return site_position_lst
 
@@ -209,12 +204,11 @@ class DBService:
     # <return>one PM25 and PM10 </return>
     def m_readPM25PM10ById(self,timeStr,Id):
         queryStr = '''SELECT AirInfo_{}.PM25, AirInfo_{}.PM10 FROM AirInfo_{}
-                      WHERE stId = "{}"'''.format(timeStr,timeStr,timeStr,Id)
+                      WHERE stId = '{}'
+                   '''.format(timeStr,timeStr,timeStr,Id)
         cursor = self.connection.cursor()
         cursor.execute(queryStr)
         pm25_pm10 = cursor.fetchone()
-
-        self.connection.close()
 
         return pm25_pm10
 
@@ -228,7 +222,6 @@ class DBService:
         cursor = self.connection.cursor()
         cursor.execute(queryStr)
         alpha = cursor.fetchone()
-        self.connection.close()
 
         return alpha
 
@@ -262,7 +255,6 @@ class DBService:
             cursor.execute(sqlStr)
 
         self.connection.commit()
-        self.connection.close()
 
     # 2017-10-31 Add by Mayday
     # <summary>Read error site data</summary>

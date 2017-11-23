@@ -23,7 +23,7 @@ class TableService:
 
         air_table_lst = []
         for item in tables:
-            resair_table_lstult.append(item[1])
+            air_table_lst.append(item[0])
 
         return air_table_lst
 
