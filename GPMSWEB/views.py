@@ -83,12 +83,19 @@ def data(requests):
 
 # 取得有問題的測站，傳送至 wrongList.html 頁面
 def wronglist(requests):
-    json_url = 'https://ch13-ccc60.firebaseio.com/'
-    map_json = firebase.FirebaseApplication(json_url,None)
-    error_json = map_json.get(json_url, None)
+    if(len(requests.GET) == 0):
+        url = ""
+        errorSiteVal = ""
+        errorTimeVal = ""
+    else:
+        print(requests.GET)
+        url = requests.GET['url']
+        errorSiteVal = requests.GET['errorSiteVal']
+        errorTimeVal = requests.GET['errorTimeVal']
 
     return render(requests, "wrongList.html", locals())
 
+# Json 資料網址
 def json(requests):
     json_url = 'https://ch13-ccc60.firebaseio.com/'
     map_json = firebase.FirebaseApplication(json_url,None)

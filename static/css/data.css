@@ -99,6 +99,8 @@ a:focus, a:hover {
   color: #6CB670;
 }
 
+ 
+
 .kill-margin-bottom {
   margin-bottom: 0 !important;
 }
@@ -223,11 +225,6 @@ a:focus, a:hover {
 .btn-main:hover {
   background: #2c9091;
   color: #fff;
-}
-
-.cvWidth{
-  width: 700px;
-  height: 350px;
 }
 
 .mt-20 {

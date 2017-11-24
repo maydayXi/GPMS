@@ -15,10 +15,10 @@ class DBService:
     # 類別初始執行
     def __init__(self):
         # self.path = os.path.dirname(__file__)       #取得資料庫所在路徑
-        self.connection = db.connect(database="d1hr2vo3lmf7l",
-					                 user="u691nrkdrrb3v2",
-					                 password="pe1985615c773d417f2b004d74c5855cb0787fad0b05a491ed35ccc035b5d6499",
-					                 host="ec2-34-236-253-151.compute-1.amazonaws.com",
+        self.connection = db.connect(database="ddko5britb3go7",
+					                 user="uerii7jpklfmot",
+					                 password="p5d52665c6a9236f7207975b4b9f06850ee64e0cf30539de1b5649a691bb9e958",
+					                 host="ec2-52-87-101-125.compute-1.amazonaws.com",
 					                 port="5432")
 
     # 2017-11-23 edit by Mayday
