@@ -40,7 +40,7 @@ class DBService:
 
         return air_table_lst
 
-    # 2017-11-17 add by Mayday
+    # 2017-11-23 edit by Mayday
     # <summary> 取得所有異常測站資料表 </summary>
     # <return> 異常資料表名稱串列 </return>
     def lst_readAllErrorTableName(self):
@@ -99,18 +99,19 @@ class DBService:
 
         return site_info_lst
 
-    # 2017-10-25 add by Mayday
+    # 2017-11-24 edit by Mayday
     # <summary>Read site name by site id</summary>
     # <param name = 'id'>Site id</param>
     # <return>Site name</return>
-    def readSiteNoteById(self,Id):
-        connection = sqlite3.connect(self.path + '/' + 'PM25.sqlite')
-        sqlStr = 'select stNote from SiteInfo where stId = "{}"'.format(
-                Id)
-        cursor = connection.execute(sqlStr)
-        result = cursor.fetchone()
+    def m_readSiteNoteById(self,Id):
+        sqlStr = '''SELECT stNote FROM SiteInfo
+                    WHERE stId = '{}'
+                 '''.format(Id)
+        cursor = self.connection.cursor()
+        cursor.execute(sqlStr)
+        st_note = cursor.fetchone()
 
-        return result
+        return st_note
 
     # 2017-11-23 edit by Mayday
     # <summary> Read site position by site Name </summary>
@@ -155,35 +156,49 @@ class DBService:
             cursor.execute(sqlStr)
         self.connection.commit()
 
-    # 2017-11-23 add by Mayday
-    # <summary>Read air data by station name </summary>
+    # 2017-11-24 edit by Mayday
+    # <summary>Read air data by station name by view </summary>
     # <param name = "table_name"> Table name </param>
-    # <param name = "stNote"> Station name   </param>
     # <return> Air data belonging to station name </return>
-    def m_readAirDataByNote(self,table_name,stNote):
-        queryStr = """SELECT {}.* FROM {}, SiteInfo
-                      WHERE SiteInfo.stId = {}.stId and SiteInfo.stNote = '{}'
-                   """.format(table_name,table_name,table_name,stNote)
+    def lst_readAirData(self,table_name):
+        queryStr = """SELECT SiteInfo.stNote, {}.* FROM {}, SiteInfo
+                      WHERE SiteInfo.stId = {}.stId
+                   """.format(table_name,table_name,table_name)
         print("m_readAirDataByNote-connection")
         cursor = self.connection.cursor()
         print("m_readAirDataByNote-execute")
         cursor.execute(queryStr)
-        print("m_readAirDataByNote-fetchone")
-        result = cursor.fetchone()
-        # self.connection.close()
+        print("m_readAirDataByNote-fetchall")
+        result = cursor.fetchall()
+        print('lst_readAirData success')
 
         return result
 
-    # 2017-10-12 add by Mayday
+    # 2017-11-24 add by Mayday
+    # <summary> Read error site data by clock </summmary>
+    # <param name="table_name"> Error table name </param>
+    # <param name="stNote"> Error site name </param>
+    # <return> Error site data </return>
+    def m_readAirDataByNote(self, table_name, stNote):
+        queryStr = """SELECT {}.* FROM {}, SiteInfo
+                      WHERE SiteInfo.stId = {}.stId AND SiteInfo.stNote = '{}'
+                   """.format(table_name, table_name, table_name, stNote)
+        cursor = self.connection.cursor()
+        cursor.execute(queryStr)
+        result = cursor.fetchone()
+
+        return result
+
+    # 2017-11-24 edit by Mayday
     # <summary> Read PM25 data by Id </summary>
     # <param name ="table_name"> Table name </param>
     # <param name ="Id"> Data Id </param>
     # <teturn> one PM25 data belonging to id</return>
     def readPM25ById(self,table_name,Id):
-        connection = sqlite3.connect(self.path + '/' + 'PM25.sqlite')
-        queryStr = 'SELECT stId,PM25 FROM {} WHERE stId = "{}"'.format(
-                table_name,Id)
-        cursor = connection.execute(queryStr)
+        queryStr = '''SELECT stId,PM25 FROM {}
+                      WHERE stId = '{}' '''.format(table_name,Id)
+        cursor = self.connection.cursor()
+        cursor.execute(queryStr)
         result = cursor.fetchone()
 
         return result
@@ -204,21 +219,6 @@ class DBService:
         site_position_lst = cursor.fetchall()
 
         return site_position_lst
-
-    # 2017-11-23 edit by Mayday
-    # <summary>Read PM25 and PM10 by Id</summary>
-    # <param name = "timeStsr">table name </param>
-    # <param name = "Id">      Site Id    </param>
-    # <return>one PM25 and PM10 </return>
-    def m_readPM25PM10ById(self,timeStr,Id):
-        queryStr = '''SELECT AirInfo_{}.PM25, AirInfo_{}.PM10 FROM AirInfo_{}
-                      WHERE stId = '{}'
-                   '''.format(timeStr,timeStr,timeStr,Id)
-        cursor = self.connection.cursor()
-        cursor.execute(queryStr)
-        pm25_pm10 = cursor.fetchone()
-
-        return pm25_pm10
 
     # 2017-11-23 edit by Mayday
     # <summary> Select Alpha by N </summary>
@@ -265,12 +265,12 @@ class DBService:
 
         self.connection.commit()
 
-    # 2017-10-31 Add by Mayday
+    # 2017-11-24 edit by Mayday
     # <summary>Read error site data</summary>
     # <param name = 'table_name'>Error table name</param>
     # <return>Error site data list</summay>
     def readErrorData(self, table_name):
-        sqlStr = "select * from {} where {}.PM25 > 54".format(table_name,table_name)
+        sqlStr = "SELECT * FROM {} WHERE {}.PM25 > 54".format(table_name,table_name)
         cursor = self.connection.cursor()
         cursor.execute(sqlStr)
 

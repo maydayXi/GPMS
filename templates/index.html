@@ -527,25 +527,21 @@ Fixed Navigation
               <tr>
                 <th>編號</th>
                 <th>日期</th>
-                <th>地點</th>
+                <th>時間</th>
+                <th>測站</th>
               </tr>
             </thead>
             <tbody>
-              <tr>
-                <td>John</td>
-                <td>Doe</td>
-                <td>john@example.com</td>
-              </tr>
-              <tr>
-                <td>Mary</td>
-                <td>Moe</td>
-                <td>mary@example.com</td>
-              </tr>
-              <tr>
-                <td>July</td>
-                <td>Dooley</td>
-                <td>july@example.com</td>
-              </tr>
+              {% for item in error %}
+                <tr>
+                  <td>{{forloop.counter}}</td>
+                  <td>{{date}}</td>
+                  <td>{{time}}</td>
+                  <td>{{item.1}}</td>
+                </tr>
+              {% empty %}
+                目前無異常
+              {% endfor %}
             </tbody>
           </table>
           <!-- table end -->

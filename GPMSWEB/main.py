@@ -8,9 +8,8 @@ Created on Sun Sep 24 17:06:34 2017
 
 #from excelService import Service               # excel class
 from GPMSWEB.DBService import DBService         # 資料庫 class
-from GPMSWEB.Helper import Helper               # 資料爬蟲 class
 from GPMSWEB.dataAnaly import dataAnaly         # 資料分析 class
-import time                            # html package , time package
+import time                                     # time package
 from urllib.request import urlopen, Request
 import json
 
@@ -20,17 +19,15 @@ class main:
     def __init__(self):                     # 初始化所有變數
         self.db = DBService()               # Database instance
         self.ana = dataAnaly()              # DataAnaly instance
-        self.data = Helper()                # Url data fetch instance
-        self.sensor_lst = ['pm2.5','pm10','temperature','humidity']
         self.all_id_lst = []                # 所有測站 ID list
         self.pm25_lst = []                  # PM2.5 lsit
         self.pm10_lst = []                  # PM10 list
         self.t_lst = []                     # Temperatuer lsit
         self.h_lst = []                     # Humidity list
-        self.web_error = []
-        self.id_lst = []
-        self.dict_pm25 = {}
-        self.dict_pm10 = {}
+        self.web_error = []                 # Error site Id list
+        self.id_lst = []                    # Useful site Id list
+        self.dict_pm25 = {}                 # Site Id -> PM2.5 dict
+        self.dict_pm10 = {}                 # Site Id -> PM10 dict
 
     # 2017-11-23 edit by Mayday
     # <summary> 初始有效 ID 與爬蟲網址 </summary>
@@ -44,18 +41,13 @@ class main:
             self.all_id_lst.append(item[0])
 
         print("get useful data list")
-        # Get useful data list
-        # self.id_lst,self.url_lst = self.data.urlHelper(self.all_id_lst,self.sensor_lst)
 
         return self.timeStr
 
     # 2017-11-23 edit by Mayday
     # <summary> 爬蟲方法 取得測站數據 </summary>
     def getAirValue(self):
-        print(len(self.all_id_lst))
         for i in range(0,len(self.all_id_lst)):
-            # htmlStr = requests.get(self.url_lst[i]).text
-            # tempStr = htmlStr.split(":")[-1]
             try :
                 res1 = urlopen(Request("http://www.airq.org.tw/Home/GetCurrentValueApi?station={}&sensor=pm2.5".format(self.all_id_lst[i])))
                 res2 = urlopen(Request("http://www.airq.org.tw/Home/GetCurrentValueApi?station={}&sensor=pm10".format(self.all_id_lst[i])))
@@ -77,17 +69,10 @@ class main:
                 self.h_lst.append(float(humidity_pack))
                 self.t_lst.append(float(temperature_pack))
 
-        print(len(self.id_lst))
-        print(len(self.pm25_lst))
-        print(len(self.pm10_lst))
-        print(len(self.t_lst))
-        print(len(self.h_lst))
-
         # id -> pm25
         self.dict_pm25 = dict(zip(self.id_lst, self.pm25_lst))
         # id -> pm10
         self.dict_pm10 = dict(zip(self.id_lst, self.pm10_lst))
-
 
     # 2017-11-23 edit by Mayday
     # <summary> 儲存測站數據 </summary>

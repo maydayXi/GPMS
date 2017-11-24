@@ -54,7 +54,7 @@ img{
     position: relative;
     top: 50%;
     transform: translateY(-50%);
-  } 
+  }
 
 /*=================================================================
   Basic Setup
@@ -223,6 +223,11 @@ a:focus, a:hover {
 .btn-main:hover {
   background: #2c9091;
   color: #fff;
+}
+
+.cvWidth{
+  width: 700px;
+  height: 350px;
 }
 
 .mt-20 {
