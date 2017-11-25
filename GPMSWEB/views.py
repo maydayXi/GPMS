@@ -107,5 +107,11 @@ def map(requests):
     json_url = 'https://ch13-ccc60.firebaseio.com/'
     map_json = firebase.FirebaseApplication(json_url,None)
     error_json = map_json.get(json_url, None)
+    print(error_json)
+
+    error_labels = []
+    for item in error_json:
+        error_labels.append(item['stNote'])
+    print(error_labels)
 
     return render(requests, 'test.html', locals())
