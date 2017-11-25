@@ -102,3 +102,10 @@ def json(requests):
     error_json = map_json.get(json_url, None)
 
     return JsonResponse({"data":error_json})
+
+def map(requests):
+    json_url = 'https://ch13-ccc60.firebaseio.com/'
+    map_json = firebase.FirebaseApplication(json_url,None)
+    error_json = map_json.get(json_url, None)
+
+    return render(requests, 'test.html', locals())
