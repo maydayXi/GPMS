@@ -99,7 +99,10 @@ a:focus, a:hover {
   color: #6CB670;
 }
 
- 
+.cvWidth{
+    height: 100vim;
+    width: 100vim;
+}
 
 .kill-margin-bottom {
   margin-bottom: 0 !important;

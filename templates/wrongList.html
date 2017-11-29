@@ -157,7 +157,6 @@ left Start
 							</table>
 							<input id="errorSiteVal" type="text" name="errorSiteVal" value="" style="display:none;">
 							<input id="errorTimeVal" type="text" name="errorTimeVal" value="" style="display:none;">
-							<input id="href" type="text" name="url" value="" style="display:none;">
 							<input id="ok" type="submit" value="sent" style="display:none;">
 						</form>
 						<div class="well">原因分析:暫時未知</div>
@@ -266,8 +265,6 @@ left END
 					errorTime.innerHTML = coords['errorTime']
 					var errorTimeVal = document.getElementById('errorTimeVal')
 					errorTimeVal.value = coords['errorTime']
-					var href = document.getElementById('href')
-					href.value = coords['url']
 
 					document.getElementById('ok').click()
 					console.log(coords['stNote']);

@@ -114,7 +114,7 @@ left Start
 					<div class="panel-body">
 
 						<form action="." method="get" id="stForm">
-							<select size="20" class="form-control" style="font-family: Microsoft JhengHei;
+							<select size="23" class="form-control" style="font-family: Microsoft JhengHei;
 		              font-size: 18px; height: 500px;" id="site_lst" name="site" onchange="select()">
 		                {% for id,site in site_lst %}
 		                  <option value={{id}}>{{site}}
@@ -137,8 +137,8 @@ left Start
 
 			<!-- 右邊開始 -->
 
-			<div class="col-md-7 col-12">
-				<div class="panel panel-info Rside" style="height: 955px;">
+			<div class="col-sm-7 col-12">
+				<div class="panel panel-info Rside" style="height: 1000px;">
 					<!-- BTN Start -->
 					<div class="panel-heading">
 						<div class="btn-group">
@@ -152,7 +152,7 @@ left Start
 					<!-- Chart.js Start -->
 					<div class="panel-body">
 						<!-- 上Chart -->
-						<div class="panel panel-warning" style="height: 80%">
+						<div class="panel panel-warning" style="height: 100%">
 							<div class="panel-heading">該點的數據</div>
 							<div class="panel-body">
 								<canvas class="cvWidth" id="pastChart">
@@ -164,7 +164,7 @@ left Start
 						<!-- 下Chart -->
 						<div class="panel panel-warning">
 							<div class="panel-heading">區域的數據</div>
-							<div class="panel-body " style="height: 100px;">
+							<div class="panel-body " style="height: 100%;">
 								<canvas class="cvWidth" id="areaChart">
 
         				</canvas>
