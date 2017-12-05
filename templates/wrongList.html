@@ -38,9 +38,9 @@
 	<!-- Font Awsome ICON -->
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
-<body id="body">
+<body id="body" onload="init()">
 
-<!-- <script>
+<script>
 	function init() {
 		var fb = document.getElementsByClassName('fb-comments')[0];
 		var x = fb.getAttribute('data-href');
@@ -85,7 +85,7 @@
       }
     });
   };
-</script> -->
+</script>
 
 
 
@@ -130,7 +130,7 @@ left Start
 	<div class="row">
 
 		<div class="col-md-7 col-12">
-			<div class="panel panel-info" style="height: 90vh;">
+			<div class="panel panel-info" style="height: 100vh;">
 				<div class="panel-heading">
 					異常監測站地點
 				</div>
@@ -141,67 +141,68 @@ left Start
 		</div>
 
 		<div class="col-md-5 col-12">
-	    	<div class="panel panel-danger" style="height: 90vh;">
-		   		<div class="panel-heading">站點當時信息</div>
+    	<div class="panel panel-danger" style="height: 100vh;">
+	   		<div class="panel-heading">站點當時信息</div>
 
-		    	<div class="panel-body NodeInfo" >
-						<form action="." method="get">
-							<table class="table table-bordered">
-			    			<tbody>
-									<tr class="info">
-										<td>監測站點</td>
-										<td id="errorSite">{{errorSiteVal}}</td>
-									</tr>
-			    				<tr class="info">
-						        <td>發生時間</td>
-						        <td id="errorTime">{{errorTimeVal}}</td>
-							    </tr>
-									<tr class="warning">
-										<td>PM2.5</td>
-										<td></td>
-									</tr>
-									<tr class="warning">
-										<td>PM10</td>
-										<td></td>
-									</tr>
-									<tr class="warning">
-										<td>溫度</td>
-										<td></td>
-									</tr>
-									<tr class="warning">
-										<td>濕度</td>
-										<td></td>
-									</tr>
-			    			</tbody>
-			    		</table>
-							<input id="errorSiteVal" type="text" name="errorSiteVal" value="" style="display:none;">
-							<input id="errorTimeVal" type="text" name="errorTimeVal" value="" style="display:none;">
-							<input id="ok" type="submit" value="sent" style="display:none;">
-						</form>
-		    		<div class="well">原因分析:暫時未知</div>
+	    	<div class="panel-body NodeInfo" >
+					<form action="." method="get">
+						<table class="table table-bordered">
+		    			<tbody>
+		    				<tr class="info">
+									<td>監測站點</td>
+					        <td id="errorSite">{{errorSiteVal}}</td>
+						    </tr>
+								<tr class="info">
+									<td>發生時間</td>
+									<td id="errorTime">{{errorTimeVal}}</td>
+								</tr>
+								<tr class="warning">
+									<td>PM2.5</td>
+									<td></td>
+								</tr>
+								<tr class="warning">
+									<td>PM10</td>
+									<td></td>
+								</tr>
+								<tr class="warning">
+									<td>溫度</td>
+									<td></td>
+								</tr>
+								<tr class="warning">
+									<td>濕度</td>
+									<td></td>
+								</tr>
+		    			</tbody>
+		    		</table>
+						<input id="errorSiteVal" type="text" name="errorSiteVal" value="" style="display:none;">
+						<input id="errorTimeVal" type="text" name="errorTimeVal" value="" style="display:none;">
+						<input id="ok" type="submit" value="sent" style="display:none;">
+					</form>
+	    		<div class="well">原因分析:暫時未知</div>
 
-						<hr>
-						<a href="http://127.0.0.1:8000/gpms/history/" class="btn btn-transparent" style="font-size: 18px;">
-							按此回報和查看所有異常站點記錄
-						</a>
-		    	</div>
-		    </div>
+					<hr>
 
-	        <!-- <div class="panel panel-warning">
+					<a href="http://127.0.0.1:8000/gpms/history/" class="btn btn-transparent" style="font-size: 18px;">
+						按此回報和查看所有異常站點記錄
+					</a>
+	    	</div>
+	    </div>
 
-		    	<div class="panel-heading">
-		    		如果你知道這個監測站附近的情況請告訴我們
-		    		<div class="fb-share-button" data-href="http://im41gpms.herokuapp.com/wrongList/" data-layout="button" data-size="small" data-mobile-iframe="true">
-		    			<a class="fb-xfbml-parse-ignore" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fdevelopers.facebook.com%2Fdocs%2Fplugins%2F&amp;src=sdkpreparse">分享</a>
-		    		</div>
-		    	</div>
+      <!-- <div class="panel panel-warning">
 
-		    	<div class="panel-body">
+	    	<div class="panel-heading">
+	    		如果你知道這個監測站附近的情況請告訴我們
+	    		<div class="fb-share-button" data-href="http://im41gpms.herokuapp.com/wrongList/" data-layout="button" data-size="small" data-mobile-iframe="true">
+	    			<a class="fb-xfbml-parse-ignore" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fdevelopers.facebook.com%2Fdocs%2Fplugins%2F&amp;src=sdkpreparse">分享</a>
+	    		</div>
+	    	</div>
+
+	    	<div class="panel-body">
 					<div class="ovscroll">
 						<div class="fb-comments" data-width="100%" data-href="http://127.0.0.1:8000/gpms/wronglist/" data-numposts="5"></div>
 					</div>
-		    	</div>
-		    </div> -->
+	    	</div>
+	    </div> -->
 		</div>
 	</div>
 </div>
@@ -236,16 +237,6 @@ left END
 	<script type="text/javascript" src="{% static "scripts/script.js" %}"></script>
 	<!-- Google	Map API -->
 	<!-- <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA1MDAz4pygB9byYzbBpaeFRptZ1cyKcig&callback=initMap"></script> -->
-
-	<!-- <script>
-		function init() {
-			var fb = document.getElementsByClassName('fb-comments')[0];
-			var share = document.getElementsByClassName('fb-share-button')[0];
-			fb.setAttribute('data-href', location.href);
-			share.setAttribute('data-href', location.href);
-		}
-	</script> -->
-
 	<script>
     function initMap() {
       var map = new google.maps.Map(document.getElementById('map'), {

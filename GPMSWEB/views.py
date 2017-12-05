@@ -6,7 +6,6 @@ from GPMSWEB.main import main                   # 自建主程式類別
 from GPMSWEB.DBService import DBService         # 自建資料庫類別
 from GPMSWEB.TableService import TableService   # 自建資料表類別
 from GPMSWEB.dataAnaly import dataAnaly         # 資料分析類別
-import psycopg2
 from firebase import firebase
 
 # Create your views here.
@@ -87,10 +86,18 @@ def wronglist(requests):
         errorSiteVal = ""
         errorTimeVal = ""
     else:
-        print(requests.GET)
-        url = requests.GET['url']
         errorSiteVal = requests.GET['errorSiteVal']
         errorTimeVal = requests.GET['errorTimeVal']
+
+    json_url = 'https://ch13-ccc60.firebaseio.com/'
+    map_json = firebase.FirebaseApplication(json_url,None)
+    error_json = map_json.get(json_url, None)
+
+    error_labels = []
+    if error_json != None:
+        for item in error_json:
+            error_labels.append(item['stNote'])
+
 
     return render(requests, "wrongList.html", locals())
 
@@ -116,4 +123,5 @@ def map(requests):
     return render(requests, 'test.html', locals())
 
 def historyData(requests):
-    return render(requests, 'history.html')
+
+    return render(requests, "history.html", locals())

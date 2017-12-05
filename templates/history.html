@@ -48,47 +48,50 @@
 <body id="body" data-spy="scroll" data-target=".navbar" data-offset="50">
 
   <div id="fb-root"></div>
-  <script>(function(d, s, id) {
-    var js, fjs = d.getElementsByTagName(s)[0];
-    if (d.getElementById(id)) return;
-    js = d.createElement(s); js.id = id;
-    js.src = 'https://connect.facebook.net/zh_TW/sdk.js#xfbml=1&version=v2.11&appId=909518255880791';
-    fjs.parentNode.insertBefore(js, fjs);
-  }(document, 'script', 'facebook-jssdk'));</script>
+  <script>
+    (function(d, s, id) {
+      var js, fjs = d.getElementsByTagName(s)[0];
+      if (d.getElementById(id)) return;
+      js = d.createElement(s);
+      js.id = id;
+      js.src = 'https://connect.facebook.net/zh_TW/sdk.js#xfbml=1&version=v2.11&appId=909518255880791';
+      fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));
+  </script>
 
   <!--
   Fixed Navigation
   ==================================== -->
   <div class="container-fluid">
 
-  	<nav class="navbar navbar-inverse navbar-fixed-top navigation">
-  	<div class="container-fluid">
-  	    <div class="navbar-header">
-  	    	<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
-  	        	<span class="icon-bar"></span>
-  	       	 	<span class="icon-bar"></span>
-  	        	<span class="icon-bar"></span>
+    <nav class="navbar navbar-inverse navbar-fixed-top navigation">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+	        	<span class="icon-bar"></span>
+	       	 	<span class="icon-bar"></span>
+	        	<span class="icon-bar"></span>
   	    	</button>
-  	    <a class="navbar-brand" href="http://127.0.0.1:8000/gpms/index">GPMS</a>
-  	    </div>
+          <a class="navbar-brand" href="http://127.0.0.1:8000/gpms/index">GPMS</a>
+        </div>
 
-  	    <div class="collapse navbar-collapse navbar-right navigation-menu" id="myNavbar">
-  			<ul class="nav navbar-nav">
-  				<li><a href="http://127.0.0.1:8000/gpms/index">Home</a></li>
-  				<li><a href="http://127.0.0.1:8000/gpms/wronglist/">異常監測站</a></li>
-          <li class="active"><a href="http://127.0.0.1:8000/gpms/history/">歷史資料</a></li>
-  				<li><a href="http://127.0.0.1:8000/gpms/data/">全部監測站</a></li>
-  			</ul>
-  	    </div>
-  	</div>
-  </nav>
+        <div class="collapse navbar-collapse navbar-right navigation-menu" id="myNavbar">
+          <ul class="nav navbar-nav">
+            <li><a href="http://127.0.0.1:8000/gpms/index">Home</a></li>
+            <li><a href="http://127.0.0.1:8000/gpms/wronglist/">異常監測站</a></li>
+            <li class="active"><a href="http://127.0.0.1:8000/gpms/history/">歷史資料</a></li>
+            <li><a href="http://127.0.0.1:8000/gpms/data/">全部監測站</a></li>
+          </ul>
+        </div>
+      </div>
+    </nav>
 
   </div>
   <!--
   End Fixed Navigation
   ==================================== -->
 
-  <div class="container panel-group" style="padding-top: 65px;">
+  <div class="container panel-group" style="padding-top: 65px; height: 100vh;">
 
     <h2>歷史異常檢測記錄</h2>
     <p>在這裡，您可以和其他朋友討論或回饋關於異常站點週邊的資訊</p>
@@ -103,9 +106,7 @@
           </h4>
         </div>
         <div id="collapse1" class="panel-collapse collapse in">
-          <div class="panel-body">Lorem ipsum dolor sit amet, consectetur adipisicing elit,
-          sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-          quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+          <div class="panel-body">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
           </div>
         </div>
       </div>
@@ -121,35 +122,35 @@
           <div class="panel-body">
             <div class="row">
               <div class="col-md-6">
-                  <table class="table table-bordered">
-                    <tbody>
-                      <tr class="info">
-    										<td>監測站點</td>
-    										<td id="errorSite">{{errorSiteVal}}</td>
-    									</tr>
-    			    				<tr class="info">
-    						        <td>發生時間</td>
-    						        <td id="errorTime">{{errorTimeVal}}</td>
-    							    </tr>
-                      <tr class="warning">
-    										<td>PM2.5</td>
-    										<td></td>
-    									</tr>
-    									<tr class="warning">
-    										<td>PM10</td>
-    										<td></td>
-    									</tr>
-    									<tr class="warning">
-    										<td>溫度</td>
-    										<td></td>
-    									</tr>
-    									<tr class="warning">
-    										<td>濕度</td>
-    										<td></td>
-    									</tr>
-                    </tbody>
-                  </table>
-                </div>
+                <table class="table table-bordered">
+                  <tbody>
+                    <tr class="info">
+                      <td>監測站點</td>
+                      <td id="errorSite">{{errorSiteVal}}</td>
+                    </tr>
+                    <tr class="info">
+                      <td>發生時間</td>
+                      <td id="errorTime">{{errorTimeVal}}</td>
+                    </tr>
+                    <tr class="warning">
+                      <td>PM2.5</td>
+                      <td></td>
+                    </tr>
+                    <tr class="warning">
+                      <td>PM10</td>
+                      <td></td>
+                    </tr>
+                    <tr class="warning">
+                      <td>溫度</td>
+                      <td></td>
+                    </tr>
+                    <tr class="warning">
+                      <td>濕度</td>
+                      <td></td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
 
               <div class="col-md-6">
                 <div class="panel panel-default">
@@ -162,25 +163,25 @@
                 </div>
               </div>
 
-              </div>
             </div>
           </div>
         </div>
       </div>
-
     </div>
+
+  </div>
   </div>
 
   <footer>
-      <div class="container">
-          <div class="row">
-              <div class="col-md-12">
-                  <div class="block">
-                      <p>Copyright &copy; <a href="http://im.nutc.edu.tw/bin/home.php">NUTC-IM</a> | Prof. Allen Lian </p>
-                  </div>
-              </div>
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="block">
+            <p>Copyright &copy; <a href="http://im.nutc.edu.tw/bin/home.php">NUTC-IM</a> | Prof. Allen Lian </p>
           </div>
+        </div>
       </div>
+    </div>
   </footer>
 
   <!--
@@ -188,22 +189,13 @@
 		=====================================-->
 
   <!-- Change data-href jQuery -->
-
   <script>
-
-    $(".panel").click(function(){
-
+    $(".panel").click(function() {
       // console.log("before: " + $(".fb-comments").data('href'));
-
-      $(".fb-comments").attr('data-href',"http://im41gpms.herokuapp.com/wronglist/");
+      $(".fb-comments").attr('data-href', "http://im41gpms.herokuapp.com/wronglist/");
       FB.XFBML.parse();
-
     });
-
   </script>
-
-  <!--  -->
-
 
   <!-- Main jQuery -->
   <script type="text/javascript" src="{% static "plugins/jquery/dist/jquery.min.js" %}"></script>
@@ -212,7 +204,7 @@
   <!-- Smooth Scroll -->
   <script type="text/javascript" src="{% static "plugins/smooth-scroll/dist/js/smooth-scroll.min.js" %}"></script>
   <!-- Sticky Nav -->
-  <script type="text/javascript" src="{% static "plugins/Sticky/jquery.sticky.js" %}"></script>
+  <script type="text/javascript" src="{% static "plugins/Sticky/jquery.sticky.js"%}"></script>
   <!-- wow.min Script -->
   <script type="text/javascript" src="{% static "plugins/wow/dist/wow.min.js" %}"></script>
   <!-- Custom js -->

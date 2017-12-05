@@ -54,7 +54,7 @@ img{
     position: relative;
     top: 50%;
     transform: translateY(-50%);
-  }
+  } 
 
 /*=================================================================
   Basic Setup
@@ -111,10 +111,9 @@ a:focus, a:hover {
   background-color: #f5f5f5;
   color: #737f8a;
   padding: 10px 30px;
-  border:1px solid;
-  border-radius: 1 ;
+  border: 1px solid;
+  border-radius: 1;
   width: 100%;
-
   -webkit-transition: all .3s ease-in 0s;
   transition: all .3s ease-in 0s;
 }
