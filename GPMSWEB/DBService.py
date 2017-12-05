@@ -275,5 +275,6 @@ class DBService:
         cursor.execute(sqlStr)
 
         result = cursor.fetchall()
+        print(result)
 
         return result

@@ -40,6 +40,7 @@ def Main(requests):
 # 首頁
 def index(requests):
     error_table_name_lst = table.lst_getAllErrorTableName()
+    print(error_table_name_lst[-1])
     error = db.readErrorData(error_table_name_lst[-1])
     date = error_table_name_lst[-1][10:20].replace("_","-")
     time = error_table_name_lst[-1][-5:].replace("_",":")
@@ -76,8 +77,6 @@ def data(requests):
     time_lst,pm25_lst = table.getXYAxis(table_name_lst,site_lst[row][0],interval=5)
     data[site_lst[row][1]]["1"] = pm25_lst
     data[site_lst[row][1]]["area"] = area
-
-    # data = HttpResponse(json.dumps(data),content_type="application/json")
 
     return render(requests, "data.html", locals())
 
