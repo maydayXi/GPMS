@@ -38,16 +38,9 @@
 	<!-- Font Awsome ICON -->
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
-<body id="body" onload="init()">
+<body id="body">
 
 <script>
-	function init() {
-		var fb = document.getElementsByClassName('fb-comments')[0];
-		var x = fb.getAttribute('data-href');
-		// alert(location.href + '\n' + x);
-		fb.setAttribute('data-href', location.href);
-		// alert(location.href + '\n' + fb.getAttribute('data-href'));
-	}
 	window.fbAsyncInit = function() {
     FB.init({
       appId: '909518255880791',
@@ -86,8 +79,6 @@
     });
   };
 </script>
-
-
 
 <div id="preloader"></div>
 
@@ -158,24 +149,28 @@ left Start
 								</tr>
 								<tr class="warning">
 									<td>PM2.5</td>
-									<td></td>
+									<td id="PM25">{{pm25_val}}</td>
 								</tr>
 								<tr class="warning">
 									<td>PM10</td>
-									<td></td>
+									<td id="PM10">{{pm10_val}}</td>
 								</tr>
 								<tr class="warning">
 									<td>溫度</td>
-									<td></td>
+									<td id="Temperature">{{temperature_val}}</td>
 								</tr>
 								<tr class="warning">
 									<td>濕度</td>
-									<td></td>
+									<td id="Humidity">{{humidity_val}}</td>
 								</tr>
 		    			</tbody>
 		    		</table>
 						<input id="errorSiteVal" type="text" name="errorSiteVal" value="" style="display:none;">
 						<input id="errorTimeVal" type="text" name="errorTimeVal" value="" style="display:none;">
+						<input id="PM25Val" type="text" name="PM25Val" value="" style="display:none;">
+						<input id="PM10Val" type="text" name="PM10Val" value="" style="display:none;">
+						<input id="TemperatureVal" type="text" name="TemperatureVal" value="" style="display:none;">
+						<input id="HumidityVal" type="text" name="HumidityVal" value="" style="display:none;">
 						<input id="ok" type="submit" value="sent" style="display:none;">
 					</form>
 	    		<div class="well">原因分析:暫時未知</div>
@@ -261,8 +256,14 @@ left END
 					document.getElementById('errorTime').innerHTML = locations[i]['errorTime'];
 					document.getElementById('errorSiteVal').value = marker['label'];
 					document.getElementById('errorTimeVal').value = locations[i]['errorTime'];
-					console.log(document.getElementById('errorSiteVal').value);
-					console.log(document.getElementById('errorTimeVal').value);
+					document.getElementById('PM25').innerHTML = locations[i]['PM25'];
+					document.getElementById('PM25Val').value = locations[i]['PM25'];
+					document.getElementById('PM10').innerHTML = locations[i]['PM10'];
+					document.getElementById('PM10Val').value = locations[i]['PM10'];
+					document.getElementById('Temperature').innerHTML = locations[i]['溫度'];
+					document.getElementById('TemperatureVal').value = locations[i]['溫度'];
+					document.getElementById('Humidity').innerHTML = locations[i]['濕度'];
+					document.getElementById('HumidityVal').value = locations[i]['濕度'];
 					document.getElementById('ok').click();
 				});
 

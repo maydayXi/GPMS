@@ -85,15 +85,23 @@ def wronglist(requests):
         url = ""
         errorSiteVal = ""
         errorTimeVal = ""
-    else:
+        pm25_val = ""
+        pm10_val = ""
+        temperature_val = ""
+        humidity_val = ""
+    else:                                                       # 記錄 POST 過來的訊息
         errorSiteVal = requests.GET['errorSiteVal']
         errorTimeVal = requests.GET['errorTimeVal']
+        pm25_val = requests.GET['PM25Val']
+        pm10_val = requests.GET['PM10Val']
+        temperature_val = requests.GET['TemperatureVal']
+        humidity_val = requests.GET['HumidityVal']
 
     json_url = 'https://ch13-ccc60.firebaseio.com/'
     map_json = firebase.FirebaseApplication(json_url,None)
-    error_json = map_json.get(json_url, None)
+    error_json = map_json.get(json_url, None)                   # 取得即時的異常測站
 
-    error_labels = []
+    error_labels = []                                           # 異常測站的名稱串列
     if error_json != None:
         for item in error_json:
             error_labels.append(item['stNote'])
