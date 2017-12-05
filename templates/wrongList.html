@@ -212,14 +212,6 @@ left END
 	<!-- Google	Map API -->
 	<!-- <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA1MDAz4pygB9byYzbBpaeFRptZ1cyKcig&callback=initMap"></script> -->
 	<script>
-		function init() {
-			var fb = document.getElementsByClassName('fb-comments')[0];
-			var share = document.getElementsByClassName('fb-share-button')[0];
-			fb.setAttribute('data-href', location.href);
-			share.setAttribute('data-href', location.href);
-		}
-	</script>
-	<script>
     function initMap() {
       var map = new google.maps.Map(document.getElementById('map'), {
         zoom: 8,
