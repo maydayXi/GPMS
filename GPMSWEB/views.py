@@ -114,3 +114,6 @@ def map(requests):
     print(error_labels)
 
     return render(requests, 'test.html', locals())
+
+def historyData(requests):
+    return render(requests, 'history.html')

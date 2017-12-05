@@ -25,4 +25,5 @@ urlpatterns = [
     url(r'^gpms/data/$', views.data),
     url(r'^gpms/wronglist/$', views.wronglist),
     url(r'^gpms/wronglist/(\w+)/$', views.wronglist),
+    url(r'^gpms/history/$',views.historyData),
 ]

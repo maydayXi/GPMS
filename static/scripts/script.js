@@ -4,11 +4,11 @@ jQuery(function ($) { "use strict";
 	/*	Page Preloader
 	/* ========================================================================= */
 
-	window.onload = function () {
-		console.log("Start1")
-		document.getElementById('preloader').style.display = 'none';
-		console.log("preloader Finished!")
-	}
+	// window.onload = function () {
+	// 	console.log("Start1")
+	// 	document.getElementById('preloader').style.display = 'none';
+	// 	console.log("preloader Finished!")
+	// }
 
 	/* ========================================================================= */
 	/*	Menu item highlighting
