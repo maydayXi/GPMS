@@ -100,8 +100,8 @@ a:focus, a:hover {
 }
 
 .cvWidth{
-    height: 100vim;
-    width: 100vim;
+    height: 80vim;
+    width: 80vim;
 }
 
 .kill-margin-bottom {
@@ -550,6 +550,7 @@ a:focus, a:hover {
 .LTside {
   font-family: Microsoft JhengHei;
   text-align: center;
+  /*height: 1200px;*/
 }
 
 .LTside h2{
