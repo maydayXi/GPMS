@@ -15,11 +15,17 @@ class DBService:
     # 類別初始執行
     def __init__(self):
         # self.path = os.path.dirname(__file__)       #取得資料庫所在路徑
-        self.connection = db.connect(database="ddko5britb3go7",
-					                 user="uerii7jpklfmot",
-					                 password="p5d52665c6a9236f7207975b4b9f06850ee64e0cf30539de1b5649a691bb9e958",
-					                 host="ec2-52-87-101-125.compute-1.amazonaws.com",
-					                 port="5432")
+        # self.connection = db.connect(database="ddko5britb3go7",
+		# 			                 user="uerii7jpklfmot",
+		# 			                 password="p5d52665c6a9236f7207975b4b9f06850ee64e0cf30539de1b5649a691bb9e958",
+		# 			                 host="ec2-52-87-101-125.compute-1.amazonaws.com",
+		# 			                 port="5432")
+        self.connection = db.connect(
+            database="dbs2i42vpoo68l",
+            user="peeilhuppcssqk",
+            password="59d3795fcc165d9ba1c00143107e4aecbfdd69d36a9fb425dc32f24ad6a254fb",
+            host="ec2-107-22-167-179.compute-1.amazonaws.com",
+            port="5432")
 
     # 2017-11-23 edit by Mayday
     # <summary> 取得所有空氣資料表 </summary>

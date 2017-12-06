@@ -136,7 +136,7 @@ left Start
 	   		<div class="panel-heading">站點當時信息</div>
 
 	    	<div class="panel-body NodeInfo" >
-					<form action="." method="get">
+					<!-- <form action="." method="get"> -->
 						<table class="table table-bordered">
 		    			<tbody>
 		    				<tr class="info">
@@ -165,14 +165,14 @@ left Start
 								</tr>
 		    			</tbody>
 		    		</table>
-						<input id="errorSiteVal" type="text" name="errorSiteVal" value="" style="display:none;">
+						<!-- <input id="errorSiteVal" type="text" name="errorSiteVal" value="" style="display:none;">
 						<input id="errorTimeVal" type="text" name="errorTimeVal" value="" style="display:none;">
 						<input id="PM25Val" type="text" name="PM25Val" value="" style="display:none;">
 						<input id="PM10Val" type="text" name="PM10Val" value="" style="display:none;">
 						<input id="TemperatureVal" type="text" name="TemperatureVal" value="" style="display:none;">
 						<input id="HumidityVal" type="text" name="HumidityVal" value="" style="display:none;">
 						<input id="ok" type="submit" value="sent" style="display:none;">
-					</form>
+					</form> -->
 	    		<div class="well">原因分析:暫時未知</div>
 
 					<hr>
@@ -254,17 +254,17 @@ left END
 				google.maps.event.addListener(marker, 'click', function () {
 					document.getElementById('errorSite').innerHTML = marker['label'];
 					document.getElementById('errorTime').innerHTML = locations[i]['errorTime'];
-					document.getElementById('errorSiteVal').value = marker['label'];
-					document.getElementById('errorTimeVal').value = locations[i]['errorTime'];
+					// document.getElementById('errorSiteVal').value = marker['label'];
+					// document.getElementById('errorTimeVal').value = locations[i]['errorTime'];
 					document.getElementById('PM25').innerHTML = locations[i]['PM25'];
-					document.getElementById('PM25Val').value = locations[i]['PM25'];
+					// document.getElementById('PM25Val').value = locations[i]['PM25'];
 					document.getElementById('PM10').innerHTML = locations[i]['PM10'];
-					document.getElementById('PM10Val').value = locations[i]['PM10'];
-					document.getElementById('Temperature').innerHTML = locations[i]['溫度'];
-					document.getElementById('TemperatureVal').value = locations[i]['溫度'];
-					document.getElementById('Humidity').innerHTML = locations[i]['濕度'];
-					document.getElementById('HumidityVal').value = locations[i]['濕度'];
-					document.getElementById('ok').click();
+					// document.getElementById('PM10Val').value = locations[i]['PM10'];
+					document.getElementById('Temperature').innerHTML = locations[i]['溫度'].toFixed(2) + "&deg;C";
+					// document.getElementById('TemperatureVal').value = locations[i]['溫度'].toFixed(2);
+					document.getElementById('Humidity').innerHTML = locations[i]['濕度'].toFixed(2) + '%';
+					// document.getElementById('HumidityVal').value = locations[i]['濕度'].toFixed(2) + '%';
+					// document.getElementById('ok').click();
 				});
 
 				return marker

@@ -6,20 +6,23 @@ Description: Meghna Responsive HTML5/CSS3 Portfolio Template
 Version: 1.0
 Tags: one-page, single-page, portfolio, custom-colors, post-formats, responsive, html5, css3
 */
+
 /*=== MEDIA QUERY ===*/
+
 @import url("https://fonts.googleapis.com/css?family=Anaheim|Quattrocento+Sans:400,700");
 @import url("https://fonts.googleapis.com/css?family=Montserrat:400,700|Open+Sans:300,400,600");
 @import url(https://fonts.googleapis.com/earlyaccess/cwtexyen.css);
-
 @media (max-width: 640px) {
   html {
-    font-size: 100%;  /* 16px/16 = 100% */
+    font-size: 100%;
+    /* 16px/16 = 100% */
   }
 }
 
 @media (max-width: 460px) {
   html {
-    font-size: 62.5%; /* 10px/16 = 0.625 */
+    font-size: 62.5%;
+    /* 10px/16 = 0.625 */
   }
 }
 
@@ -45,20 +48,21 @@ p {
   font-family: "Quattrocento Sans", sans-serif;
 }
 
-img{
-  max-width:100%;
-  max-height:100%;
+img {
+  max-width: 100%;
+  max-height: 100%;
 }
 
-.center-vertical{
-    position: relative;
-    top: 50%;
-    transform: translateY(-50%);
-  } 
+.center-vertical {
+  position: relative;
+  top: 50%;
+  transform: translateY(-50%);
+}
 
 /*=================================================================
   Basic Setup
 ==================================================================*/
+
 ::-moz-selection {
   /* Code for Firefox */
   color: #fff;
@@ -214,7 +218,7 @@ a:focus, a:hover {
   padding: 0 0 50px;
 }
 
-.sub-title > h3 {
+.sub-title>h3 {
   border-left: 3px solid #ddd;
   border-right: 3px solid #ddd;
   display: inline-block;
@@ -302,13 +306,13 @@ a:focus, a:hover {
 
 @media (max-width: 480px) {
   .section {
-  padding: 50px 0;
+    padding: 50px 0;
   }
 }
 
 @media (max-width: 768px) {
   .section {
-  padding: 50px 0;
+    padding: 50px 0;
   }
 }
 
@@ -338,8 +342,6 @@ a:focus, a:hover {
   background-repeat: no-repeat;
   background-size: cover;
 }
-
-
 
 .sk-cube-grid {
   width: 40px;
@@ -403,23 +405,23 @@ a:focus, a:hover {
 
 @-webkit-keyframes sk-cubeGridScaleDelay {
   0%, 70%, 100% {
-  -webkit-transform: scale3D(1, 1, 1);
-  transform: scale3D(1, 1, 1);
+    -webkit-transform: scale3D(1, 1, 1);
+    transform: scale3D(1, 1, 1);
   }
   35% {
-  -webkit-transform: scale3D(0, 0, 1);
-  transform: scale3D(0, 0, 1);
+    -webkit-transform: scale3D(0, 0, 1);
+    transform: scale3D(0, 0, 1);
   }
 }
 
 @keyframes sk-cubeGridScaleDelay {
   0%, 70%, 100% {
-  -webkit-transform: scale3D(1, 1, 1);
-  transform: scale3D(1, 1, 1);
+    -webkit-transform: scale3D(1, 1, 1);
+    transform: scale3D(1, 1, 1);
   }
   35% {
-  -webkit-transform: scale3D(0, 0, 1);
-  transform: scale3D(0, 0, 1);
+    -webkit-transform: scale3D(0, 0, 1);
+    transform: scale3D(0, 0, 1);
   }
 }
 
@@ -487,8 +489,8 @@ a:focus, a:hover {
 }
 
 /* CSS mfp-with-zoom class */
-.mfp-with-zoom .mfp-container,
-.mfp-with-zoom.mfp-bg {
+
+.mfp-with-zoom .mfp-container, .mfp-with-zoom.mfp-bg {
   opacity: 0;
   -webkit-transition: all 0.3s ease-out;
   transition: all 0.3s ease-out;
@@ -502,8 +504,7 @@ a:focus, a:hover {
   opacity: 0.8;
 }
 
-.mfp-with-zoom.mfp-removing .mfp-container,
-.mfp-with-zoom.mfp-removing.mfp-bg {
+.mfp-with-zoom.mfp-removing .mfp-container, .mfp-with-zoom.mfp-removing.mfp-bg {
   opacity: 0;
 }
 
@@ -511,9 +512,6 @@ a:focus, a:hover {
   margin-top: 0px;
   display: inline-block;
 }*/
-
-
-
 
 #map {
   height: 100%;
@@ -525,9 +523,9 @@ a:focus, a:hover {
 ==================================================================*/
 
 .navigation {
-  background-color: rgba(29,32,36,100%);
+  background-color: rgba(29, 32, 36, 100%);
   width: 100%;
- /* z-index: 99;*/
+  /* z-index: 99;*/
   margin-bottom: 0;
   padding: 0px;
 }
@@ -566,7 +564,7 @@ a:focus, a:hover {
   background: #fff;
 }
 
-.navbar .navbar-collapse{
+.navbar .navbar-collapse {
   font-size: 25px;
   font-family: "cwTeXYen", sans-serif;
 }
@@ -582,21 +580,23 @@ a:focus, a:hover {
 /*=================================================================
   Panel
 ==================================================================*/
+
 #map {
   height: 85vh;
   /*width: 100%;*/
 }
 
-.panel{
+.panel {
   font-family: "cwTeXYen", sans-serif;
   font-size: 18px;
   line-height: 30px;
 }
 
-.NodeInfo .table td{
+.NodeInfo .table td {
   text-align: center;
 }
-.ovscroll{
+
+.ovscroll {
   overflow-y: auto;
   max-height: 312px;
 }
@@ -604,6 +604,7 @@ a:focus, a:hover {
 /*=================================================================
   About us section
 ==================================================================*/
+
 .about .block {
   background: #242930;
   padding: 30px;
@@ -670,31 +671,35 @@ a:focus, a:hover {
   color: #afbac4;
 }
 
-.about .about-item h3{
+.about .about-item h3 {
   font-family: "cwTeXYen", sans-serif;
 }
 
-.about .about-item p{
+.about .about-item p {
   font-family: "cwTeXYen", sans-serif;
   font-size: 20px;
 }
 
-
-
-
 footer {
   text-align: center;
   background: #272727;
-  padding: 27px 0px; }
-  footer p {
-    font-weight: 300;
-    font-size: 12px;
-    color: #dfdfdf;
-    letter-spacing: 3px; }
-    footer p a {
-      color: #00BFFF; }
-      footer p a:hover {
-        color: #00FFFF;
-        text-decoration: none; }
+  padding: 27px 0px;
+}
+
+footer p {
+  font-weight: 300;
+  font-size: 12px;
+  color: #dfdfdf;
+  letter-spacing: 3px;
+}
+
+footer p a {
+  color: #00BFFF;
+}
+
+footer p a:hover {
+  color: #00FFFF;
+  text-decoration: none;
+}
 
 /*# sourceMappingURL=maps/style.css.map */

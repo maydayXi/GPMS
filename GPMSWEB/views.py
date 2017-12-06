@@ -2,7 +2,6 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from django.http import JsonResponse
 from datetime import datetime                   # 時間
-from GPMSWEB.main import main                   # 自建主程式類別
 from GPMSWEB.DBService import DBService         # 自建資料庫類別
 from GPMSWEB.TableService import TableService   # 自建資料表類別
 from GPMSWEB.dataAnaly import dataAnaly         # 資料分析類別
@@ -15,28 +14,6 @@ db = DBService()                            # 資料庫物件
 analy = dataAnaly()                         # 資料分析物件
 table = TableService()                      # 表格資料物件
 
-# 找出有問題的站點
-def Main(requests):
-    x = main()
-    x.getInitData()
-    x.getAirValue()
-    x.dataSave()
-    table_name_lst = table.lst_getAllAirInfoTableName()
-    error_site = x.analy()
-
-    error = []
-    for item in error_site:
-        error_air_data = db.m_readAirDataByNote(table_name_lst[-1], item)
-        error_position = db.m_readSitePositionByNote(item)
-        error.append([error_air_data[0],item,error_air_data[1],                 # stId, PM2.5
-                       error_air_data[2],error_air_data[3],                     # PM10, Temperature
-                       error_air_data[4],error_position[0],error_position[1]])  # Humidity, stLatitude, stLongitude
-
-    db.createErrorData(table_name_lst[-1][8:],error)
-
-    return render(requests, "test.html", {"result":error})
-
-# 首頁
 def index(requests):
     error_table_name_lst = table.lst_getAllErrorTableName()
     print(error_table_name_lst[-1])
@@ -131,5 +108,12 @@ def map(requests):
     return render(requests, 'test.html', locals())
 
 def historyData(requests):
+    dateStr = datetime.now().strftime('%Y-%m-%d')
+    history_json_url = 'https://errorsite-2017.firebaseio.com/{}/'.format(dateStr)
+    error_site_obj = firebase.FirebaseApplication(history_json_url, None)           # 取得累計三次的測站資料
+
+    if error_site_obj is not None:
+        error_site_data = error_site_obj.get(history_json_url, None)
+        print("errorSiteData = >", error_site_data)
 
     return render(requests, "history.html", locals())
