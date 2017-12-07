@@ -134,14 +134,21 @@
       <div class="panel-group" id="accordion">
 
         {% for key, value in error_site_data.items %}
-        <div id="{{forloop.counter0}}" class="panel panel-default" onclick="cfb(this.id)">
+        <div class="panel panel-default">
           <div class="panel-heading">
-            <h4 class="panel-title">
+            <h4  id="{{forloop.counter0}}" class="panel-title"  onclick="cfb(this.id)">
               <a id="errorSite{{forloop.counter0}}" data-toggle="collapse" data-parent="#accordion" href="#P{{forloop.counter0}}">
                 {{key}}
               </a>
             </h4>
           </div>
+
+          {% if value|length == 6 %}
+            <script>
+              document.getElementById('errorSite{{forloop.counter0}}').style = "color:red;";
+            </script>
+          {% endif %}
+
           <div id="P{{forloop.counter0}}" class="panel-collapse collapse">
             <div class="panel-body">
               <div class="col-md-6">
@@ -151,9 +158,6 @@
                       <td>時間</td>
                       <td id="time{{forloop.counter0}}">
                         {% if value|length == 6 %}
-                          <script type="text/javascript">
-                            document.getElementById('errorSite{{forloop.counter0}}').style.color = "red";
-                          </script>
                           {{value.PostTime}}
                         {% else %}
                           {% for t in value.time %}
@@ -247,7 +251,7 @@
     function cfb(Id) {
       var error_site = document.getElementById('errorSite' + Id).innerHTML;
       var error_time = document.getElementById('time' + Id).innerHTML;
-      
+
       var url = "http://im41gpms.herokuapp.com/history/" + "?errorSiteVal=" +
         encodeURIComponent(error_site.trim()) +
         '&errorTimeVal=' + dateStr + "+" + escape(error_time.trim())
@@ -255,7 +259,7 @@
       console.log(url);
 
       $(".fb-comments").attr('data-href', url);
-      FB.XFBML.parse();
+      FB.XFBML.parse(document.getElementById('P' + Id));
     }
   </script>
 
