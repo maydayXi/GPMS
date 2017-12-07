@@ -16,11 +16,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   <!-- FB Share Content -->
-  <meta property="og:url" content="location.href" />
+  <!-- <meta property="og:url" content="location.href" /> -->
   <meta property="og:type" content="website" />
   <meta property="og:title" content="GPMS-PM2.5異常分析系統" />
   <meta property="og:description" content="異常站點的詳細資訊" />
-  <meta property="og:image" content="https://upload.wikimedia.org/wikipedia/commons/thumb/d/dd/Achtung.svg/220px-Achtung.svg.png" />
+  <meta property="og:image" content="https://raw.githubusercontent.com/maydayXi/GPMS/master/static/images/Achtung.jpg" />
   <!--  -->
 
   <!-- Favicon -->
@@ -53,14 +53,43 @@
 
   <div id="fb-root"></div>
   <script>
+  	window.fbAsyncInit = function() {
+      FB.init({
+        appId: '909518255880791',
+        autoLogAppEvents: true,
+        xfbml: true,
+        version: 'v2.11'
+      });
+      FB.AppEvents.logPageView();
+    };
     (function(d, s, id) {
       var js, fjs = d.getElementsByTagName(s)[0];
       if (d.getElementById(id)) return;
       js = d.createElement(s);
       js.id = id;
-      js.src = 'https://connect.facebook.net/zh_TW/sdk.js#xfbml=1&version=v2.11&appId=909518255880791';
+      js.src = 'https://connect.facebook.net/zh_TW/sdk.js';
       fjs.parentNode.insertBefore(js, fjs);
     }(document, 'script', 'facebook-jssdk'));
+
+    function postToPage() {
+      var page_id = '277631202754911';
+      FB.api('/' + page_id, {
+        fields: 'access_token'
+      }, function(resp) {
+        if (resp.access_token) {
+          FB.api('/' + page_id + '/feed',
+            'post', {
+              message: "I 'm a Page!",
+              link: location.href,
+              access_token: resp.access_token
+            },
+            function(response) {
+              console.log(response);
+              //response 為一個dict {id: "POST ID"}
+            });
+        }
+      });
+    };
   </script>
 
   <!--
@@ -211,9 +240,10 @@
     function cfb(Id) {
       var error_site = document.getElementById('errorSite' + Id).innerHTML;
       var error_time = document.getElementById('time' + Id).innerHTML;
-      var url = "http://im41gpms.herokuapp.com/wronglist/" + "?errorSiteVal=" +
+      
+      var url = "http://im41gpms.herokuapp.com/history/" + "?errorSiteVal=" +
         encodeURIComponent(error_site.trim()) +
-        '&errorTime=' + dateStr + "+" + escape(error_time.trim())
+        '&errorTimeVal=' + dateStr + "+" + escape(error_time.trim())
 
       console.log(url);
 
