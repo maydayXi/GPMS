@@ -150,11 +150,15 @@
                     <tr class="info">
                       <td>時間</td>
                       <td id="time{{forloop.counter0}}">
-                        {% for t in value.time %}
-                          {% if forloop.last %}
-                            {{t}}
-                          {% endif %}
-                        {% endfor %}
+                        {% if value|length == 6 %}
+                          {{value.PostTime}}
+                        {% else %}
+                          {% for t in value.time %}
+                            {% if forloop.last %}
+                              {{t}}
+                            {% endif %}
+                          {% endfor %}
+                        {% endif %}
                       </td>
                     <tr class="danger">
                       <td>PM25</td>
