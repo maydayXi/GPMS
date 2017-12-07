@@ -151,6 +151,9 @@
                       <td>時間</td>
                       <td id="time{{forloop.counter0}}">
                         {% if value|length == 6 %}
+                          <script type="text/javascript">
+                            document.getElementById('errorSite{{forloop.counter0}}').style.color = "red";
+                          </script>
                           {{value.PostTime}}
                         {% else %}
                           {% for t in value.time %}
