@@ -547,6 +547,24 @@ a:focus, a:hover {
   max-width: 300px;
 }
 
+.ttable td{
+  font-family: "cwTeXYen", sans-serif;
+  text-align: center;
+}
+
+.ttable tr{
+  font-family: "cwTeXYen", sans-serif;
+  text-align: center;
+}
+
+.fontabc h2{
+  font-family: "cwTeXYen", sans-serif;
+}
+
+.fontabc p{
+  font-family: "cwTeXYen", sans-serif;
+}
+
 /*=================================================================
   About us section
 ==================================================================*/
