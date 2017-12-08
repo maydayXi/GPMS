@@ -143,7 +143,7 @@
             </h4>
           </div>
 
-          {% if value|length == 6 %}
+          {% if value|length == 10 %}
             <script>
               document.getElementById('errorSite{{forloop.counter0}}').style = "color:red;";
             </script>
@@ -157,7 +157,7 @@
                     <tr class="info">
                       <td>時間</td>
                       <td id="time{{forloop.counter0}}">
-                        {% if value|length == 6 %}
+                        {% if value|length == 10 %}
                           {{value.PostTime}}
                         {% else %}
                           {% for t in value.time %}
@@ -170,41 +170,57 @@
                     <tr class="danger">
                       <td>PM25</td>
                       <td>
-                        {% for pm25 in value.PM25 %}
-                          {% if forloop.last %}
-                            {{pm25}}
-                          {% endif %}
-                        {% endfor %}
+                        {% if value|length == 10 %}
+                          {{value.PostPM10}}
+                        {% else %}
+                          {% for pm25 in value.PM25 %}
+                            {% if forloop.last %}
+                              {{pm25}}
+                            {% endif %}
+                          {% endfor %}
+                        {% endif %}
                       </td>
                     </tr>
                     <tr class="danger">
                       <td>PM10</td>
                       <td>
-                        {% for pm10 in value.PM10 %}
-                          {% if forloop.last %}
-                            {{pm10}}
-                          {% endif %}
-                        {% endfor %}
+                        {% if value|length == 10 %}
+                          {{value.PostPM10}}
+                        {% else %}
+                          {% for pm10 in value.PM10 %}
+                            {% if forloop.last %}
+                              {{pm10}}
+                            {% endif %}
+                          {% endfor %}
+                        {% endif %}
                       </td>
                     </tr>
                     <tr class="danger">
                       <td>溫度</td>
                       <td>
-                        {% for temperature in value.溫度 %}
-                          {% if forloop.last %}
-                            {{temperature}}
-                          {% endif %}
-                        {% endfor %}
+                        {% if value|length == 10 %}
+                          {{value.PostTemp}}
+                        {% else %}
+                          {% for temperature in value.溫度 %}
+                            {% if forloop.last %}
+                              {{temperature}}
+                            {% endif %}
+                          {% endfor %}
+                        {% endif %}
                       </td>
                     </tr>
                     <tr class="danger">
                       <td>濕度</td>
                       <td>
-                        {% for humidity in value.濕度 %}
-                          {% if forloop.last %}
-                            {{humidity}}
-                          {% endif %}
-                        {% endfor %}
+                        {% if value|length == 10 %}
+                          {{value.PostHumidity}}
+                        {% else %}
+                          {% for humidity in value.濕度 %}
+                            {% if forloop.last %}
+                              {{humidity}}
+                            {% endif %}
+                          {% endfor %}
+                        {% endif %}
                       </td>
                     </tr>
                   </tbody>
